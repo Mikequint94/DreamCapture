@@ -9,35 +9,35 @@ Dream Capture is a mobile app to record dreams via speech-to-text. The app also 
 
 ## Functionality and MVP
 
-This app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation:
+##### This app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation:
 
-Reliable alarm to gently wake up user at the correct time and days of the week
-Will immediately launch app on snooze and prompt for audio recording
-User Authentication (email and password)
-Recording speech to text is accurate and quick.
-Dreams are searchable
-Adding notes to dreams
-Adding keywords to dreams
-Demo page showcasing relevant app features
-Customized to look more unique
-Production README
+- [ ] Reliable alarm to gently wake up user at the correct time and days of the week
+ -  Will immediately launch app on snooze and prompt for audio recording
+- [ ] User Authentication (email and password)
+- [ ] Recording speech to text is accurate and quick.
+- [ ] Dreams are searchable
+- [ ] Adding notes to dreams
+- [ ] Adding keywords to dreams
+- [ ] Demo page showcasing relevant app features
+ - Customized to look more unique
+- [ ]Production README
 
-### Bonus:
+#### Bonus:
 
 - [ ] Analytics
-- Collect demographic info on user during sign up
+ - Collect demographic info on user during sign up
 
 - [ ] Charts and graphs to display keyword frequency and sentiment tracking
 - [ ] 3rd Party Authentication
-- Auth0 or similar
-- Oauth potentially upon user request
+ - Auth0 or similar
+ - Oauth potentially upon user request
 - [ ] Reference Guide
-- Explaining what your dreams may mean based on analyzed content
-Intro to app tutorial to explain workflow
-Graphic time display with a sun/moon travelling across the top of the screen
+ - Explaining what your dreams may mean based on analyzed content
+- [ ] Intro to app tutorial to explain workflow
+- [ ] Graphic time display with a sun/moon travelling across the top of the screen
 
 
-Technologies and Technical Challenges
+## Technologies and Technical Challenges
 Backend
 Ruby on Rails
 PostgreSQL

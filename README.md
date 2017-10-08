@@ -54,9 +54,25 @@ Managing permissions (local storage, calendar, microphone, speech-to-text): Gett
 Integrating Watson API for Natural language processing: Using built in speech-to-text to record a user’s dream, then linking it with IBM’s watson for speech analysis.
 Pleasing and relaxing UX/UI: aim is to gently guide user through workflow just as they wake up.
 
-Wireframes
+## Wireframes
 
-(put in links on readme.md)
+![wireframe1](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_1_signup_login.png)
+
+![wireframe2](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_2_signup_form.png)
+
+![wireframe3](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_3_main.png)
+
+![wireframe4](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_4_alarm.png)
+
+![wireframe5](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_5_record_dream_start.png)
+
+![wireframe6](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_6_in_recording.png)
+
+![wireframe7](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_7_post_recording_review.png)
+
+![wireframe8](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_8_add_keywords.png)
+
+![wireframe9](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_9_dream_show.png)
 
 (links to sample schema and sample state)
 

@@ -12,27 +12,27 @@ Dream Capture is a mobile app to record dreams via speech-to-text. The app also 
 ##### This app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation:
 
 - [ ] Reliable alarm to gently wake up user at the correct time and days of the week
- -  Will immediately launch app on snooze and prompt for audio recording
+  -  Will immediately launch app on snooze and prompt for audio recording
 - [ ] User Authentication (email and password)
 - [ ] Recording speech to text is accurate and quick.
 - [ ] Dreams are searchable
 - [ ] Adding notes to dreams
 - [ ] Adding keywords to dreams
 - [ ] Demo page showcasing relevant app features
- - Customized to look more unique
-- [ ]Production README
+  - Customized to look more unique
+- [ ] Production README
 
 #### Bonus:
 
 - [ ] Analytics
- - Collect demographic info on user during sign up
+  - Collect demographic info on user during sign up
 
 - [ ] Charts and graphs to display keyword frequency and sentiment tracking
 - [ ] 3rd Party Authentication
- - Auth0 or similar
- - Oauth potentially upon user request
+  - Auth0 or similar
+  - Oauth potentially upon user request
 - [ ] Reference Guide
- - Explaining what your dreams may mean based on analyzed content
+  - Explaining what your dreams may mean based on analyzed content
 - [ ] Intro to app tutorial to explain workflow
 - [ ] Graphic time display with a sun/moon travelling across the top of the screen
 
@@ -106,7 +106,7 @@ https://github.com/Mikequint94/DreamCapture/blob/master/docs/SampleState.md
 
 ## Group Members and Work Breakdown
 
-##### We have three members: Michael Quint, Peter Ludlum, Adrienne Lin
+#### We have three members: Michael Quint, Peter Ludlum, Adrienne Lin
 
 __Michael’s__ primary responsibilities will be:
 - Implementing voice to text feature
@@ -161,7 +161,7 @@ All teammates will complete and submit proposal by Monday morning.
  - Set up using Rails
  - Set up views with React Native - signup/login screen and signup form
  - Session Show and Session Form pages
-
+ 
 - Create Skeleton of the following pages and Navigation between them
  - Index Page
  - Option to record

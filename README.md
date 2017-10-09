@@ -145,32 +145,32 @@ All teammates will use the weekend to learn React Native.
 
 Team members will also individually research the following technologies:
 - Michael
- - Research Watson and other speech-to-text.
- - Start setting up API keys.
+    - Research Watson and other speech-to-text.
+    - Start setting up API keys.
 
 - Peter 		
- - Research AWS.
- - Look at alarm functionality.
+    - Research AWS.
+    - Look at alarm functionality.
 
 - Adrienne
- - Research OAuth providers and determine if app will use.
+    - Research OAuth providers and determine if app will use.
 
 All teammates will complete and submit proposal by Monday morning.
 #### __Phase 2:__ Foundation (2 days)
 - User authentication
- - Set up using Rails
- - Set up views with React Native - signup/login screen and signup form
- - Session Show and Session Form pages
+    - Set up using Rails
+    - Set up views with React Native - signup/login screen and signup form
+    - Session Show and Session Form pages
  
 - Create Skeleton of the following pages and Navigation between them
- - Index Page
- - Option to record
- - Shows all dreams
- - Dream Record Page
- - Dream Edit Page
- - Dream Show Page
- - Add note
- - Add seeds for testing
+    - Index Page
+    - Option to record
+    - Shows all dreams
+    - Dream Record Page
+    - Dream Edit Page
+    - Dream Show Page
+    - Add note
+    - Add seeds for testing
 
 #### __Phase 3:__ MVP Features  (4 days)
 - Alarm

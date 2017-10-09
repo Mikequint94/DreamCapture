@@ -56,21 +56,39 @@ Pleasing and relaxing UX/UI: aim is to gently guide user through workflow just a
 
 ## Wireframes
 
+#### Signup and Login
+
 ![wireframe1](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_1_signup_login.png)
+---
+#### Signup Form
 
 ![wireframe2](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_2_signup_form.png)
+--
+#### Dream Index
 
 ![wireframe3](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_3_main.png)
+--
+#### Alarm
 
 ![wireframe4](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_4_alarm.png)
+--
+#### Record Dream Start
 
 ![wireframe5](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_5_record_dream_start.png)
+--
+#### In Recording Screen
 
 ![wireframe6](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_6_in_recording.png)
+--
+#### Post Recording Review
 
 ![wireframe7](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_7_post_recording_review.png)
+--
+#### Add Keywords
 
 ![wireframe8](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_8_add_keywords.png)
+--
+#### Dream Show
 
 ![wireframe9](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_9_dream_show.png)
 

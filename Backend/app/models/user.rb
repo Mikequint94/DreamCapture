@@ -5,6 +5,11 @@ class User < ApplicationRecord
 
   #  ----- Associations -------
 
+  has_many :dreams
+
+  has_many :notes,
+           through: :dreams,
+           source: :note
 
   # ----- Methods -------
 

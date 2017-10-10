@@ -2,7 +2,7 @@ class Api::DreamsController < ApplicationController
 
   def create
     @dream = Dream.new(dream_params)
-    if @dream.save!
+    if @dream.save
       render "api/dreams/show"
     else
       render @dream.errors.full_messages, status: 422
@@ -10,7 +10,7 @@ class Api::DreamsController < ApplicationController
   end
 
   def show
-    @dream = Dream.find(params[:id])
+    @dream = Dream.includes(:note).find(params[:id])
     if @dream
       render "api/dreams/show"
     else

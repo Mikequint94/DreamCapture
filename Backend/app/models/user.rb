@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   has_many :dreams
 
+  has_many :notes,
+           through: :dreams,
+           source: :note
+
   # ----- Methods -------
 
   after_initialize :ensure_session_token

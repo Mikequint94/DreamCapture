@@ -9,8 +9,12 @@ Rails.application.routes.draw do
       resources :dreams, only: %i[index]
     end
 
-    resources :dreams, except: %i[index new]
-    
+    resources :dreams, except: %i[index new] do
+      resources :notes, only: %i[index]
+    end
+
+    resources :notes, except: %i[index show]
+
   end
 
 end

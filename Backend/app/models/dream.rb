@@ -5,6 +5,8 @@ class Dream < ApplicationRecord
 
   belongs_to :user
 
+  has_one :note, dependent: :destroy
+
   # ----- Methods -------
 
 end

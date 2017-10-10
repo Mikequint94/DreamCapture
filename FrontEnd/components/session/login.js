@@ -19,30 +19,31 @@ export default class LoginScreen extends React.Component {
     this.state = { email: "", password: "" };
   }
 
-  signup() {
-    login(this.state)
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
-          Welcome, create an account.
+          Welcome, please log in.
         </Text>
-        <TextInput style={styles.input}
-          value={this.state.email}
-          placeholder='Email'
-          onChangeText={(email) => this.setState({email})} />
-        <TextInput style={styles.input}
-          value={this.state.password}
-          placeholder='Password'
-          onChangeText={(password) => this.setState({password})}/>
-        <View style={{margin: 10}} />
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.input}
+            value={this.state.email}
+            autoCapitalize='none'
+            placeholder='Email'
+            onChangeText={ email => this.setState({email})} />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.input}
+            value={this.state.password}
+            autoCapitalize='none'
+            placeholder='Password'
+            onChangeText={ password => this.setState({password})}/>
+        </View>
         <TouchableOpacity style={styles.submitButton}
           onPress={
-            () => this.signup(this.state.email, this.state.password)}>
-          <Text style={styles.submitButtonText}> Sign Up </Text>
-        </TouchableOpacity>
+            () => this.props.login(this.state)}>
+            <Text style={styles.submitButtonText}> Log In </Text>
+          </TouchableOpacity>
       </View>
 
     )
@@ -61,13 +62,17 @@ const styles = StyleSheet.create ({
     textAlign: 'center',
     margin: 10,
   },
+  inputContainer: {
+    flexDirection: 'row',
+  },
   input: {
-    // flex: 1,
+    flex: 0.8,
     height: 40,
     borderColor: 'grey',
     borderWidth: 1,
   },
   submitButton: {
+    margin: 10,
     backgroundColor: '#2830a5',
     height: 40,
     justifyContent: 'center',

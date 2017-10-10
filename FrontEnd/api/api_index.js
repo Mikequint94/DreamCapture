@@ -1,4 +1,4 @@
-const API_URL = 'http://www.dream-capture.com';
+const API_URL = 'https://dream-capture.herokuapp.com';
 
 export const SIGNIN_URL = `${API_URL}/api/session`;
 export const SIGNUP_URL = `${API_URL}/api/users`;

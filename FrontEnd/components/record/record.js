@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
+  TextInput,
   View,
   Image,
   TouchableHighlight
@@ -145,6 +146,12 @@ export default class RecordScreen extends React.Component {
           {analysis}
         </Text>
       )
+      finaltext = (
+            <TextInput style={styles.input}
+              onChangeText={(text) => this.setState({finalResults: text})}
+              value={this.state.finalResults}
+            />
+      )
     }
     if (this.state.started === "" || this.state.end === "√") {
       micpic = (
@@ -155,11 +162,7 @@ export default class RecordScreen extends React.Component {
             />
           </TouchableHighlight>
       )
-      finaltext = (
-            <Text>
-              {this.state.finalResults}
-            </Text>
-      )
+
     } else {
       micpic = (
           <Image
@@ -182,9 +185,8 @@ export default class RecordScreen extends React.Component {
           Record Your Dream
          </Text>
         {micpic}
-        {stopbutton}
         {finaltext}
-        {watsonInfo}
+        {stopbutton}
       </View>
     );
   }
@@ -198,6 +200,12 @@ const styles = StyleSheet.create({
   soundwave: {
     width: 300,
     height: 250,
+  },
+  input: {
+    width: 300,
+    height: 300,
+    borderColor: 'gray',
+    borderWidth: 1
   },
   container: {
     flex: 1,

@@ -35,7 +35,7 @@ class WatsonAnalyzer {
       sentimentScore = response.data.sentiment.document.score;
       // console.log(sentimentLabel, sentimentScore);
       response.data.keywords.map(index => {
-        keywords.push(Object.values(index));
+        keywords.push(Object.values(index)[0]);
       });
       console.log(sentimentLabel, sentimentScore, keywords);
     })
@@ -43,7 +43,9 @@ class WatsonAnalyzer {
       console.log(error);
     });
 
-    return [sentimentScore, sentimentLabel, keywords];
+    setTimeout(function() {
+      return [sentimentScore, sentimentLabel, keywords];
+    }, 500);
   }
 }
 

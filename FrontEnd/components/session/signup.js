@@ -7,27 +7,43 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import { signup } from '../../actions/session_actions';
 
 export default class SignupScreen extends React.Component {
   static navigationOptions = {
-      title: 'Signup',
+      title: 'Sign Up',
   };
+
+  constructor() {
+    super();
+    this.state = { email: "", password: "" };
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
-          Welcome, create an account.
+          Welcome, please sign up.
         </Text>
-        <TextInput style={styles.input}
-          placeholder='Email' />
-        <TextInput style={styles.input}
-          placeholder='Password' />
-        <View style={{margin: 10}} />
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.input}
+            value={this.state.email}
+            autoCapitalize='none'
+            placeholder='Email'
+            onChangeText={ email => this.setState({email})} />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.input}
+            value={this.state.password}
+            autoCapitalize='none'
+            placeholder='Password'
+            onChangeText={ password => this.setState({password})}/>
+        </View>
         <TouchableOpacity style={styles.submitButton}
           onPress={
-            () => this.signup(this.state.email, this.state.password)}>
-          <Text style={styles.submitButtonText}> Sign Up </Text>
-        </TouchableOpacity>
+            () => this.props.signup(this.state) }>
+            <Text style={styles.submitButtonText}> Sign Up </Text>
+          </TouchableOpacity>
       </View>
 
     )
@@ -46,13 +62,17 @@ const styles = StyleSheet.create ({
     textAlign: 'center',
     margin: 10,
   },
+  inputContainer: {
+    flexDirection: 'row',
+  },
   input: {
-    // flex: 1,
+    flex: 0.8,
     height: 40,
     borderColor: 'grey',
     borderWidth: 1,
   },
   submitButton: {
+    margin: 10,
     backgroundColor: '#2830a5',
     height: 40,
     justifyContent: 'center',

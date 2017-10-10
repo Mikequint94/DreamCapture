@@ -15,25 +15,18 @@ export const receiveCurrentUser = user => ({
 // });
 //
 
-export const login = user => dispatch => (
-  fetch( SIGNIN_URL,  {
-    method: 'POST',
-    body: JSON.stringify( {user: user} )
-  })
-);
-//
-// export const login = (user) => dispatch => (
-//   axios.post(SIGNIN_URL, { user: user })
-//     .then((response) => {
-//       console.log('user' + user);
-//       console.log(response);
-//     })
-//     .catch((error) => {
-//       console.log("Can\'t log in");
-//       console.log(error);
-//       console.log({['user']: user});
-//     })
-//   );
+
+export const login = (user) => dispatch => (
+  axios.post(SIGNIN_URL, { user })
+    .then((response) => {
+      console.log('success');
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log("Can\'t log in");
+      console.log(error.response);
+    })
+  );
 
   // APIUtil.login(user).then(
   //   user => (dispatch(receiveCurrentUser(user))),

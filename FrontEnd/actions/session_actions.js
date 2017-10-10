@@ -15,31 +15,29 @@ export const receiveCurrentUser = user => ({
 // });
 //
 
-export const login = user => dispatch => (
-  fetch( SIGNIN_URL,  {
-    method: 'POST',
-    body: JSON.stringify( {user: user} )
-  })
-);
-//
-// export const login = (user) => dispatch => (
-//   axios.post(SIGNIN_URL, { user: user })
-//     .then((response) => {
-//       console.log('user' + user);
-//       console.log(response);
-//     })
-//     .catch((error) => {
-//       console.log("Can\'t log in");
-//       console.log(error);
-//       console.log({['user']: user});
-//     })
-//   );
 
-  // APIUtil.login(user).then(
-  //   user => (dispatch(receiveCurrentUser(user))),
-  //   error => (dispatch(receiveErrors(error.responseJSON))
-  // ));
+export const login = (user) => dispatch => (
+  axios.post(SIGNIN_URL, { user })
+    .then((response) => {
+      console.log('success');
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log("Can\'t log in");
+      console.log(error.response);
+    })
+  );
 
+export const signup = (user) => dispatch => (
+  axios.post(SIGNUP_URL, { user })
+    .then((response) => {
+      console.log('success');
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error.response);
+    })
+  );
 
 
 // export const logout = () => dispatch => (
@@ -47,9 +45,3 @@ export const login = user => dispatch => (
 //   ))
 // );
 //
-// export const signup = user => dispatch => (
-//   APIUtil.signup(user).then(
-//     user => (dispatch(receiveCurrentUser(user))),
-//     error => (dispatch(receiveErrors(error.responseJSON))
-//   ))
-// );

@@ -23,7 +23,7 @@ export default class LoginScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
-          Welcome, please sign in.
+          Welcome, please log in.
         </Text>
         <View style={styles.inputContainer}>
           <TextInput style={styles.input}
@@ -41,7 +41,7 @@ export default class LoginScreen extends React.Component {
         </View>
         <TouchableOpacity style={styles.submitButton}
           onPress={
-            () => this.props.login(this.state) }>
+            () => this.props.login(this.state)}>
             <Text style={styles.submitButtonText}> Log In </Text>
           </TouchableOpacity>
       </View>

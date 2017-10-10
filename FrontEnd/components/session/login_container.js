@@ -1,5 +1,5 @@
-import {connect} from 'react-redux';
-import {login} from '../../actions/session_actions';
+import { connect } from 'react-redux';
+import { login } from '../../actions/session_actions';
 import LoginScreen from './login.js';
 
 const mapDispatchToProps = (dispatch) => {

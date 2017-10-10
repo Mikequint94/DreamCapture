@@ -28,11 +28,16 @@ export const login = (user) => dispatch => (
     })
   );
 
-  // APIUtil.login(user).then(
-  //   user => (dispatch(receiveCurrentUser(user))),
-  //   error => (dispatch(receiveErrors(error.responseJSON))
-  // ));
-
+export const signup = (user) => dispatch => (
+  axios.post(SIGNUP_URL, { user })
+    .then((response) => {
+      console.log('success');
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error.response);
+    })
+  );
 
 
 // export const logout = () => dispatch => (
@@ -40,9 +45,3 @@ export const login = (user) => dispatch => (
 //   ))
 // );
 //
-// export const signup = user => dispatch => (
-//   APIUtil.signup(user).then(
-//     user => (dispatch(receiveCurrentUser(user))),
-//     error => (dispatch(receiveErrors(error.responseJSON))
-//   ))
-// );

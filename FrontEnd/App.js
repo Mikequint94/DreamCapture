@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import MainScreen from './components/main/main';
 import RecordScreen from './components/record/record';
-import LoginScreen from './components/auth/login';
-import SignupScreen from './components/auth/signup';
+import LoginScreen from './components/session/login';
+import SignupScreen from './components/session/signup';
 import AlarmScreen from './components/alarm/alarm';
 import DreamShowScreen from './components/dream/dream_show';
 

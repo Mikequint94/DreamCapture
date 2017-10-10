@@ -15,22 +15,22 @@ export const receiveCurrentUser = user => ({
 //   errors
 // });
 
-export const login = (user) => dispatch => (
-  axios.post(SIGNIN_URL, {
-      user
-    })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log("Can\'t log in");
-    });
-
-  APIUtil.login(user).then(
-    user => (dispatch(receiveCurrentUser(user))),
-    error => (dispatch(receiveErrors(error.responseJSON))
-  ))
-);
+// export const login = (user) => dispatch => (
+//   axios.post(SIGNIN_URL, {
+//       user
+//     })
+//     .then((response) => {
+//       console.log(response);
+//     })
+//     .catch((error) => {
+//       console.log("Can\'t log in");
+//     });
+// 
+//   APIUtil.login(user).then(
+//     user => (dispatch(receiveCurrentUser(user))),
+//     error => (dispatch(receiveErrors(error.responseJSON))
+//   ))
+// );
 
 
 

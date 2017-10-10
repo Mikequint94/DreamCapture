@@ -9,6 +9,8 @@ import {
 
 import Voice from 'react-native-voice';
 
+import WatsonAnalyzer from './watson';
+
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
       title: 'Record',
@@ -131,6 +133,19 @@ export default class RecordScreen extends React.Component {
     let micpic;
     let finaltext;
     let stopbutton;
+    let watsonInfo;
+    let string = this.state.finalResults;
+    let analysis = "loading"
+    console.log(string);
+    if (this.state.end === "√") {
+      let analysis = WatsonAnalyzer.analyze(string)
+      console.log(analysis);
+      watsonInfo = (
+        <Text>
+          {analysis}
+        </Text>
+      )
+    }
     if (this.state.started === "" || this.state.end === "√") {
       micpic = (
           <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
@@ -169,6 +184,7 @@ export default class RecordScreen extends React.Component {
         {micpic}
         {stopbutton}
         {finaltext}
+        {watsonInfo}
       </View>
     );
   }

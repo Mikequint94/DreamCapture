@@ -1,8 +1,8 @@
 class Api::DreamsController < ApplicationController
 
   def create
-    @dream.new(dream_params)
-    if @dream.create
+    @dream = Dream.new(dream_params)
+    if @dream.save!
       render "api/dreams/show"
     else
       render @dream.errors.full_messages, status: 422
@@ -10,7 +10,7 @@ class Api::DreamsController < ApplicationController
   end
 
   def show
-    @dream.find(params[:id])
+    @dream = Dream.find(params[:id])
     if @dream
       render "api/dreams/show"
     else
@@ -43,14 +43,15 @@ class Api::DreamsController < ApplicationController
   end
 
   def index
-      @dreams = current_user.dreams.order(created_at: :desc)
-      render 'api/dreams/index'
+    user = User.find(params[:user_id])
+    @dreams = user.dreams.order(created_at: :desc)
+    render 'api/dreams/index'
   end
 
   private
 
   def dream_params
-    params.require(:dream).permit(:body)
+    params.require(:dream).permit(:body, :user_id)
   end
 
 end

@@ -1,3 +1,5 @@
 rootProject.name = 'FrontEnd'
+include ':react-native-voice'
+project(':react-native-voice').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-voice/android')
 
 include ':app'

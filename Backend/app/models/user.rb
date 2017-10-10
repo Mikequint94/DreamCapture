@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   #  ----- Associations -------
 
+  has_many :dreams
 
   # ----- Methods -------
 

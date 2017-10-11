@@ -56,6 +56,10 @@ export default class SignupScreen extends React.Component {
             () => this.handleSignup() }>
             <Text style={styles.submitButtonText}> Sign Up </Text>
           </TouchableOpacity>
+        <Button
+          onPress={() => navigate('SignIn')}
+          title='Log In'
+          />
       </View>
 
     )

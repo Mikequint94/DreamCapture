@@ -25,6 +25,7 @@ export const login = (user) => dispatch => (
   );
 
 export const logout = () => dispatch => (
+  console.log("log out pushed"),
   axios({
     method: 'DELETE',
     url: SESSION_URL,
@@ -48,14 +49,13 @@ export const signup = (user) => dispatch => (
       console.log('success');
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
-      dispatch(onSignIn());
+      onSignIn();
     })
     .catch((error) => {
       console.log('signup axios error');
       console.log(error.response);
     })
   );
-
 
   const USER_LOGGED_IN = "user_logged_in";
 

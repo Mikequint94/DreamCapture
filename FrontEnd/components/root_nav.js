@@ -3,7 +3,8 @@
 
 import React from "react";
 import { Platform, StatusBar } from "react-native";
-import { StackNavigator, TabNavigator } from "react-navigation";
+import { StackNavigator,
+         TabNavigator } from "react-navigation";
 // import { FontAwesome } from "react-native-vector-icons";
 
 import SignupContainer from "./session/signup_container";
@@ -13,7 +14,6 @@ import MainScreen from "./main/main";
 import RecordScreen from './record/record_container';
 import AlarmScreen from './alarm/alarm';
 import DreamShowScreen from './dream/dream_show_container';
-
 
 export const SignedOut = StackNavigator({
   SignUp: {
@@ -32,7 +32,12 @@ export const SignedOut = StackNavigator({
 
 export const SignedIn = StackNavigator(
   {
-    Main: { screen: MainScreen },
+    Main: {
+      screen: MainScreen,
+      navigationOptions: {
+        headerLeft: null
+      }
+    },
     Record: { screen: RecordScreen },
     Login: { screen: LoginContainer },
     Signup: { screen: SignupContainer },

@@ -1,27 +1,34 @@
-import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
-import {
-  AppRegistry,
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import MainScreen from './main/main';
-import RecordScreen from './record/record_container';
-import LoginContainer from './session/login_container';
-import SignupContainer from './session/signup_container';
-import AlarmScreen from './alarm/alarm';
-import DreamShowScreen from './dream/dream_show_container';
+// Navigation code adapted from
+// https://github.com/spencercarli/react-navigation-auth-flow
 
-export default AppEntry = StackNavigator({
-  Main: { screen: MainScreen },
-  Record: { screen: RecordScreen },
-  Login: { screen: LoginContainer },
-  Signup: { screen: SignupContainer },
-  Alarm: { screen: AlarmScreen },
-  DreamShow: {
-    path: 'dream/:dreamId',
-    screen: DreamShowScreen
-   },
-});
+import React, { Component } from 'react';
+import { createRootNavigator } from './root_nav';
+import { isSignedIn } from '../actions/session_actions';
+
+export default class AppEntry extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
+
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert("signedIN error occurred"));
+  }
+
+  render() {
+    const { checkedSignIn, signedIn } = this.state;
+
+    if (!checkedSignIn) {
+      return null;
+    }
+
+    const RootNavigator = createRootNavigator(signedIn);
+    return <RootNavigator />;
+  }
+}

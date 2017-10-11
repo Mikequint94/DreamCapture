@@ -8,7 +8,7 @@ const DreamReducer = (state = {}, action) => {
       newState = action.dreams;
       return newState;
     case RECEIVE_DREAM:
-      newState[action.dream.id] = action.dream;
+      newState[action.dream.data.id] = action.dream.data;
       return newState;
     default:
       return state;

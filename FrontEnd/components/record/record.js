@@ -80,6 +80,16 @@ export default class RecordScreen extends React.Component {
     });
   }
 
+  saveDream() {
+    const { navigate } = this.props.navigation;
+    this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser})
+    .then(
+    (response) => {
+      navigate('DreamShow', {dreamId: response.dream.data.id})
+    }
+  )
+  }
+
   async _startRecognizing(e) {
     console.log("recording started");
     this.setState({
@@ -132,7 +142,6 @@ export default class RecordScreen extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     let middleTextPic;
     let bottomButton;
     let watsonInfo;
@@ -171,9 +180,8 @@ export default class RecordScreen extends React.Component {
               />
           </TouchableHighlight>
           <Button style={{ height:80, width: 80, marginHorizontal: 30}} onPress={
-                this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser.id}),
-                () => navigate('DreamShow', {dreamId: 1})
-              }
+              this.saveDream.bind(this)
+                }
             title="Save" />
         </View>
       )

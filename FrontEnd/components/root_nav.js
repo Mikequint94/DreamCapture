@@ -4,15 +4,14 @@
 import React from "react";
 import { Platform, StatusBar } from "react-native";
 import { StackNavigator, TabNavigator } from "react-navigation";
-import { FontAwesome } from "react-native-vector-icons";
 
 import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
 
 import MainScreen from "./main/main";
-import RecordScreen from './record/record';
+import RecordScreen from './record/record_container';
 import AlarmScreen from './alarm/alarm';
-import DreamShowScreen from './dream/dream_show';
+import DreamShowScreen from './dream/dream_show_container';
 
 
 export const SignedOut = StackNavigator({
@@ -37,7 +36,7 @@ export const SignedIn = StackNavigator(
     Login: { screen: LoginContainer },
     Signup: { screen: SignupContainer },
     Alarm: { screen: AlarmScreen },
-    DreamShow: { screen: DreamShowScreen },
+    DreamShow: { path: 'dream/:dreamid', screen: DreamShowScreen },
   });
 
 export const createRootNavigator = (signedIn = false) => {

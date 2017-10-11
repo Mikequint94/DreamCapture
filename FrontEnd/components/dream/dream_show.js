@@ -11,21 +11,22 @@ export default class DreamShowScreen extends React.Component {
   };
 
   componentDidMount(){
-    this.props.requestDream(1);
+    this.props.requestDream(this.props.navigation.state.params.dreamId);
   }
 
   render() {
+    let currentDream = this.props.navigation.state.params.dreamId;
     console.log(this.props);
+    console.log(this.props.dreams[currentDream].body);
     let dreams;
-    if (this.props.dreams[0]) {
+    if (this.props.dreams[currentDream]) {
       dreams = (
-        <Text>{this.props.dreams[0]}</Text>
+        <Text>{this.props.dreams[currentDream].body}</Text>
       )
     }
     return (
       <View>
         {dreams}
-        <Text> Dream Show Screen </Text>
       </View>
     )
   }

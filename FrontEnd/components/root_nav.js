@@ -4,7 +4,7 @@
 import React from "react";
 import { Platform, StatusBar } from "react-native";
 import { StackNavigator, TabNavigator } from "react-navigation";
-import { FontAwesome } from "react-native-vector-icons";
+// import { FontAwesome } from "react-native-vector-icons";
 
 import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";

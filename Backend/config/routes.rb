@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
 
     resources :keywords, except: %i[index show]
-    resources :notes, except: %i[index show]
+    resources :notes, except: %i[index show update]
   end
 
 end

@@ -1,26 +1,21 @@
 class Api::KeywordsController < ApplicationController
   def create
-    @keyword = Keyword.new(keyword_params)
-    if @keyword.save
-      render "api/keywords/index"
-    else
-      render @keyword.errors.full_messages, status: 422
-    end
-  end
+    @keyword = Keyword.find_by(keyword: params[:keyword][:keyword])
 
-  def update
-    @keyword = Keyword.find(params[:id])
     if @keyword
+      @keyword.dream_ids = @keyword.dream_ids << params[:keyword][:dream_id]
 
-      if @keyword.update_attributes(keyword_params)
+    else
+      @keyword = Keyword.new(keyword_params)
+      @keyword.dream_ids = params[:keyword][:dream_id]
+      if @keyword.save
         render "api/keywords/index"
       else
         render @keyword.errors.full_messages, status: 422
       end
 
-    else
-      render json: ["Keyword not found."], status: 404
     end
+
   end
 
   def destroy
@@ -41,7 +36,7 @@ class Api::KeywordsController < ApplicationController
   private
 
   def keyword_params
-    params.require(:keyword).permit(:keyword)
+    params.require(:keyword).permit(:keyword, :dream_id)
   end
 
 end

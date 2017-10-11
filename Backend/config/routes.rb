@@ -11,8 +11,10 @@ Rails.application.routes.draw do
 
     resources :dreams, except: %i[index new] do
       resources :notes, only: %i[index]
+      resources :keywords, only: %i[index]
     end
 
+    resources :keywords, except: %i[index show]
     resources :notes, except: %i[index show]
 
   end

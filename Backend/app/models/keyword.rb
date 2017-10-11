@@ -5,5 +5,5 @@ class Keyword < ApplicationRecord
 
 
   # ----- Methods -------
-  
+
 end

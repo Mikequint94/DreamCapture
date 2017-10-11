@@ -4,7 +4,8 @@ import {createDream} from '../../actions/dream_actions';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser,
+  currentUser: state.session.user_id,
+  dreams: state.entities.dreams
 });
 
 const mapDispatchToProps = dispatch => ({

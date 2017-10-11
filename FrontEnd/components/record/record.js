@@ -131,12 +131,13 @@ export default class RecordScreen extends React.Component {
   }
 
   render() {
-    let micpic;
+    const { navigate } = this.props.navigation;
     let finaltext;
-    let stopbutton;
+    let bottombutton;
     let watsonInfo;
     let string = this.state.finalResults;
     let analysis = "loading"
+    let topText;
     console.log(string);
     if (this.state.end === "√") {
       let analysis = WatsonAnalyzer.analyze(string)
@@ -146,15 +147,32 @@ export default class RecordScreen extends React.Component {
           {analysis}
         </Text>
       )
-      finaltext = (
+      middleTextPic = (
             <TextInput style={styles.input}
               onChangeText={(text) => this.setState({finalResults: text})}
               value={this.state.finalResults}
             />
       )
+      bottombutton = (
+        <View>
+          <TouchableHighlight onPress={this._destroyRecognizer.bind(this)}>
+            <Image
+              style={styles.button}
+              source={require('./rerecord.png')}
+            />
+          </TouchableHighlight>
+          <Button onPress={() => navigate('Record')}
+          title="Save" />
+      </View>
+      )
     }
-    if (this.state.started === "" || this.state.end === "√") {
-      micpic = (
+    if (this.state.started === "") {
+      toptext = (
+        <Text style={styles.welcome}>
+          Record Your Dream
+         </Text>
+      )
+      bottombutton = (
           <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
             <Image
               style={styles.button}
@@ -163,14 +181,19 @@ export default class RecordScreen extends React.Component {
           </TouchableHighlight>
       )
 
-    } else {
-      micpic = (
+    } else if (this.state.end === "") {
+      topText = (
+        <Text style={styles.welcome}>
+          Recording...
+         </Text>
+      )
+      middleTextPic = (
           <Image
             style={styles.soundwave}
             source={require('./soundwav.gif')}
           />
       )
-      stopbutton = (
+      bottomButton = (
         <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
           <Image
             style={styles.button}
@@ -181,12 +204,9 @@ export default class RecordScreen extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Record Your Dream
-         </Text>
-        {micpic}
-        {finaltext}
-        {stopbutton}
+        {topText}
+        {middleTextPic}
+        {bottomButton}
       </View>
     );
   }

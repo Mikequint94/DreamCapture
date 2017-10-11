@@ -5,6 +5,7 @@ import React from "react";
 import { Platform, StatusBar } from "react-native";
 import { StackNavigator, TabNavigator } from "react-navigation";
 
+
 import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
 

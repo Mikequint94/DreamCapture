@@ -4,5 +4,6 @@ class CreateKeywords < ActiveRecord::Migration[5.1]
       t.string :keyword, null: false
       t.timestamps
     end
+    add_index :keywords, :keyword, unique: true
   end
 end

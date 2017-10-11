@@ -4,6 +4,7 @@ import {
   Text,
   TextInput,
   View,
+  Button,
   Image,
   TouchableHighlight
 } from 'react-native';
@@ -132,8 +133,8 @@ export default class RecordScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    let finaltext;
-    let bottombutton;
+    let middleTextPic;
+    let bottomButton;
     let watsonInfo;
     let string = this.state.finalResults;
     let analysis = "loading"
@@ -147,32 +148,44 @@ export default class RecordScreen extends React.Component {
           {analysis}
         </Text>
       )
+      topText = (
+        <Text style={styles.welcome}>
+          Edit and Save
+        </Text>
+      )
       middleTextPic = (
+        <View style={styles.middleContainer}>
             <TextInput style={styles.input}
               onChangeText={(text) => this.setState({finalResults: text})}
               value={this.state.finalResults}
+              multiline={true}
             />
+        </View>
       )
-      bottombutton = (
-        <View>
+      bottomButton = (
+        <View style={styles.bottomContainer}>
           <TouchableHighlight onPress={this._destroyRecognizer.bind(this)}>
             <Image
-              style={styles.button}
+              style={{height:80, width: 80, marginHorizontal: 30}}
               source={require('./rerecord.png')}
-            />
+              />
           </TouchableHighlight>
-          <Button onPress={() => navigate('Record')}
-          title="Save" />
-      </View>
+          <Button style={{ height:80, width: 80, marginHorizontal: 30}} onPress={
+                this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser.id}),
+                () => navigate('DreamShow', {dreamId: 1})
+              }
+            title="Save" />
+        </View>
       )
     }
     if (this.state.started === "") {
-      toptext = (
+      console.log(this.props);
+      topText = (
         <Text style={styles.welcome}>
           Record Your Dream
-         </Text>
+        </Text>
       )
-      bottombutton = (
+      bottomButton = (
           <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
             <Image
               style={styles.button}
@@ -188,10 +201,12 @@ export default class RecordScreen extends React.Component {
          </Text>
       )
       middleTextPic = (
+        <View style={styles.middleContainer}>
           <Image
             style={styles.soundwave}
             source={require('./soundwav.gif')}
           />
+      </View>
       )
       bottomButton = (
         <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
@@ -231,7 +246,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
+  },
+  bottomContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20
+  },
+  middleContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 200
   },
   welcome: {
     flex: 3,

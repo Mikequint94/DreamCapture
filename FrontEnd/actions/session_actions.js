@@ -13,10 +13,10 @@ export const receiveCurrentUser = user => ({
 export const login = (user) => dispatch => (
   axios.post(SESSION_URL, { user })
     .then(response => {
-      console.log('success');
+      console.log('login success');
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
-      dispatch(onSignIn());
+      onSignIn();
     })
     .catch((error) => {
       console.log("Can\'t log in");
@@ -31,10 +31,10 @@ export const logout = () => dispatch => (
     params: {}
   })
     .then(response => {
-      console.log('loggedout');
+      console.log('logged out');
       console.log(response);
       dispatch(receiveCurrentUser(null));
-      dispatch(onSignOut());
+      onSignOut();
     })
     .catch((error) => {
       console.log("Can\'t log out");
@@ -63,15 +63,10 @@ export const signup = (user) => dispatch => (
   const onSignOut = () => AsyncStorage.removeItem(USER_LOGGED_IN);
 
   export const isSignedIn = () => {
-    return new Promise((resolve, reject) => {
-      AsyncStorage.getItem(USER_LOGGED_IN)
-        .then(res => {
-          if (res !== null) {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        })
-        .catch(err => reject(err));
-    });
+    const userLoggedIn = AsyncStorage.getItem(USER_LOGGED_IN);
+    if (userLoggedIn !== null) {
+      return true;
+    } else {
+      return false;
+    }
   };

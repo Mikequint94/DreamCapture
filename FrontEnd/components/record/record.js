@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
+  TextInput,
   View,
+  Button,
   Image,
   TouchableHighlight
 } from 'react-native';
 
 import Voice from 'react-native-voice';
+
+import WatsonAnalyzer from './watson';
 
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
@@ -128,11 +132,60 @@ export default class RecordScreen extends React.Component {
   }
 
   render() {
-    let micpic;
-    let finaltext;
-    let stopbutton;
-    if (this.state.started === "" || this.state.end === "√") {
-      micpic = (
+    const { navigate } = this.props.navigation;
+    let middleTextPic;
+    let bottomButton;
+    let watsonInfo;
+    let string = this.state.finalResults;
+    let analysis = "loading"
+    let topText;
+    console.log(string);
+    if (this.state.end === "√") {
+      let analysis = WatsonAnalyzer.analyze(string)
+      console.log(analysis);
+      watsonInfo = (
+        <Text>
+          {analysis}
+        </Text>
+      )
+      topText = (
+        <Text style={styles.welcome}>
+          Edit and Save
+        </Text>
+      )
+      middleTextPic = (
+        <View style={styles.middleContainer}>
+            <TextInput style={styles.input}
+              onChangeText={(text) => this.setState({finalResults: text})}
+              value={this.state.finalResults}
+              multiline={true}
+            />
+        </View>
+      )
+      bottomButton = (
+        <View style={styles.bottomContainer}>
+          <TouchableHighlight onPress={this._destroyRecognizer.bind(this)}>
+            <Image
+              style={{height:80, width: 80, marginHorizontal: 30}}
+              source={require('./rerecord.png')}
+              />
+          </TouchableHighlight>
+          <Button style={{ height:80, width: 80, marginHorizontal: 30}} onPress={
+                this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser.id}),
+                () => navigate('DreamShow', {dreamId: 1})
+              }
+            title="Save" />
+        </View>
+      )
+    }
+    if (this.state.started === "") {
+      console.log(this.props);
+      topText = (
+        <Text style={styles.welcome}>
+          Record Your Dream
+        </Text>
+      )
+      bottomButton = (
           <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
             <Image
               style={styles.button}
@@ -140,19 +193,22 @@ export default class RecordScreen extends React.Component {
             />
           </TouchableHighlight>
       )
-      finaltext = (
-            <Text>
-              {this.state.finalResults}
-            </Text>
+
+    } else if (this.state.end === "") {
+      topText = (
+        <Text style={styles.welcome}>
+          Recording...
+         </Text>
       )
-    } else {
-      micpic = (
+      middleTextPic = (
+        <View style={styles.middleContainer}>
           <Image
             style={styles.soundwave}
             source={require('./soundwav.gif')}
           />
+      </View>
       )
-      stopbutton = (
+      bottomButton = (
         <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
           <Image
             style={styles.button}
@@ -163,12 +219,9 @@ export default class RecordScreen extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Record Your Dream
-         </Text>
-        {micpic}
-        {stopbutton}
-        {finaltext}
+        {topText}
+        {middleTextPic}
+        {bottomButton}
       </View>
     );
   }
@@ -183,11 +236,29 @@ const styles = StyleSheet.create({
     width: 300,
     height: 250,
   },
+  input: {
+    width: 300,
+    height: 300,
+    borderColor: 'gray',
+    borderWidth: 1
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F5FCFF'
+  },
+  bottomContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20
+  },
+  middleContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 200
   },
   welcome: {
     flex: 3,

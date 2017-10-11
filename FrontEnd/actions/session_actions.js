@@ -9,12 +9,6 @@ export const receiveCurrentUser = user => ({
   user
 });
 
-// export const receiveErrors = errors => ({
-//   type: RECEIVE_SESSION_ERRORS,
-//   errors
-// });
-//
-
 
 export const login = (user) => dispatch => (
   axios.post(SIGNIN_URL, { user })
@@ -38,10 +32,3 @@ export const signup = (user) => dispatch => (
       console.log(error.response);
     })
   );
-
-
-// export const logout = () => dispatch => (
-//   APIUtil.logout().then(user => (dispatch(receiveCurrentUser(null))
-//   ))
-// );
-//

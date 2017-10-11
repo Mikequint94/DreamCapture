@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { logout } from '../../actions/session_actions';
 import {
   StyleSheet,
   Text,
@@ -10,6 +11,13 @@ export default class MainScreen extends React.Component {
   static navigationOptions = {
       title: 'Main',
   };
+
+  handleLogout() {
+    const { navigate } = this.props.navigation;
+    logout();
+    // navigate('Login');
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -20,6 +28,10 @@ export default class MainScreen extends React.Component {
         <Button
           onPress={() => navigate('Record')}
           title="Record a dream"
+        />
+        <Button
+          onPress={() => this.handleLogout()}
+          title="Log Out"
         />
         <Button
           onPress={() => navigate('Login')}
@@ -34,7 +46,7 @@ export default class MainScreen extends React.Component {
           title="Alarm Show Page"
         />
         <Button
-          onPress={() => navigate('DreamShow')}
+          onPress={() => navigate('DreamShow', {dreamId: 1})}
           title="Dream Show Page"
         />
       </View>

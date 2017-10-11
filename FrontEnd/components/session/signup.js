@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { signup } from '../../actions/session_actions';
 import {
   StyleSheet,
   ScrollView,
@@ -6,8 +7,9 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  Card,
+  Button,
 } from 'react-native';
-import { signup } from '../../actions/session_actions';
 
 export default class SignupScreen extends React.Component {
   static navigationOptions = {
@@ -19,9 +21,18 @@ export default class SignupScreen extends React.Component {
     this.state = { email: "", password: "" };
   }
 
+  handleSignup() {
+    const { navigate } = this.props.navigation;
+    this.props.signup(this.state)
+    navigate('Main');
+  }
+
+
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
+
         <Text style={styles.header}>
           Welcome, please sign up.
         </Text>
@@ -36,12 +47,13 @@ export default class SignupScreen extends React.Component {
           <TextInput style={styles.input}
             value={this.state.password}
             autoCapitalize='none'
+            secureTextEntry={true}
             placeholder='Password'
             onChangeText={ password => this.setState({password})}/>
         </View>
         <TouchableOpacity style={styles.submitButton}
           onPress={
-            () => this.props.signup(this.state) }>
+            () => this.handleSignup() }>
             <Text style={styles.submitButtonText}> Sign Up </Text>
           </TouchableOpacity>
       </View>

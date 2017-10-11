@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AsyncStorage } from "react-native";
-import {SIGNIN_URL, SIGNUP_URL} from '../api/api_index';
+import {SESSION_URL, USERS_URL} from '../api/api_index';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
@@ -11,7 +11,7 @@ export const receiveCurrentUser = user => ({
 });
 
 export const login = (user) => dispatch => (
-  axios.post(SIGNIN_URL, { user })
+  axios.post(SESSION_URL, { user })
     .then(response => {
       console.log('success');
       console.log(response);
@@ -24,8 +24,26 @@ export const login = (user) => dispatch => (
     })
   );
 
+export const logout = () => dispatch => (
+  axios({
+    method: 'DELETE',
+    url: SESSION_URL,
+    params: {}
+  })
+    .then(response => {
+      console.log('loggedout');
+      console.log(response);
+      dispatch(receiveCurrentUser(null));
+      dispatch(onSignOut());
+    })
+    .catch((error) => {
+      console.log("Can\'t log out");
+      console.log(error.response);
+    })
+  );
+
 export const signup = (user) => dispatch => (
-  axios.post(SIGNUP_URL, { user })
+  axios.post(USERS_URL, { user })
     .then((response) => {
       console.log('success');
       console.log(response);
@@ -33,6 +51,7 @@ export const signup = (user) => dispatch => (
       dispatch(onSignIn());
     })
     .catch((error) => {
+      console.log('signup axios error');
       console.log(error.response);
     })
   );

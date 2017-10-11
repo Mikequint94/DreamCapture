@@ -19,6 +19,12 @@ export default class LoginScreen extends React.Component {
     this.state = { email: "", password: "" };
   }
 
+  handleLogin() {
+    const { navigate } = this.props.navigation;
+    this.props.login(this.state)
+    navigate('Main');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -42,7 +48,7 @@ export default class LoginScreen extends React.Component {
         </View>
         <TouchableOpacity style={styles.submitButton}
           onPress={
-            () => this.props.login(this.state)}>
+            () => this.handleLogin()}>
             <Text style={styles.submitButtonText}> Log In </Text>
           </TouchableOpacity>
       </View>

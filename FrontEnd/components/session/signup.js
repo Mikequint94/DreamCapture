@@ -6,6 +6,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  Card,
+  Button,
 } from 'react-native';
 import { signup } from '../../actions/session_actions';
 
@@ -20,8 +22,10 @@ export default class SignupScreen extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
+    
         <Text style={styles.header}>
           Welcome, please sign up.
         </Text>
@@ -36,6 +40,7 @@ export default class SignupScreen extends React.Component {
           <TextInput style={styles.input}
             value={this.state.password}
             autoCapitalize='none'
+            secureTextEntry={true}
             placeholder='Password'
             onChangeText={ password => this.setState({password})}/>
         </View>

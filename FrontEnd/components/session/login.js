@@ -37,6 +37,7 @@ export default class LoginScreen extends React.Component {
             value={this.state.password}
             autoCapitalize='none'
             placeholder='Password'
+            secureTextEntry={true}
             onChangeText={ password => this.setState({password})}/>
         </View>
         <TouchableOpacity style={styles.submitButton}

@@ -13,7 +13,7 @@ const SessionReducer = (state = _nullUser, action) => {
       const currentUser = action.user;
       return {
         email: currentUser.email,
-        user_id: currentUser.user_id
+        user_id: currentUser.id
       };
     default:
       return state;

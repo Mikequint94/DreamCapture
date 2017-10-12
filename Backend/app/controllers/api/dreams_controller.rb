@@ -5,7 +5,7 @@ class Api::DreamsController < ApplicationController
     if @dream.save
       render "api/dreams/show"
     else
-      render @dream.errors.full_messages, status: 422
+      render json: @dream.errors.full_messages, status: 422
     end
   end
 
@@ -25,7 +25,7 @@ class Api::DreamsController < ApplicationController
       if @dream.update_attributes(dream_params)
         render "api/dreams/show"
       else
-        render @dream.errors.full_messages, status: 422
+        render json: @dream.errors.full_messages, status: 422
       end
 
     else

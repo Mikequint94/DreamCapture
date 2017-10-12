@@ -6,12 +6,11 @@ import {
   View,
   Button,
   Image,
+  Alert,
   TouchableHighlight
 } from 'react-native';
 
 import Voice from 'react-native-voice';
-
-import WatsonAnalyzer from './watson';
 
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
@@ -85,9 +84,32 @@ export default class RecordScreen extends React.Component {
     this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser})
     .then(
     (response) => {
-      navigate('DreamShow', {dreamId: response.dream.data.id})
+      navigate('DreamShow', {dreamId: response.dream.data.id}),
+    error => console.log(error);)
     }
   )
+  }
+  rerecord() {
+    Alert.alert(
+      'Are you sure?',
+      'Your current recording will not be saved.',
+      [
+        {text: 'Yes', onPress: () => {
+          this._destroyRecognizer.bind(this);
+          this.setState({
+            recognized: '',
+            pitch: '',
+            error: '',
+            started: '',
+            results: [],
+            partialResults: [],
+            end: ''
+          });
+        }},
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ],
+      { cancelable: false }
+    )
   }
 
   async _startRecognizing(e) {
@@ -144,19 +166,13 @@ export default class RecordScreen extends React.Component {
   render() {
     let middleTextPic;
     let bottomButton;
-    let watsonInfo;
     let string = this.state.finalResults;
     let analysis = "loading"
     let topText;
     console.log(string);
     if (this.state.end === "√") {
-      let analysis = WatsonAnalyzer.analyze(string)
-      console.log(analysis);
-      watsonInfo = (
-        <Text>
-          {analysis}
-        </Text>
-      )
+      // let analysis = WatsonAnalyzer.analyze(string)
+      // console.log(analysis);
       topText = (
         <Text style={styles.welcome}>
           Edit and Save
@@ -173,7 +189,7 @@ export default class RecordScreen extends React.Component {
       )
       bottomButton = (
         <View style={styles.bottomContainer}>
-          <TouchableHighlight onPress={this._destroyRecognizer.bind(this)}>
+          <TouchableHighlight onPress={this.rerecord.bind(this)}>
             <Image
               style={{height:80, width: 80, marginHorizontal: 30}}
               source={require('./rerecord.png')}

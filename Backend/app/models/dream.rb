@@ -7,6 +7,10 @@ class Dream < ApplicationRecord
 
   has_one :note, dependent: :destroy
 
+  has_many :taggings, dependent: :destroy
+
+  has_many :keywords, through: :taggings
+
   # ----- Methods -------
 
 end

@@ -31,7 +31,7 @@ export const requestDream = dreamId => dispatch => (
 );
 export const requestUserDreams = userId => dispatch => (
   DreamUtil.fetchUserDreams(userId)
-    .then(dreams => dispatch(receiveAllDreams(dreams)))
+    .then(dreams => dispatch(receiveAllDreams(dreams.data)))
 );
 
 export const createDream = data => dispatch => (

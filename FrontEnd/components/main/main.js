@@ -29,6 +29,10 @@ export default class MainScreen extends React.Component {
           Welcome to DreamCapture
         </Text>
         <Button
+          onPress={() => navigate('Home')}
+          title="Home"
+        />
+        <Button
           onPress={() => navigate('Record')}
           title="Record a dream"
         />

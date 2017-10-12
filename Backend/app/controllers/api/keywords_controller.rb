@@ -35,7 +35,7 @@ class Api::KeywordsController < ApplicationController
                   .joins(:taggings)
                   .group("keywords.id")
                   .order("count(taggings.id) DESC")
-                  # .limit(5)
+                  .limit(5)
     render 'api/keywords/index'
   end
 

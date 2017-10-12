@@ -12,7 +12,7 @@ class Api::KeywordsController < ApplicationController
         @keyword.dream_ids = params[:keyword][:dream_id]
         render "api/keywords/show"
       else
-        render @keyword.errors.full_messages, status: 422
+        render json: @keyword.errors.full_messages, status: 422
       end
 
     end

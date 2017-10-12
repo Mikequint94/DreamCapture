@@ -1,1 +1,8 @@
-json.extract! @dream, :id, :body, :created_at, :sentiment, :score, :note
+json.extract! @dream,
+              :id,
+              :body,
+              :created_at, 
+              :sentiment,
+              :score,
+              :note,
+              :keywords

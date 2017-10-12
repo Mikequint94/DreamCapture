@@ -4,7 +4,7 @@ import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Button, TouchableHighlight,
          Image, FlatList } from 'react-native';
-import { List, ListItem, Avatar } from 'react-native-elements'
+import { SearchBar, List, ListItem, Avatar } from 'react-native-elements'
 
 export default class DreamIndexScreen extends React.Component {
   static navigationOptions = {
@@ -37,24 +37,42 @@ export default class DreamIndexScreen extends React.Component {
         renderItem={({ item }) => (
           this.renderFlatListItem(item)
         )}
+        ItemSeparatorComponent={this.renderSeparator}
       />
     return dreamList;
   }
+
+  renderSeparator() {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "85%",
+          backgroundColor: "#CFD3DA",
+          marginLeft: "15%"
+        }}
+      />
+    );
+  };
 
   renderFlatListItem(item) {
     const dream = Object.values(item)[0];
     const timeStamp = dream.created_at;
     const dayNum = this.parseDate(timeStamp)[2];
     return (
-      <ListItem
+      <ListItem style={styles.listItem}
         title={`${dream.body}`}
         avatar={<Avatar
-                  medium
+                  width={30}
+                  height={30}
                   title={dayNum}
+                  titleStyle={{fontSize:20}}
+                  overlayContainerStyle={{backgroundColor:'#A1BEB4'}}
                 />}
       />
     )
   }
+
 
   keyExtractor(item){
     const dream = Object.values(item)[0];
@@ -65,13 +83,16 @@ export default class DreamIndexScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        <SearchBar
+          round
+          placeholder='Search dreams'/>
         <View style={styles.recordSection}>
           <TouchableHighlight>
-            <Icon name='microphone' size={75} color="white" />
+            <Icon name='microphone' size={70} color="white" />
           </TouchableHighlight>
         </View>
         <View style={styles.dreamSection}>
-          <Text>Dream Index</Text>
+
           <List>
             {this.dreamList()}
           </List>
@@ -95,4 +116,7 @@ const styles = StyleSheet.create({
   dreamSection: {
     flex: 3,
   },
+  listItem : {
+    // flexDirection: 'row'
+  }
 });

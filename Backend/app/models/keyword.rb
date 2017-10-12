@@ -11,4 +11,10 @@ class Keyword < ApplicationRecord
 
   # ----- Methods -------
 
+  before_validation :ensure_downcase
+
+  def ensure_downcase
+    self.keyword.downcase
+  end
+
 end

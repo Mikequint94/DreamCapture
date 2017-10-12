@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DreamIndexItem from './dream_index_item';
+import { FontAwesome } from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
   StyleSheet,
   Text,
@@ -18,31 +20,43 @@ export default class DreamIndexScreen extends React.Component {
     this.props.requestUserDreams(this.props.userId);
   }
 
-  render() {
+  parseDate(timestamp) {
+    const time = timestamp.split('-');
+    const year = time[0];
+    const month = time[1];
+    const day = time[2].slice(0,2);
+    return [year, month, day];
+  };
+
+  dreamList() {
     const dreams = this.props.dreams;
-    if (dreams === undefined ) {
+    if (Object.keys(dreams).length === 0
+        && dreams.constructor === Object ) {
       return ( <View></View> );
     }
 
     const dreamList = dreams.map((dream, idx) => (
         <DreamIndexItem
           key={this.props.userId + idx}
-          dream={Object.values(dream)} />
+          dream={Object.values(dream)}
+          parseDate={this.parseDate} />
       ));
 
+    return dreamList;
+  }
+
+  render() {
+
     return (
-      <View style={styles.mainView}>
+      <View style={styles.container}>
         <View style={styles.recordSection}>
           <TouchableHighlight>
-            <Image
-              style={styles.recordButton}
-              source={require('../record/button.png')}
-              />
+            <Icon name='microphone' size={75} color="white" />
           </TouchableHighlight>
         </View>
         <View style={styles.dreamSection}>
           <Text>Dream Index</Text>
-          {dreamList}
+          {this.dreamList()}
         </View>
       </View>
     );
@@ -50,7 +64,7 @@ export default class DreamIndexScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  mainView: {
+  container: {
     flex: 1,
 
   },
@@ -59,10 +73,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#3B264A',
-  },
-  recordButton: {
-    width: 100,
-    height: 100,
   },
   dreamSection: {
     flex: 3,

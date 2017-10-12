@@ -27,11 +27,13 @@ export const receiveDream = dream => ({
 
 export const requestDream = dreamId => dispatch => (
   DreamUtil.fetchDream(dreamId)
-    .then(dream => dispatch(receiveDream(dream)))
+    .then(dream => dispatch(receiveDream(dream))),
+    err => (dispatch(receiveErrors(err.responseJSON)))
 );
 export const requestUserDreams = userId => dispatch => (
   DreamUtil.fetchUserDreams(userId)
-    .then(dreams => dispatch(receiveAllDreams(dreams.data)))
+    .then(dreams => dispatch(receiveAllDreams(dreams.data))),
+    err => (dispatch(receiveErrors(err.responseJSON)))
 );
 
 export const createDream = data => dispatch => (

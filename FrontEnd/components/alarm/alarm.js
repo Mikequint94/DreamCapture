@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
 } from 'react-native';
 
-import TimerMixin from 'react-timer-mixin';
 import RNCalendarEvents from 'react-native-calendar-events';
 
 export default class AlarmScreen extends React.Component {
@@ -24,6 +24,7 @@ export default class AlarmScreen extends React.Component {
     this.time = new Date;
 
     this.updateTime = this.updateTime.bind(this);
+    this.setAlarm = this.setAlarm.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +42,11 @@ export default class AlarmScreen extends React.Component {
       })
       .catch(error => console.warn('Auth Error: ', error));
 
+    // RNCalendarEvents.findCalendars()
+    //   .then(calendars => {
+    //     console.log(calendars);
+    //   });
+
 
     this.updateTime();
     clockId = setInterval(this.updateTime, 1000);
@@ -49,6 +55,22 @@ export default class AlarmScreen extends React.Component {
 
   componentWillUnmount() {
     clearInterval(clockId);
+  }
+
+  setAlarm() {
+
+
+    RNCalendarEvents.saveEvent(`Example Event`, {
+      startDate: "2017-10-11T17:42:00.000Z",
+      endDate: "2017-10-11T17:47:00.000Z",
+      calendar: ['Calendar'],
+      alarm: [{
+        date:"2017-10-11T17:42:00.000Z"
+      }],
+    })
+    .then(id => {
+      console.log(id);
+    }).catch(error => console.log('Save Event Error: ', error));
   }
 
 
@@ -70,6 +92,10 @@ export default class AlarmScreen extends React.Component {
         <Text> {this.state.time.slice(0, 8)} </Text>
         <Text> {this.state.date} </Text>
         <Text> {this.state.events} </Text>
+        <TouchableOpacity style={styles.submitButton}
+          onPress={this.setAlarm} >
+          <Text style={styles.submitButtonText}> Alarm </Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -82,9 +108,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
+  submitButton: {
     margin: 10,
+    backgroundColor: '#2830a5',
+    height: 40,
+    justifyContent: 'center',
   },
+  submitButtonText: {
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+  }
 });

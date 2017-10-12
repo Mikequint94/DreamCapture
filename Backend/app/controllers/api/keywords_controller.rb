@@ -4,12 +4,13 @@ class Api::KeywordsController < ApplicationController
 
     if @keyword
       @keyword.dream_ids = @keyword.dream_ids << params[:keyword][:dream_id]
+      render "api/keywords/show"
 
     else
       @keyword = Keyword.new(keyword_params)
       @keyword.dream_ids = params[:keyword][:dream_id]
       if @keyword.save
-        render "api/keywords/index"
+        render "api/keywords/show"
       else
         render @keyword.errors.full_messages, status: 422
       end
@@ -28,8 +29,7 @@ class Api::KeywordsController < ApplicationController
   end
 
   def index
-    dream = Dream.find(params[:dream_id])
-    @keyword = dream.keywords
+    @keywords = Keyword.joins(:taggings).group("keywords.id").order("count(taggings.id) DESC")
     render 'api/keywords/index'
   end
 

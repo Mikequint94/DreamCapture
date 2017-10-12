@@ -1,6 +1,6 @@
 import {RECEIVE_ALL_DREAMS, RECEIVE_DREAM} from '../actions/dream_actions';
 
-const DreamReducer = (state = {}, action) => {
+const DreamsReducer = (state = {}, action) => {
   let newState = Object.assign({}, state);
   Object.freeze(state);
   switch (action.type) {
@@ -15,4 +15,4 @@ const DreamReducer = (state = {}, action) => {
   }
 };
 
-export default DreamReducer;
+export default DreamsReducer;

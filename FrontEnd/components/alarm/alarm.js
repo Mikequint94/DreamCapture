@@ -5,8 +5,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import PushNotification from 'react-native-push-notification';
 
-import RNCalendarEvents from 'react-native-calendar-events';
 
 export default class AlarmScreen extends React.Component {
   static navigationOptions = {
@@ -28,25 +28,6 @@ export default class AlarmScreen extends React.Component {
   }
 
   componentDidMount() {
-    RNCalendarEvents.authorizationStatus()
-      .then(status => {
-        this.setState({ cal_auth: status })
-        if(status === 'undetermined') {
-          RNCalendarEvents.authorizeEventStore()
-          .then((newStatus) => {
-            if(newStatus == 'authorized') {
-              this.setState({ cal_auth: newStatus })
-            }
-          })
-        }
-      })
-      .catch(error => console.warn('Auth Error: ', error));
-
-    // RNCalendarEvents.findCalendars()
-    //   .then(calendars => {
-    //     console.log(calendars);
-    //   });
-
 
     this.updateTime();
     clockId = setInterval(this.updateTime, 1000);
@@ -60,17 +41,6 @@ export default class AlarmScreen extends React.Component {
   setAlarm() {
 
 
-    RNCalendarEvents.saveEvent(`Example Event`, {
-      startDate: "2017-10-11T17:42:00.000Z",
-      endDate: "2017-10-11T17:47:00.000Z",
-      calendar: ['Calendar'],
-      alarm: [{
-        date:"2017-10-11T17:42:00.000Z"
-      }],
-    })
-    .then(id => {
-      console.log(id);
-    }).catch(error => console.log('Save Event Error: ', error));
   }
 
 
@@ -87,7 +57,7 @@ export default class AlarmScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> Alarm Screen </Text>
+        <Text> When do you usually wake up? </Text>
         <Text> {this.state.cal_auth} </Text>
         <Text> {this.state.time.slice(0, 8)} </Text>
         <Text> {this.state.date} </Text>

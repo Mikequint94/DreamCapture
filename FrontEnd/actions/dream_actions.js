@@ -1,4 +1,7 @@
-import * as DreamUtil from '../util/dream_util';
+// import * as DreamUtil from '../util/dream_util';
+
+import axios from 'axios';
+import {API_URL} from '../api/api_index';
 
 export const RECEIVE_ALL_DREAMS = 'RECEIVE_ALL_DREAMS';
 export const RECEIVE_DREAM = 'RECEIVE_DREAM';
@@ -22,26 +25,28 @@ export const receiveAllDreams = dreams => ({
 
 export const receiveDream = dream => ({
   type: RECEIVE_DREAM,
-  dream
+  dream.data
 });
 
 export const requestDream = dreamId => dispatch => (
-  DreamUtil.fetchDream(dreamId)
+  axios.get(`${API_URL}/api/dreams/${dreamId}`)
     .then(dream => dispatch(receiveDream(dream)))
+    .catch(err => dispatch(receiveErrors(err)))
 );
 export const requestUserDreams = userId => dispatch => (
-  DreamUtil.fetchUserDreams(userId)
-    .then(dreams => dispatch(receiveAllDreams(dreams)))
+  axios.get(`${API_URL}/api/users/${userId}/dreams`)
+    .then(dreams => dispatch(receiveAllDreams(dreams.data)))
+    .catch(err => dispatch(receiveErrors(err)))
 );
 
-export const createDream = data => dispatch => (
-  DreamUtil.createDream(data)
-    .then(dream => dispatch(receiveDream(dream)),
-    err => dispatch(receiveErrors(err.responseJSON)))
+export const createDream = dream => dispatch => (
+  axios.post(`${API_URL}/api/dreams`, { dream })
+    .then(data => dispatch(receiveDream(data)))
+    .catch(err => dispatch(receiveErrors(err)))
 );
 
-export const updateDream = data => dispatch => (
-  DreamUtil.updateDream(data)
-    .then(dream => dispatch(receiveDream(dream)),
-    err => (dispatch(receiveErrors(err.responseJSON))))
+export const updateDream = dream => dispatch => (
+  axios.patch(`${API_URL}/api/dreams/${data.id}`, { dream })
+    .then(data => dispatch(receiveDream(data)))
+    .catch(err => (dispatch(receiveErrors(err))))
 );

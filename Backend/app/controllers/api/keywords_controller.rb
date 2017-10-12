@@ -7,9 +7,9 @@ class Api::KeywordsController < ApplicationController
       render "api/keywords/show"
 
     else
-      @keyword = Keyword.new(keyword_params)
-      @keyword.dream_ids = params[:keyword][:dream_id]
+      @keyword = Keyword.new({ keyword: params[:keyword][:keyword] } )
       if @keyword.save
+        @keyword.dream_ids = params[:keyword][:dream_id]
         render "api/keywords/show"
       else
         render @keyword.errors.full_messages, status: 422
@@ -29,14 +29,20 @@ class Api::KeywordsController < ApplicationController
   end
 
   def index
-    @keywords = Keyword.joins(:taggings).group("keywords.id").order("count(taggings.id) DESC")
+    user = User.find(params[:keyword][:user_id])
+    @keywords = user
+                  .keywords
+                  .joins(:taggings)
+                  .group("keywords.id")
+                  .order("count(taggings.id) DESC")
+                  .limit(5)
     render 'api/keywords/index'
   end
 
   private
 
   def keyword_params
-    params.require(:keyword).permit(:keyword, :dream_id)
+    params.require(:keyword).permit(:keyword, :dream_id, :user_id)
   end
 
 end

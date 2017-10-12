@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :dreams
 
+  has_many :keywords, through: :dreams
+
   # ----- Methods -------
 
   after_initialize :ensure_session_token

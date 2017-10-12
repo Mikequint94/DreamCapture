@@ -25,7 +25,7 @@ export const receiveAllDreams = dreams => ({
 
 export const receiveDream = dream => ({
   type: RECEIVE_DREAM,
-  dream.data
+  dream
 });
 
 export const requestDream = dreamId => dispatch => (

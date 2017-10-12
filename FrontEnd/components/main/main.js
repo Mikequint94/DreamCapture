@@ -53,7 +53,7 @@ export default class MainScreen extends React.Component {
           title="Alarm Show Page"
         />
         <Button
-          onPress={() => navigate('DreamShow', {dreamId: 47})}
+          onPress={() => navigate('DreamShow', {dreamId: 77})}
           title="Dream Show Page"
         />
       </View>

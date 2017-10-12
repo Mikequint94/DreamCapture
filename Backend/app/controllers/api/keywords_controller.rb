@@ -1,13 +1,13 @@
 class Api::KeywordsController < ApplicationController
   def create
-    @keyword = Keyword.find_by(keyword: params[:keyword][:keyword])
+    @keyword = Keyword.find_by(keyword: params[:keyword][:keyword].downcase)
 
     if @keyword
       @keyword.dream_ids = @keyword.dream_ids << params[:keyword][:dream_id]
       render "api/keywords/show"
 
     else
-      @keyword = Keyword.new({ keyword: params[:keyword][:keyword] } )
+      @keyword = Keyword.new({ keyword: params[:keyword][:keyword].downcase } )
       if @keyword.save
         @keyword.dream_ids = params[:keyword][:dream_id]
         render "api/keywords/show"
@@ -29,7 +29,7 @@ class Api::KeywordsController < ApplicationController
   end
 
   def index
-    user = User.find(params[:keyword][:user_id])
+    user = User.find(params[:user_id])
     @keywords = user
                   .keywords
                   .joins(:taggings)
@@ -42,7 +42,7 @@ class Api::KeywordsController < ApplicationController
   private
 
   def keyword_params
-    params.require(:keyword).permit(:keyword, :dream_id, :user_id)
+    params.require(:keyword).permit(:keyword, :dream_id)
   end
 
 end

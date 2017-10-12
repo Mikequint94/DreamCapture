@@ -13,10 +13,10 @@ export const receiveCurrentUser = user => ({
 export const login = (user) => dispatch => (
   axios.post(SESSION_URL, { user })
     .then(response => {
-      console.log('success');
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
-      dispatch(onSignIn());
+      onSignIn();
+      console.log('login success');
     })
     .catch((error) => {
       console.log("Can\'t log in");
@@ -24,31 +24,35 @@ export const login = (user) => dispatch => (
     })
   );
 
-export const logout = () => dispatch => (
+export const logout = () => dispatch => {
+  console.log("log out pushed");
   axios({
     method: 'DELETE',
     url: SESSION_URL,
     params: {}
   })
     .then(response => {
-      console.log('loggedout');
       console.log(response);
-      dispatch(receiveCurrentUser(null));
-      dispatch(onSignOut());
+      dispatch(receiveCurrentUser({
+        email: null,
+        user_id: null
+      }));
+      onSignOut();
+      console.log('logged out');
     })
     .catch((error) => {
       console.log("Can\'t log out");
       console.log(error.response);
-    })
-  );
+    });
+  };
 
 export const signup = (user) => dispatch => (
   axios.post(USERS_URL, { user })
     .then((response) => {
-      console.log('success');
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
-      dispatch(onSignIn());
+      onSignIn();
+      console.log('signup success');
     })
     .catch((error) => {
       console.log('signup axios error');
@@ -56,22 +60,18 @@ export const signup = (user) => dispatch => (
     })
   );
 
-
   const USER_LOGGED_IN = "user_logged_in";
 
   const onSignIn = () => AsyncStorage.setItem(USER_LOGGED_IN, "true");
   const onSignOut = () => AsyncStorage.removeItem(USER_LOGGED_IN);
 
   export const isSignedIn = () => {
-    return new Promise((resolve, reject) => {
-      AsyncStorage.getItem(USER_LOGGED_IN)
-        .then(res => {
-          if (res !== null) {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        })
-        .catch(err => reject(err));
-    });
+    const userLoggedIn = AsyncStorage.getItem(USER_LOGGED_IN);
+    if (userLoggedIn !== null) {
+      console.log('async user logged in');
+      return true;
+    } else {
+      console.log('async user logged out');
+      return false;
+    }
   };

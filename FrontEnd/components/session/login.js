@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
+import { isSignedIn } from '../../actions/session_actions';
+
 import {
   StyleSheet,
   ScrollView,
@@ -6,8 +9,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  Button
 } from 'react-native';
-import { login } from '../../actions/session_actions';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -19,13 +22,25 @@ export default class LoginScreen extends React.Component {
     this.state = { email: "", password: "" };
   }
 
+  resetNav() {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main' }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  };
+
   handleLogin() {
-    const { navigate } = this.props.navigation;
     this.props.login(this.state)
-    navigate('Main');
+    if (isSignedIn()) {
+      this.resetNav();
+    }
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
@@ -51,6 +66,10 @@ export default class LoginScreen extends React.Component {
             () => this.handleLogin()}>
             <Text style={styles.submitButtonText}> Log In </Text>
           </TouchableOpacity>
+        <Button
+          onPress={() => navigate('SignUp')}
+          title='Sign Up'
+          />
       </View>
 
     )

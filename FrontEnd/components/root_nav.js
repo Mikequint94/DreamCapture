@@ -3,36 +3,49 @@
 
 import React from "react";
 import { Platform, StatusBar } from "react-native";
-import { StackNavigator, TabNavigator } from "react-navigation";
-
+import { StackNavigator,
+         TabNavigator } from "react-navigation";
+// import { FontAwesome } from "react-native-vector-icons";
 
 import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
 
-import MainScreen from "./main/main";
+import MainContainer from "./main/main_container";
 import RecordScreen from './record/record_container';
 import AlarmScreen from './alarm/alarm';
 import DreamShowScreen from './dream/dream_show_container';
-
 
 export const SignedOut = StackNavigator({
   SignUp: {
     screen: SignupContainer,
     navigationOptions: {
       title: "Sign Up Root Nav",
+      headerLeft: null
     }
   },
   SignIn: {
     screen: LoginContainer,
     navigationOptions: {
       title: "Log In Root Nav",
+      headerLeft: null
     }
-  }
+  },
+  Main: {
+    screen: MainContainer,
+    navigationOptions: {
+      headerLeft: null
+    }
+  },
 });
 
 export const SignedIn = StackNavigator(
   {
-    Main: { screen: MainScreen },
+    Main: {
+      screen: MainContainer,
+      navigationOptions: {
+        headerLeft: null
+      }
+    },
     Record: { screen: RecordScreen },
     Login: { screen: LoginContainer },
     Signup: { screen: SignupContainer },

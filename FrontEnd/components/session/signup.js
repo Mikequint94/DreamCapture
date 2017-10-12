@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { signup } from '../../actions/session_actions';
+import { NavigationActions } from 'react-navigation';
+import { isSignedIn } from '../../actions/session_actions';
+
 import {
   StyleSheet,
   ScrollView,
@@ -21,12 +23,22 @@ export default class SignupScreen extends React.Component {
     this.state = { email: "", password: "" };
   }
 
-  handleSignup() {
-    const { navigate } = this.props.navigation;
-    this.props.signup(this.state)
-    navigate('Main');
-  }
+  resetNav() {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Main' }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  };
 
+  handleSignup() {
+    this.props.signup(this.state)
+    if (isSignedIn()) {
+      this.resetNav();
+    }
+  }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -56,6 +68,10 @@ export default class SignupScreen extends React.Component {
             () => this.handleSignup() }>
             <Text style={styles.submitButtonText}> Sign Up </Text>
           </TouchableOpacity>
+        <Button
+          onPress={() => navigate('SignIn')}
+          title='Log In'
+          />
       </View>
 
     )

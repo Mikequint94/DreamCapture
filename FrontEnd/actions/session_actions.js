@@ -13,10 +13,10 @@ export const receiveCurrentUser = user => ({
 export const login = (user) => dispatch => (
   axios.post(SESSION_URL, { user })
     .then(response => {
-      console.log('login success');
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
       onSignIn();
+      console.log('login success');
     })
     .catch((error) => {
       console.log("Can\'t log in");
@@ -24,32 +24,35 @@ export const login = (user) => dispatch => (
     })
   );
 
-export const logout = () => dispatch => (
-  console.log("log out pushed"),
+export const logout = () => dispatch => {
+  console.log("log out pushed");
   axios({
     method: 'DELETE',
     url: SESSION_URL,
     params: {}
   })
     .then(response => {
-      console.log('logged out');
       console.log(response);
-      dispatch(receiveCurrentUser(null));
+      dispatch(receiveCurrentUser({
+        email: null,
+        user_id: null
+      }));
       onSignOut();
+      console.log('logged out');
     })
     .catch((error) => {
       console.log("Can\'t log out");
       console.log(error.response);
-    })
-  );
+    });
+  };
 
 export const signup = (user) => dispatch => (
   axios.post(USERS_URL, { user })
     .then((response) => {
-      console.log('success');
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
       onSignIn();
+      console.log('signup success');
     })
     .catch((error) => {
       console.log('signup axios error');
@@ -65,8 +68,10 @@ export const signup = (user) => dispatch => (
   export const isSignedIn = () => {
     const userLoggedIn = AsyncStorage.getItem(USER_LOGGED_IN);
     if (userLoggedIn !== null) {
+      console.log('async user logged in');
       return true;
     } else {
+      console.log('async user logged out');
       return false;
     }
   };

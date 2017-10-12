@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
+import { isSignedIn } from '../../actions/session_actions';
+
 import {
   StyleSheet,
   ScrollView,
@@ -32,9 +34,10 @@ export default class SignupScreen extends React.Component {
   };
 
   handleSignup() {
-    const { navigate } = this.props.navigation;
     this.props.signup(this.state)
-    this.resetNav()
+    if (isSignedIn()) {
+      this.resetNav();
+    }
   }
 
   render() {

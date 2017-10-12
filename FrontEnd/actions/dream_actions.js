@@ -25,20 +25,10 @@ export const receiveAllDreams = dreams => ({
 
 export const receiveDream = dream => ({
   type: RECEIVE_DREAM,
-  dream.data
+  dream
 });
 
 export const requestDream = dreamId => dispatch => (
-<<<<<<< HEAD
-  DreamUtil.fetchDream(dreamId)
-    .then(dream => dispatch(receiveDream(dream))),
-    err => (dispatch(receiveErrors(err.responseJSON)))
-);
-export const requestUserDreams = userId => dispatch => (
-  DreamUtil.fetchUserDreams(userId)
-    .then(dreams => dispatch(receiveAllDreams(dreams.data))),
-    err => (dispatch(receiveErrors(err.responseJSON)))
-=======
   axios.get(`${API_URL}/api/dreams/${dreamId}`)
     .then(dream => dispatch(receiveDream(dream)))
     .catch(err => dispatch(receiveErrors(err)))
@@ -47,7 +37,6 @@ export const requestUserDreams = userId => dispatch => (
   axios.get(`${API_URL}/api/users/${userId}/dreams`)
     .then(dreams => dispatch(receiveAllDreams(dreams.data)))
     .catch(err => dispatch(receiveErrors(err)))
->>>>>>> 682c30c17f2bd64242b85137b41bc6e13c204c41
 );
 
 export const createDream = dream => dispatch => (

@@ -85,11 +85,7 @@ export default class RecordScreen extends React.Component {
     .then(
     (response) => {
       navigate('DreamShow', {dreamId: response.dream.data.id})
-<<<<<<< HEAD
-        .catch(error => console.log(error))
-=======
     .catch(error => console.log(error))
->>>>>>> 682c30c17f2bd64242b85137b41bc6e13c204c41
     }
   )
   }

@@ -3,7 +3,10 @@ import DreamIndexItem from './dream_index_item';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
+  TouchableHighlight,
+  Image
 } from 'react-native';
 
 export default class DreamIndexScreen extends React.Component {
@@ -28,10 +31,40 @@ export default class DreamIndexScreen extends React.Component {
       ));
 
     return (
-      <View>
-        <Text>Dream Index</Text>
-        {dreamList}
+      <View style={styles.mainView}>
+        <View style={styles.recordSection}>
+          <TouchableHighlight>
+            <Image
+              style={styles.recordButton}
+              source={require('../record/button.png')}
+              />
+          </TouchableHighlight>
+        </View>
+        <View style={styles.dreamSection}>
+          <Text>Dream Index</Text>
+          {dreamList}
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  mainView: {
+    flex: 1,
+
+  },
+  recordSection: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#3B264A',
+  },
+  recordButton: {
+    width: 100,
+    height: 100,
+  },
+  dreamSection: {
+    flex: 3,
+  },
+});

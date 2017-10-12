@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resource :session, only: %i[create destroy]
     resources :users, only: %i[create update] do
+      resources :keywords, only: %i[index]
       resources :dreams, only: %i[index]
     end
 
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
       # resources :notes, only: %i[index]
     end
 
-    resources :keywords, only: %i[create destroy index]
+    resources :keywords, only: %i[create destroy]
     resources :notes, only: %i[create update destroy]
   end
 

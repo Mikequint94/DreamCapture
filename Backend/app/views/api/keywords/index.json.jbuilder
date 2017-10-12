@@ -1,3 +1,3 @@
-json.array! @keywords do |dream|
-  json.set! dream.id, dream
+json.array! @keywords do |keyword|
+  json.set! keyword.id, keyword
 end

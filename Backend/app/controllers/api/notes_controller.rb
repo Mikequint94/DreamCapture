@@ -4,7 +4,7 @@ class Api::NotesController < ApplicationController
     if @note.save
       render "api/notes/index"
     else
-      render @note.errors.full_messages, status: 422
+      render json: @note.errors.full_messages, status: 422
     end
   end
 
@@ -15,7 +15,7 @@ class Api::NotesController < ApplicationController
       if @note.update_attributes(note_params)
         render "api/notes/index"
       else
-        render @note.errors.full_messages, status: 422
+        render json: @note.errors.full_messages, status: 422
       end
 
     else

@@ -29,7 +29,7 @@ class Api::KeywordsController < ApplicationController
   end
 
   def index
-    user = User.find(params[:keyword][:user_id])
+    user = User.find(params[:user_id])
     @keywords = user
                   .keywords
                   .joins(:taggings)
@@ -42,7 +42,7 @@ class Api::KeywordsController < ApplicationController
   private
 
   def keyword_params
-    params.require(:keyword).permit(:keyword, :dream_id, :user_id)
+    params.require(:keyword).permit(:keyword, :dream_id)
   end
 
 end

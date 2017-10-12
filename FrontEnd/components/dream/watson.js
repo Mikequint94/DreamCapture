@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
+import SuggestedKeywordItem from '../keyword/suggested_keyword_item';
 
 
 String.prototype.convert_to_url = function() {
@@ -56,16 +57,18 @@ export default class WatsonAnalyzer extends React.Component {
 
   render() {
     let keywordShow;
+    let topKeywordShow;
+    // console.log(this.keywords);
     if (this.keywords) {
-      keywordShow = (
-        <View style={styles.suggestedKeys}>
-          <Text>{this.keywords[0]}</Text>
-          <Text>{this.keywords[1]}</Text>
-          <Text>{this.keywords[2]}</Text>
-          <Text>{this.keywords[3]}</Text>
-          <Text>{this.keywords[4]}</Text>
-        </View>
-      );
+      keywordShow = this.keywords.map(
+        (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {keyword} />
+    );
+    }
+    console.log(this.props.keywords);
+    if (this.props.keywords) {
+      // topKeywordShow = this.props.keywords.map(
+      //   (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {Object.values(keyword)} />
+      // );
     }
 
     return (
@@ -79,10 +82,11 @@ export default class WatsonAnalyzer extends React.Component {
         <Text>
           Suggested Keywords:
           {keywordShow}
+          {topKeywordShow}
         </Text>
       </View>
     );
-  }
+}
 }
 
 module.exports = WatsonAnalyzer;
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: 300,
-    height: 300,
+    height: 200,
     borderColor: 'gray',
     borderWidth: 1
   }

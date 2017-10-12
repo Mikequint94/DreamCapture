@@ -10,7 +10,7 @@ class Api::DreamsController < ApplicationController
   end
 
   def show
-    @dream = Dream.includes(:note).find(params[:id])
+    @dream = Dream.includes(:note, :keywords).find(params[:id])
     if @dream
       render "api/dreams/show"
     else

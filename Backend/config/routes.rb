@@ -9,13 +9,12 @@ Rails.application.routes.draw do
       resources :dreams, only: %i[index]
     end
 
-    resources :dreams, except: %i[index new] do
-      resources :notes, only: %i[index]
-      resources :keywords, only: %i[index]
+    resources :dreams, except: %i[index new edit] do
+      # resources :notes, only: %i[index]
     end
 
-    resources :keywords, except: %i[index show]
-    resources :notes, except: %i[index show update]
+    resources :keywords, only: %i[create destroy index]
+    resources :notes, only: %i[create update destroy]
   end
 
 end

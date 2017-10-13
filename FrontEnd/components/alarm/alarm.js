@@ -5,8 +5,26 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-// import PushNotification from 'react-native-push-notification';
+import PushNotification from 'react-native-push-notification';
+import PushNotificationsHandler from 'react-native-push-notification';
 
+PushNotification.configure({
+
+  // (required) Called when a remote or local notification is opened or received
+    onNotification: function(notification) {
+        console.log( 'NOTIFICATION:', notification );
+    },
+    // IOS ONLY (optional): default: all - Permissions to register.
+    permissions: {
+       alert: true,
+       badge: true,
+       sound: true
+     },
+     // Should the initial notification be popped automatically
+    // default: true
+    popInitialNotification: true,
+    requestPermissions: false,
+  });
 
 export default class AlarmScreen extends React.Component {
   static navigationOptions = {
@@ -28,6 +46,7 @@ export default class AlarmScreen extends React.Component {
   }
 
   componentDidMount() {
+    PushNotificationsHandler.requestPermissions()
 
     this.updateTime();
     clockId = setInterval(this.updateTime, 1000);
@@ -39,7 +58,13 @@ export default class AlarmScreen extends React.Component {
   }
 
   setAlarm() {
-
+    PushNotification.cancelAllLocalNotifications()
+    PushNotification.localNotificationSchedule({
+      message: "Record your dream", // (required)
+      date: new Date(Date.now() + (5 * 1000)),
+      repeatType:'daily',
+      repeatInterval: "daily"
+    });
 
   }
 

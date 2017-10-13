@@ -8,7 +8,7 @@ const KeywordsReducer = (state = {}, action) => {
       newState = action.keywords;
       return newState;
     case RECEIVE_KEYWORD:
-      newState[action.keyword.data.id] = action.keyword.data;
+      newState[action.keyword.id] = action.keyword;
       return newState;
     default:
       return state;

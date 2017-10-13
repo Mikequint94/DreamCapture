@@ -1,4 +1,7 @@
-import * as KeywordUtil from '../util/keyword_util';
+// import * as KeywordUtil from '../util/keyword_util';
+
+import axios from 'axios';
+import {API_URL} from '../api/api_index';
 
 export const RECEIVE_ALL_KEYWORDS = 'RECEIVE_ALL_KEYWORDS';
 export const RECEIVE_KEYWORD = 'RECEIVE_KEYWORD';
@@ -26,17 +29,18 @@ export const receiveKeyword = keyword => ({
 });
 
 export const requestKeyword = keywordId => dispatch => (
-  KeywordUtil.fetchKeyword(keywordId)
-    .then(keyword => dispatch(receiveKeyword(keyword)))
+  axios.get(`${API_URL}/api/keywords/${keywordId}`)
+    .then(keyword => dispatch(receiveKeyword(keyword.data)))
+    .catch(err => dispatch(receiveErrors(err)))
 );
 export const requestTopKeywords = userId => dispatch => (
-  KeywordUtil.fetchTopKeywords(userId)
-    .then(keywords => dispatch(receiveAllKeywords(keywords)),
-    err => dispatch(receiveErrors(err)))
+  axios.get(`${API_URL}/api/users/${userId}/keywords`)
+    .then(keywords => dispatch(receiveAllKeywords(keywords.data)))
+    .catch(err => dispatch(receiveErrors(err)))
 );
 
-export const createKeyword = data => dispatch => (
-  KeywordUtil.createKeyword(data)
-    .then(keyword => dispatch(receiveKeyword(keyword)),
-    err => dispatch(receiveErrors(err)))
+export const createKeyword = keyword => dispatch => (
+  axios.post(`${API_URL}/api/keywords`, { keyword })
+    .then(data => dispatch(receiveKeyword(data.data)))
+    .catch(err => dispatch(receiveErrors(err)))
 );

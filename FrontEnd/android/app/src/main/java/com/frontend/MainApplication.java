@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.calendarevents.CalendarEventsPackage;
 import com.wenkesj.voice.VoicePackage;
 import com.facebook.react.ReactNativeHost;
@@ -26,7 +27,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+<<<<<<< HEAD
             new ReactNativePushNotificationPackage(),
+=======
+            new VectorIconsPackage(),
+>>>>>>> 9d12f776ba685e249ee9a35429b9625b42ab4fc5
             new CalendarEventsPackage(),
             new VoicePackage()
       );

@@ -8,6 +8,7 @@ import {
 
 import WatsonAnalyzer from './watson';
 import KeywordShow from '../keyword/keyword_show';
+import moment from 'moment'
 
 export default class DreamShowScreen extends React.Component {
   static navigationOptions = {
@@ -34,8 +35,6 @@ export default class DreamShowScreen extends React.Component {
     }, 1100)
   }
 
-  component
-
   render() {
     // if (this.state.newKey === "") {
     // this.props.requestDream(this.props.navigation.state.params.dreamId);
@@ -50,12 +49,24 @@ export default class DreamShowScreen extends React.Component {
           <KeywordShow currentKeywords={this.props.dreams[currentDream].keywords}/>
         )
       }
+
     let dreams;
     let watsonInfo;
     let watson;
+
     if (this.props.dreams[currentDream]) {
+      const dream = this.props.dreams[currentDream];
+      console.log(dream);
+
+      const formattedDate = moment(dream.created_at).format('MMMM D, YYYY');
+
       dreams = (
-        <Text>{this.props.dreams[currentDream].body}</Text>
+        <View>
+          <Text style={styles.day}>
+            {formattedDate}
+          </Text>
+          <Text>{dream.body}</Text>
+        </View>
       )
       watsonInfo = (
         <WatsonAnalyzer createKeyword={this.props.createKeyword} currentDream={currentDream} keywords={this.props.keywords} navigation={this.props.navigation} string={this.props.dreams[currentDream].body} />
@@ -97,8 +108,44 @@ export default class DreamShowScreen extends React.Component {
         {dreams}
         {watson}
         {addkeyword}
+
+      <View style={styles.container}>
+          {dreams}
+          {watson}
+        <View style={styles.addKeywordsContainer  }>
+          {addkeyword}
+        </View>
         {keywordShow}
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create ({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dreamsContainer: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#3E3254',
+  },
+  date: {
+
+  },
+  watsonContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'blue',
+  },
+  addKeywordsContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'skyblue',
+  },
+});

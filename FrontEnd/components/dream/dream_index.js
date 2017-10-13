@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import DreamIndexItem from './dream_index_item';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Button, TouchableHighlight,
          Image, FlatList } from 'react-native';
 import { SearchBar, List, ListItem, Avatar } from 'react-native-elements'
-
 export default class DreamIndexScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
@@ -23,6 +21,34 @@ export default class DreamIndexScreen extends React.Component {
     return [year, month, day];
   };
 
+  sectionDreams() {
+    const dreams = this.props.dreams;
+    const reformattedDreams = dreams.map(d => {
+      const dreamObj = Object.values(d)[0]
+      let dream = {};
+      const date = this.parseDate(dreamObj.created_at);
+      dream['year'] = date[0];
+      dream['month'] = date[1];
+      dream['day'] = date[2];
+      dream['body'] = dreamObj.body;
+      dream['id'] = dreamObj.id;
+      dream['user_id'] = dreamObj.user_id;
+      return dream;
+    });
+
+    const allMonths = reformattedDreams.map(d => d.month);
+    const uniqSet = new Set(allMonths);
+    const uniqMonths = Array.from(uniqSet)
+
+    const dreamsByMonth = uniqMonths.map(month => {
+      return reformattedDreams.filter(d => d.month === month);
+    });
+
+    console.log(dreamsByMonth);
+
+    return dreamsByMonth;
+  };
+
   dreamList() {
     const dreams = this.props.dreams;
     if (Object.keys(dreams).length === 0
@@ -38,6 +64,7 @@ export default class DreamIndexScreen extends React.Component {
           this.renderFlatListItem(item)
         )}
         ItemSeparatorComponent={this.renderSeparator}
+        removeClippedSubviews={false}
       />
     return dreamList;
   }
@@ -59,6 +86,7 @@ export default class DreamIndexScreen extends React.Component {
     const dream = Object.values(item)[0];
     const timeStamp = dream.created_at;
     const dayNum = this.parseDate(timeStamp)[2];
+    const { navigate } = this.props.navigation;
     return (
       <ListItem style={styles.listItem}
         title={`${dream.body}`}
@@ -69,6 +97,7 @@ export default class DreamIndexScreen extends React.Component {
                   titleStyle={{fontSize:20}}
                   overlayContainerStyle={{backgroundColor:'#A1BEB4'}}
                 />}
+        onPress={() => navigate('DreamShow', {dreamId: dream.id})}
       />
     )
   }
@@ -79,10 +108,15 @@ export default class DreamIndexScreen extends React.Component {
     return dream.id;
   }
 
+  renderSectionList() {
+
+  }
+
   render() {
 
     return (
       <View style={styles.container}>
+
         <SearchBar
           round
           placeholder='Search dreams'/>

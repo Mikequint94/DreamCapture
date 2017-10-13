@@ -9,7 +9,6 @@ import PushNotification from 'react-native-push-notification';
 import PushNotificationsHandler from 'react-native-push-notification';
 
 PushNotification.configure({
-
   // (required) Called when a remote or local notification is opened or received
     onNotification: function(notification) {
         console.log( 'NOTIFICATION:', notification );
@@ -18,7 +17,7 @@ PushNotification.configure({
     permissions: {
        alert: true,
        badge: true,
-       sound: true
+       sound: false
      },
      // Should the initial notification be popped automatically
     // default: true
@@ -34,63 +33,79 @@ export default class AlarmScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cal_auth: '',
+      reminderSet: false,
+      reminderTimer: '',
       time: '',
       date: '',
-      events: '',
     };
-    this.time = new Date;
+    // this.time = new Date;
 
-    this.updateTime = this.updateTime.bind(this);
+    // this.updateTime = this.updateTime.bind(this);
     this.setAlarm = this.setAlarm.bind(this);
+    this.cancelAlarm = this.cancelAlarm.bind(this);
   }
 
   componentDidMount() {
     PushNotificationsHandler.requestPermissions()
 
-    this.updateTime();
-    clockId = setInterval(this.updateTime, 1000);
+    // this.updateTime();
+    // clockId = setInterval(this.updateTime, 1000);
 
   }
 
   componentWillUnmount() {
-    clearInterval(clockId);
+    // clearInterval(clockId);
   }
 
   setAlarm() {
     PushNotification.cancelAllLocalNotifications()
     PushNotification.localNotificationSchedule({
       message: "Record your dream", // (required)
-      date: new Date(Date.now() + (5 * 1000)),
+      date: new Date(Date.now() + (10 * 1000)),
       repeatType:'day',
       repeatInterval: "day"
     });
 
+    this.setState({reminderSet: true})
+  }
+
+  cancelAlarm() {
+    PushNotification.cancelAllLocalNotifications()
+    this.setState({reminderSet: false})
   }
 
 
 
-  updateTime() {
-    this.time = new Date();
-    this.setState({time: this.time.toTimeString(),
-                   date: this.time.toDateString()
-                 });
-  }
+  // updateTime() {
+  //   this.time = new Date();
+  //   this.setState({time: this.time.toTimeString(),
+  //                  date: this.time.toDateString()
+  //                });
+  // }
 
 
 
   render() {
+    let button = null
+    if (this.state.reminderSet) {
+      button  =  <TouchableOpacity style={styles.submitButton}
+                    onPress={this.cancelAlarm} >
+                    <Text style={styles.submitButtonText}
+                      > Cancel Reminder </Text>
+                  </TouchableOpacity>
+    } else {
+      button  =  <TouchableOpacity style={styles.submitButton}
+                    onPress={this.setAlarm} >
+                    <Text style={styles.submitButtonText}> Set Reminder </Text>
+                  </TouchableOpacity>
+    }
+
     return (
       <View style={styles.container}>
         <Text> When do you usually wake up? </Text>
-        <Text> {this.state.cal_auth} </Text>
         <Text> {this.state.time.slice(0, 8)} </Text>
         <Text> {this.state.date} </Text>
-        <Text> {this.state.events} </Text>
-        <TouchableOpacity style={styles.submitButton}
-          onPress={this.setAlarm} >
-          <Text style={styles.submitButtonText}> Alarm </Text>
-        </TouchableOpacity>
+        {button}
       </View>
     )
   }

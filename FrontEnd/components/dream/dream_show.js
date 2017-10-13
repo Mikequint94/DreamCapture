@@ -58,14 +58,22 @@ export default class DreamShowScreen extends React.Component {
       const dream = this.props.dreams[currentDream];
       console.log(dream);
 
-      const formattedDate = moment(dream.created_at).format('MMMM D, YYYY');
+      const date = moment(dream.created_at).format('MMMM D, YYYY');
+      const time = moment(dream.created_at).format('h:mm a')
 
       dreams = (
-        <View>
-          <Text style={styles.day}>
-            {formattedDate}
+        <View style={styles.dreamsContainer}>
+          <Text style={styles.date}>
+            {date}
           </Text>
-          <Text>{dream.body}</Text>
+          <Text style={styles.time}>
+            {time}
+          </Text>
+          <View style={styles.dreamBodyBox}>
+            <Text style={styles.dreamBody}>
+              {dream.body}
+            </Text>
+          </View>
         </View>
       )
       watsonInfo = (
@@ -79,19 +87,19 @@ export default class DreamShowScreen extends React.Component {
         <Text> Loading </Text>
       )
     }
-    let addkeyword = (
-      <Text>
-        Add custom keywords:
-        <TextInput
-          style={{height: 34,
-          width: 200,
-          borderColor: 'gray',
-          borderWidth: 1}}
+    let addKeywords = (
+      <View style={styles.addKeywordsContainer}>
+        <Text style={styles.keywordsHeaderText}>
+          Add Keywords
+        </Text>
+        <TextInput style={styles.keywordsInput}
           onChangeText={(newKey) => this.setState({newKey})}
-          placeholder={"enter keyword"}
+          placeholder={"enter keywords separated by ;"}
+          placeholderTextColor='rgba(212, 204, 217, 0.7)'
           autoFocus={true}
+          autoCapitalize={'none'}
           value={this.state.newKey}
-          multiline={false}
+          multiline={true}
           onSubmitEditing={() => {
             if (this.state.newKey.length > 0) {
             this.props.createKeyword({keyword: this.state.newKey, dream_id: currentDream})
@@ -100,22 +108,22 @@ export default class DreamShowScreen extends React.Component {
 
           }
           }}
-        />
-      </Text>
+          />
+      </View>
     )
     return (
-      <View>
-        {dreams}
-        {watson}
-        {addkeyword}
-
       <View style={styles.container}>
+        <View style={styles.containerMargin}>
           {dreams}
-          {watson}
-        <View style={styles.addKeywordsContainer  }>
-          {addkeyword}
+          {addKeywords}
+          <View style={styles.watsonContainer}>
+            {watson}
+          </View>
+          <View style={styles.keywordShowContainer}>
+
+            {keywordShow}
+          </View>
         </View>
-        {keywordShow}
       </View>
     )
   }
@@ -126,26 +134,66 @@ const styles = StyleSheet.create ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#3E3254',
+  },
+  containerMargin: {
+    margin: 12,
   },
   dreamsContainer: {
     flex: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#3E3254',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginBottom: 5,
   },
   date: {
-
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#B7A3C6',
+    marginBottom: 2,
   },
-  watsonContainer: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'blue',
+  time: {
+    fontSize: 18,
+    color: '#D4CCD9',
+    marginBottom: 8,
+  },
+  dreamBodyBox: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'rgba(212, 204, 217, 0.25)',
+    marginBottom: 5,
+  },
+  dreamBody: {
+    color: '#D4CCD9',
+    margin: 5,
   },
   addKeywordsContainer: {
     flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'skyblue',
+    justifyContent: 'flex-start',
+    marginBottom: 5,
   },
+  keywordsHeaderText: {
+    color: '#D4CCD9',
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 4,
+  },
+  keywordsInput: {
+    flex: 1,
+    borderColor: 'rgba(212, 204, 217, 0.5)',
+    borderWidth: 1,
+    borderRadius: 4,
+    color: '#D4CCD9',
+    fontSize: 14,
+    padding: 5
+  },
+  watsonContainer: {
+    flex: 2,
+    overflow: 'hidden',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  keywordShowContainer: {
+    flex: 2,
+    color: '#D4CCD9',
+  }
 });

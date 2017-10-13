@@ -62,8 +62,8 @@ export default class AlarmScreen extends React.Component {
     PushNotification.localNotificationSchedule({
       message: "Record your dream", // (required)
       date: new Date(Date.now() + (5 * 1000)),
-      repeatType:'daily',
-      repeatInterval: "daily"
+      repeatType:'day',
+      repeatInterval: "day"
     });
 
   }

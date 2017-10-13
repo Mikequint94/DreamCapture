@@ -27,11 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-<<<<<<< HEAD
             new ReactNativePushNotificationPackage(),
-=======
             new VectorIconsPackage(),
->>>>>>> 9d12f776ba685e249ee9a35429b9625b42ab4fc5
             new CalendarEventsPackage(),
             new VoicePackage()
       );

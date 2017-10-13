@@ -163,7 +163,7 @@ const styles = StyleSheet.create ({
     borderRadius: 4,
     color: '#D4CCD9',
     fontSize: 14,
-    margin: 5
+    padding: 5
   },
   watsonContainer: {
     flex: 2,

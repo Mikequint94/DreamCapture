@@ -8,6 +8,7 @@ import {
 
 import WatsonAnalyzer from './watson';
 import KeywordShow from '../keyword/keyword_show';
+import moment from 'moment'
 
 export default class DreamShowScreen extends React.Component {
   static navigationOptions = {
@@ -26,17 +27,37 @@ export default class DreamShowScreen extends React.Component {
     this.props.requestTopKeywords(37);
   }
 
+  parseDate(timestamp) {
+    const time = timestamp.split('-');
+    const year = time[0];
+    const month = time[1];
+    const day = time[2].slice(0,2);
+    return [year, month, day];
+  };
+
   render() {
     let currentDream = this.props.navigation.state.params.dreamId;
     // let analysis = WatsonAnalyzer.analyze(this.props.dreams[currentDream].body)
     // console.log(analysis);
     console.log(this.props);
     // console.log(this.props.dreams[currentDream].body);
+
     let dreams;
     let watson;
+
     if (this.props.dreams[currentDream]) {
+      const dream = this.props.dreams[currentDream];
+      console.log(dream);
+
+      const formattedDate = moment(dream.created_at).format('MMMM D, YYYY');
+
       dreams = (
-        <Text>{this.props.dreams[currentDream].body}</Text>
+        <View>
+          <Text style={styles.day}>
+            {formattedDate}
+          </Text>
+          <Text>{dream.body}</Text>
+        </View>
       )
       watson = (
         <WatsonAnalyzer navigation={this.props.navigation} string={this.props.dreams[currentDream].body} />
@@ -65,11 +86,46 @@ export default class DreamShowScreen extends React.Component {
       </Text>
     )
     return (
-      <View>
-        {dreams}
-        {watson}
-        {addkeyword}
+      <View style={styles.container}>
+        <View style={styles.dreamsContainer}>
+          {dreams}
+        </View>
+        <View style={styles.watsonContainer}>
+          {watson}
+        </View>
+        <View style={styles.addKeywordsContainer  }>
+          {addkeyword}
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create ({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dreamsContainer: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#3E3254',
+  },
+  date: {
+
+  },
+  watsonContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'blue',
+  },
+  addKeywordsContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'skyblue',
+  },
+});

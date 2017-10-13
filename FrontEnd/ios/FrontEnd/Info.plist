@@ -38,7 +38,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>Required for Alarm Setting</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Required for Voice to Text</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
@@ -57,19 +57,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

@@ -66,8 +66,14 @@ export default class WatsonAnalyzer extends React.Component {
     }
     console.log(this.props.keywords);
     if (this.props.keywords) {
-      topKeywordShow = Object.values(this.props.keywords).map(
-        (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {keyword.keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+      topKeywordShow = (
+        <Text>
+         <SuggestedKeywordItem key={0 + "suggestedkey"} keyword = {this.props.keywords[0].keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+         <SuggestedKeywordItem key={1 + "suggestedkey"} keyword = {this.props.keywords[1].keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+         <SuggestedKeywordItem key={2 + "suggestedkey"} keyword = {this.props.keywords[2].keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+         <SuggestedKeywordItem key={3 + "suggestedkey"} keyword = {this.props.keywords[3].keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+         <SuggestedKeywordItem key={4 + "suggestedkey"} keyword = {this.props.keywords[4].keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+       </Text>
       );
     }
 
@@ -81,7 +87,7 @@ export default class WatsonAnalyzer extends React.Component {
         </Text>
         <Text>
           Suggested Keywords: {'\n'}
-          
+
           {keywordShow}
           {topKeywordShow}
         </Text>

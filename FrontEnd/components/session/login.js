@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import { isSignedIn } from '../../actions/session_actions';
-
+import { FontAwesome } from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  StyleSheet,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Button
+  StyleSheet, Text, TextInput, View, TouchableOpacity, Button
 } from 'react-native';
 
 export default class LoginScreen extends React.Component {
@@ -46,32 +41,48 @@ export default class LoginScreen extends React.Component {
         <Text style={styles.header}>
           Welcome, please log in.
         </Text>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.input}
-            value={this.state.email}
-            autoCapitalize='none'
-            placeholder='Email'
-            onChangeText={ email => this.setState({email})} />
+        <View style={styles.inputsContainer}>
+          <View style={styles.inputRow}>
+            <Icon style={styles.icon}
+              name='envelope-o' size={20} color='#D4CCD9' />
+            <View style={styles.inputBorder}>
+              <TextInput style={styles.input}
+                value={this.state.email}
+                autoCapitalize='none'
+                placeholder='Email'
+                placeholderTextColor='#D4CCD9'
+                onChangeText={ email => this.setState({email})} />
+            </View>
+          </View>
         </View>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.input}
-            value={this.state.password}
-            autoCapitalize='none'
-            placeholder='Password'
-            secureTextEntry={true}
-            onChangeText={ password => this.setState({password})}/>
+        <View style={styles.inputsContainer}>
+          <View style={styles.inputRow}>
+            <Icon style={styles.icon}
+              name='key' size={20} color='#D4CCD9' />
+            <View style={styles.inputBorder}>
+              <TextInput style={styles.input}
+                value={this.state.password}
+                autoCapitalize='none'
+                placeholder='Password'
+                placeholderTextColor='#D4CCD9'
+                secureTextEntry={true}
+                onChangeText={ password => this.setState({password})}/>
+            </View>
+          </View>
         </View>
-        <TouchableOpacity style={styles.submitButton}
-          onPress={
-            () => this.handleLogin()}>
-            <Text style={styles.submitButtonText}> Log In </Text>
-          </TouchableOpacity>
-        <Button
+        <View style={styles.submitContainer}>
+          <TouchableOpacity style={styles.submitButton}
+            onPress={
+              () => this.handleLogin()}>
+              <Text style={styles.submitButtonText}> Log In </Text>
+            </TouchableOpacity>
+        </View>
+        <Button style={styles.link}
           onPress={() => navigate('SignUp')}
           title='Sign Up'
+          color='#D4CCD9'
           />
       </View>
-
     )
   }
 }
@@ -81,31 +92,61 @@ const styles = StyleSheet.create ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#3E3254',
   },
   header: {
     fontSize: 20,
+    fontWeight: 'bold',
     textAlign: 'center',
-    margin: 10,
+    color: '#D4CCD9',
+    marginBottom: 20,
   },
-  inputContainer: {
+  inputsContainer: {
     flexDirection: 'row',
   },
-  input: {
-    flex: 0.8,
+  inputRow: {
+    flex: .80,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  icon: {
+    flex: .10,
+    margin: 3,
+  },
+  inputBorder: {
+    flex: 0.9,
     height: 40,
-    borderColor: 'grey',
+    borderBottomWidth: 1,
+    borderColor: '#D4CCD9',
+    marginVertical: 3,
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    color: '#D4CCD9',
+    borderColor: '#3E3254',
+    backgroundColor: '#3E3254',
     borderWidth: 1,
+    borderRadius: 1,
+    marginVertical: 3,
+  },
+  submitContainer: {
+    flexDirection: 'row'
   },
   submitButton: {
-    margin: 10,
-    backgroundColor: '#2830a5',
+    flex: 0.8,
+    marginTop: 30,
+    backgroundColor: '#83BFAA',
     height: 40,
     justifyContent: 'center',
+    borderRadius: 10,
+    marginBottom: 5,
   },
   submitButtonText: {
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
-  }
+  },
 });

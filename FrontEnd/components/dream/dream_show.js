@@ -44,7 +44,8 @@ export default class DreamShowScreen extends React.Component {
     let currentDream = this.props.navigation.state.params.dreamId;
 
     let keywordShow;
-    if (this.props.dreams[currentDream].keywords) {
+    // console.log(this.props.dreams[currentDream]);
+    if (this.props.dreams[currentDream]) {
         keywordShow = (
           <KeywordShow currentKeywords={this.props.dreams[currentDream].keywords}/>
         )
@@ -57,7 +58,7 @@ export default class DreamShowScreen extends React.Component {
         <Text>{this.props.dreams[currentDream].body}</Text>
       )
       watsonInfo = (
-        <WatsonAnalyzer keywords={this.props.keywords} navigation={this.props.navigation} string={this.props.dreams[currentDream].body} />
+        <WatsonAnalyzer createKeyword={this.props.createKeyword} currentDream={currentDream} keywords={this.props.keywords} navigation={this.props.navigation} string={this.props.dreams[currentDream].body} />
       )
     }
     if (this.state.loaded) {

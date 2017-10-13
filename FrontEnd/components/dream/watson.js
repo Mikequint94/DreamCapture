@@ -58,17 +58,17 @@ export default class WatsonAnalyzer extends React.Component {
   render() {
     let keywordShow;
     let topKeywordShow;
-    // console.log(this.keywords);
+    console.log(this.keywords);
     if (this.keywords) {
       keywordShow = this.keywords.map(
-        (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {keyword} />
+        (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
     );
     }
     console.log(this.props.keywords);
     if (this.props.keywords) {
-      // topKeywordShow = this.props.keywords.map(
-      //   (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {Object.values(keyword)} />
-      // );
+      topKeywordShow = Object.values(this.props.keywords).map(
+        (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {keyword.keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+      );
     }
 
     return (
@@ -80,7 +80,8 @@ export default class WatsonAnalyzer extends React.Component {
           Sentiment Label: {this.sentimentLabel}
         </Text>
         <Text>
-          Suggested Keywords:
+          Suggested Keywords: {'\n'}
+          
           {keywordShow}
           {topKeywordShow}
         </Text>

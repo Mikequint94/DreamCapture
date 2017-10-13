@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Button, TouchableHighlight,
          Image, FlatList } from 'react-native';
 import { SearchBar, List, ListItem, Avatar } from 'react-native-elements'
-
 export default class DreamIndexScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
@@ -117,7 +116,7 @@ export default class DreamIndexScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-    
+
         <SearchBar
           round
           placeholder='Search dreams'/>

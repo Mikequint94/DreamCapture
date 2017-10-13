@@ -18,31 +18,40 @@ export default class DreamShowScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newKey: ""
+      newKey: "",
+      loaded: false
     };
   }
 
   componentDidMount(){
     this.props.requestDream(this.props.navigation.state.params.dreamId);
-    this.props.requestTopKeywords(37);
+    this.props.requestTopKeywords(this.props.currentUser);
+    let myThis = this;
+    setTimeout(function () {
+      myThis.setState({loaded: true});
+    }, 100)
+    setTimeout(function () {
+      myThis.setState({loaded: true});
+    }, 1100)
   }
 
-  parseDate(timestamp) {
-    const time = timestamp.split('-');
-    const year = time[0];
-    const month = time[1];
-    const day = time[2].slice(0,2);
-    return [year, month, day];
-  };
-
   render() {
+    // if (this.state.newKey === "") {
+    // this.props.requestDream(this.props.navigation.state.params.dreamId);
+    // }
+
     let currentDream = this.props.navigation.state.params.dreamId;
-    // let analysis = WatsonAnalyzer.analyze(this.props.dreams[currentDream].body)
-    // console.log(analysis);
-    console.log(this.props);
-    // console.log(this.props.dreams[currentDream].body);
+
+    let keywordShow;
+    // console.log(this.props.dreams[currentDream]);
+    if (this.props.dreams[currentDream]) {
+        keywordShow = (
+          <KeywordShow currentKeywords={this.props.dreams[currentDream].keywords}/>
+        )
+      }
 
     let dreams;
+    let watsonInfo;
     let watson;
 
     if (this.props.dreams[currentDream]) {
@@ -67,9 +76,15 @@ export default class DreamShowScreen extends React.Component {
           </View>
         </View>
       )
+      watsonInfo = (
+        <WatsonAnalyzer createKeyword={this.props.createKeyword} currentDream={currentDream} keywords={this.props.keywords} navigation={this.props.navigation} string={this.props.dreams[currentDream].body} />
+      )
+    }
+    if (this.state.loaded) {
+      watson = watsonInfo
+    } else {
       watson = (
-        <WatsonAnalyzer navigation={this.props.navigation}
-          string={this.props.dreams[currentDream].body} />
+        <Text> Loading </Text>
       )
     }
     let addKeywords = (
@@ -87,22 +102,28 @@ export default class DreamShowScreen extends React.Component {
           multiline={true}
           onSubmitEditing={() => {
             if (this.state.newKey.length > 0) {
-              this.props.createKeyword({keyword: this.state.newKey, dream_id: currentDream})
-              this.setState({newKey: ""})
-            }
+            this.props.createKeyword({keyword: this.state.newKey, dream_id: currentDream})
+            .then(() => this.props.requestDream(this.props.navigation.state.params.dreamId));
+            this.setState({newKey: ""})
+
+          }
           }}
           />
       </View>
     )
     return (
       <View style={styles.container}>
-      <View style={styles.containerMargin}>
-        {dreams}
-        {addKeywords}
-        <View style={styles.watsonContainer}>
-          {watson}
+        <View style={styles.containerMargin}>
+          {dreams}
+          {addKeywords}
+          <View style={styles.watsonContainer}>
+            {watson}
+          </View>
+          <View style={styles.keywordShowContainer}>
+
+            {keywordShow}
+          </View>
         </View>
-      </View>
       </View>
     )
   }
@@ -146,7 +167,7 @@ const styles = StyleSheet.create ({
     margin: 5,
   },
   addKeywordsContainer: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'flex-start',
     marginBottom: 5,
   },
@@ -167,8 +188,12 @@ const styles = StyleSheet.create ({
   },
   watsonContainer: {
     flex: 2,
-    // overflow: 'hidden',
+    overflow: 'hidden',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
+  keywordShowContainer: {
+    flex: 2,
+    color: '#D4CCD9',
+  }
 });

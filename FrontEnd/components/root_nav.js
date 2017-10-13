@@ -11,6 +11,8 @@ import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
 
 import MainContainer from "./main/main_container";
+import DreamIndexContainer from "./dream/dream_index_container";
+
 import RecordScreen from './record/record_container';
 import AlarmScreen from './alarm/alarm';
 import DreamShowScreen from './dream/dream_show_container';
@@ -38,19 +40,19 @@ export const SignedOut = StackNavigator({
   },
 });
 
-export const SignedIn = StackNavigator(
-  {
-    Main: {
-      screen: MainContainer,
-      navigationOptions: {
-        headerLeft: null
-      }
-    },
-    Record: { screen: RecordScreen },
-    Login: { screen: LoginContainer },
-    Signup: { screen: SignupContainer },
-    Alarm: { screen: AlarmScreen },
-    DreamShow: { path: 'dream/:dreamid', screen: DreamShowScreen },
+export const SignedIn = StackNavigator({
+  Main: {
+    screen: MainContainer,
+    navigationOptions: {
+      headerLeft: null
+    }
+  },
+  Home: {screen: DreamIndexContainer },
+  Record: { screen: RecordScreen },
+  Login: { screen: LoginContainer },
+  Signup: { screen: SignupContainer },
+  Alarm: { screen: AlarmScreen },
+  DreamShow: { path: 'dream/:dreamid', screen: DreamShowScreen },
   });
 
 export const createRootNavigator = (signedIn = false) => {

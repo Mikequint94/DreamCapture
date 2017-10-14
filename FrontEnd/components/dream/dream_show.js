@@ -43,7 +43,7 @@ export default class DreamShowScreen extends React.Component {
     let currentDream = this.props.navigation.state.params.dreamId;
 
     let keywordShow;
-    let currentKeywords;
+    let currentKeywords = [{id: "", keyword: ""}];
     if (this.props.dreams[currentDream]) {
         currentKeywords = this.props.dreams[currentDream].keywords;
         keywordShow = (
@@ -54,11 +54,10 @@ export default class DreamShowScreen extends React.Component {
     let dreams;
     let watsonInfo;
     let watson;
+    // console.log(currentKeywords);
 
     if (this.props.dreams[currentDream]) {
       const dream = this.props.dreams[currentDream];
-      // console.log(dream);
-
       const date = moment(dream.created_at).format('MMMM D, YYYY');
       const time = moment(dream.created_at).format('h:mm a')
 

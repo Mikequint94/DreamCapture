@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {receiveReminder} from '../../actions/reminder_actions';
 import {
   StyleSheet,
   Text,
@@ -33,27 +34,16 @@ export default class AlarmScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reminderSet: false,
-      reminderTimer: '',
-      time: '06:00 am',
+      reminderSet: this.props.reminder.set || false,
+      time: this.props.reminder.time || '06:00 am',
     };
-    // this.time = new Date;
 
-    // this.updateTime = this.updateTime.bind(this);
     this.setAlarm = this.setAlarm.bind(this);
     this.cancelAlarm = this.cancelAlarm.bind(this);
   }
 
   componentDidMount() {
     PushNotificationsHandler.requestPermissions()
-
-    // this.updateTime();
-    // clockId = setInterval(this.updateTime, 1000);
-
-  }
-
-  componentWillUnmount() {
-    // clearInterval(clockId);
   }
 
 
@@ -88,22 +78,16 @@ export default class AlarmScreen extends React.Component {
     });
 
     this.setState({reminderSet: true})
+    this.props.receiveReminder({time: this.state.time,
+                                set: true})
   }
 
   cancelAlarm() {
     PushNotification.cancelAllLocalNotifications()
     this.setState({reminderSet: false})
+    this.props.receiveReminder({time: this.state.time,
+                                set: false})
   }
-
-
-
-  // updateTime() {
-  //   this.time = new Date();
-  //   this.setState({time: this.time.toTimeString(),
-  //                  date: this.time.toDateString()
-  //                });
-  // }
-
 
 
   render() {

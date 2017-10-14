@@ -46,7 +46,7 @@ export const createDream = dream => dispatch => (
 );
 
 export const updateDream = dream => dispatch => (
-  axios.patch(`${API_URL}/api/dreams/${data.id}`, { dream })
-    .then(data => dispatch(receiveDream(data.datas)))
+  axios.patch(`${API_URL}/api/dreams/${dream.id}`, { dream })
+    .then(data => dispatch(receiveDream(data.data)))
     .catch(err => (dispatch(receiveErrors(err))))
 );

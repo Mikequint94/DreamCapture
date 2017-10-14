@@ -24,10 +24,9 @@ export default class KeywordShow extends React.Component {
 
   render() {
     let dreamKeywords = this.props.currentKeywords;
-    let keywordItems;
     // console.log(dreamKeywords.reverse());
     // console.log(dreamKeywords);
-    keywordItems = dreamKeywords.map(
+    let keywordItems = dreamKeywords.map(
       (keyword) => <KeywordItem key={keyword.id + 'keyword'} keyword={keyword.keyword}/>
     );
 
@@ -37,7 +36,7 @@ export default class KeywordShow extends React.Component {
           Keywords:
         </Text>
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-        {keywordItems}
+          {keywordItems}
         </View>
       </View>
     );

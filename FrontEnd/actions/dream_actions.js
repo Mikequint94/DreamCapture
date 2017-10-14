@@ -25,12 +25,12 @@ export const receiveAllDreams = dreams => ({
 
 export const receiveDream = dream => ({
   type: RECEIVE_DREAM,
-  dream.data
+  dream
 });
 
 export const requestDream = dreamId => dispatch => (
   axios.get(`${API_URL}/api/dreams/${dreamId}`)
-    .then(dream => dispatch(receiveDream(dream)))
+    .then(dream => dispatch(receiveDream(dream.data)))
     .catch(err => dispatch(receiveErrors(err)))
 );
 export const requestUserDreams = userId => dispatch => (
@@ -41,12 +41,12 @@ export const requestUserDreams = userId => dispatch => (
 
 export const createDream = dream => dispatch => (
   axios.post(`${API_URL}/api/dreams`, { dream })
-    .then(data => dispatch(receiveDream(data)))
+    .then(data => dispatch(receiveDream(data.data)))
     .catch(err => dispatch(receiveErrors(err)))
 );
 
 export const updateDream = dream => dispatch => (
   axios.patch(`${API_URL}/api/dreams/${data.id}`, { dream })
-    .then(data => dispatch(receiveDream(data)))
+    .then(data => dispatch(receiveDream(data.datas)))
     .catch(err => (dispatch(receiveErrors(err))))
 );

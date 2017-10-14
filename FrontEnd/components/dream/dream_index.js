@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Button, TouchableHighlight,
-         Image, FlatList } from 'react-native';
+         Image, SectionList } from 'react-native';
 import { SearchBar, List, ListItem, Avatar } from 'react-native-elements'
+import moment from 'moment'
+
 export default class DreamIndexScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
@@ -13,26 +15,18 @@ export default class DreamIndexScreen extends React.Component {
     this.props.requestUserDreams(this.props.userId);
   }
 
-  parseDate(timestamp) {
-    const time = timestamp.split('-');
-    const year = time[0];
-    const month = time[1];
-    const day = time[2].slice(0,2);
-    return [year, month, day];
-  };
-
   sectionDreams() {
     const dreams = this.props.dreams;
     const reformattedDreams = dreams.map(d => {
       const dreamObj = Object.values(d)[0]
       let dream = {};
-      const date = this.parseDate(dreamObj.created_at);
-      dream['year'] = date[0];
-      dream['month'] = date[1];
-      dream['day'] = date[2];
+      const day = moment(dreamObj.created_at).format('DD');
+      const month = moment(dreamObj.created_at).format('MMMM');
+
+      dream['month'] = month;
+      dream['day'] = day;
       dream['body'] = dreamObj.body;
       dream['id'] = dreamObj.id;
-      dream['user_id'] = dreamObj.user_id;
       return dream;
     });
 
@@ -44,9 +38,15 @@ export default class DreamIndexScreen extends React.Component {
       return reformattedDreams.filter(d => d.month === month);
     });
 
-    console.log(dreamsByMonth);
+    const sectionListData = uniqMonths.map( (month, idx) => {
+      let section = {}
+      section['data'] = dreamsByMonth[idx];
+      section['title'] = month;
+      return section;
+    });
 
-    return dreamsByMonth;
+    console.log(sectionListData);
+    return sectionListData;
   };
 
   dreamList() {
@@ -57,14 +57,12 @@ export default class DreamIndexScreen extends React.Component {
     }
 
     const dreamList =
-      <FlatList
-        data={dreams}
-        keyExtractor={this.keyExtractor}
-        renderItem={({ item }) => (
-          this.renderFlatListItem(item)
-        )}
+      <SectionList
+        sections={this.sectionDreams()}
+        renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+        renderItem={({ item }) => this.renderSectionListItem(item)}
         ItemSeparatorComponent={this.renderSeparator}
-        removeClippedSubviews={false}
+        keyExtractor={( item ) => `${item.id}`}
       />
     return dreamList;
   }
@@ -82,38 +80,26 @@ export default class DreamIndexScreen extends React.Component {
     );
   };
 
-  renderFlatListItem(item) {
-    const dream = Object.values(item)[0];
-    const timeStamp = dream.created_at;
-    const dayNum = this.parseDate(timeStamp)[2];
+  renderSectionListItem(item) {
+    // const dream = Object.values(item)[0];
+    // const dayNum = moment(item.day).format('DD');
     const { navigate } = this.props.navigation;
     return (
       <ListItem style={styles.listItem}
-        title={`${dream.body}`}
+        title={`${item.body}`}
         avatar={<Avatar
                   width={30}
                   height={30}
-                  title={dayNum}
+                  title={item.day}
                   titleStyle={{fontSize:20}}
                   overlayContainerStyle={{backgroundColor:'#A1BEB4'}}
                 />}
-        onPress={() => navigate('DreamShow', {dreamId: dream.id})}
+        onPress={() => navigate('DreamShow', {dreamId: item.id})}
       />
     )
   }
 
-
-  keyExtractor(item){
-    const dream = Object.values(item)[0];
-    return dream.id;
-  }
-
-  renderSectionList() {
-
-  }
-
   render() {
-
     return (
       <View style={styles.container}>
 

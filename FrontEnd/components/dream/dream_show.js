@@ -194,6 +194,5 @@ const styles = StyleSheet.create ({
   },
   keywordShowContainer: {
     flex: 2,
-    color: '#D4CCD9',
   }
 });

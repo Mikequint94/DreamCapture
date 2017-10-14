@@ -43,10 +43,11 @@ export default class DreamShowScreen extends React.Component {
     let currentDream = this.props.navigation.state.params.dreamId;
 
     let keywordShow;
-    // console.log(this.props.dreams[currentDream]);
+    let currentKeywords;
     if (this.props.dreams[currentDream]) {
+        currentKeywords = this.props.dreams[currentDream].keywords;
         keywordShow = (
-          <KeywordShow currentKeywords={this.props.dreams[currentDream].keywords}/>
+          <KeywordShow currentKeywords={currentKeywords}/>
         )
       }
 
@@ -56,7 +57,7 @@ export default class DreamShowScreen extends React.Component {
 
     if (this.props.dreams[currentDream]) {
       const dream = this.props.dreams[currentDream];
-      console.log(dream);
+      // console.log(dream);
 
       const date = moment(dream.created_at).format('MMMM D, YYYY');
       const time = moment(dream.created_at).format('h:mm a')
@@ -77,7 +78,7 @@ export default class DreamShowScreen extends React.Component {
         </View>
       )
       watsonInfo = (
-        <WatsonAnalyzer createKeyword={this.props.createKeyword} currentDream={currentDream} keywords={this.props.keywords} navigation={this.props.navigation} string={this.props.dreams[currentDream].body} />
+        <WatsonAnalyzer currentKeywords={currentKeywords.map(keyword => keyword.keyword)} requestDream={this.props.requestDream} createKeyword={this.props.createKeyword} currentDream={currentDream} keywords={this.props.keywords} navigation={this.props.navigation} string={this.props.dreams[currentDream].body} />
       )
     }
     if (this.state.loaded) {
@@ -94,12 +95,12 @@ export default class DreamShowScreen extends React.Component {
         </Text>
         <TextInput style={styles.keywordsInput}
           onChangeText={(newKey) => this.setState({newKey})}
-          placeholder={"enter keywords separated by ;"}
+          placeholder={"enter keyword"}
           placeholderTextColor='rgba(212, 204, 217, 0.7)'
           autoFocus={true}
           autoCapitalize={'none'}
           value={this.state.newKey}
-          multiline={true}
+          multiline={false}
           onSubmitEditing={() => {
             if (this.state.newKey.length > 0) {
             this.props.createKeyword({keyword: this.state.newKey, dream_id: currentDream})
@@ -167,7 +168,7 @@ const styles = StyleSheet.create ({
     margin: 5,
   },
   addKeywordsContainer: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'flex-start',
     marginBottom: 5,
   },
@@ -178,7 +179,7 @@ const styles = StyleSheet.create ({
     marginBottom: 4,
   },
   keywordsInput: {
-    flex: 1,
+    height: 50,
     borderColor: 'rgba(212, 204, 217, 0.5)',
     borderWidth: 1,
     borderRadius: 4,

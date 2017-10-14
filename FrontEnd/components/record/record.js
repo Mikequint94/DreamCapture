@@ -169,7 +169,7 @@ export default class RecordScreen extends React.Component {
     let string = this.state.finalResults;
     let analysis = "loading"
     let topText;
-    console.log(string);
+    // console.log(string);
     if (this.state.end === "√") {
       // let analysis = WatsonAnalyzer.analyze(string)
       // console.log(analysis);

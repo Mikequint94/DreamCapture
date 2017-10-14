@@ -58,16 +58,19 @@ export default class WatsonAnalyzer extends React.Component {
   render() {
     let keywordShow;
     let topKeywordShow;
-    console.log(this.keywords);
+    // console.log(this.keywords);
     if (this.keywords) {
       keywordShow = this.keywords.map(
-        (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+        (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
     );
     }
-    console.log(this.props.keywords);
+    // console.log(this.props.keywords);
     if (this.props.keywords) {
-      topKeywordShow = Object.values(this.props.keywords).map(
-        (keyword, index) => <SuggestedKeywordItem key={index + "suggestedkey"} keyword = {keyword.keyword} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+      let firstFive = [this.props.keywords[0],this.props.keywords[1],this.props.keywords[2],this.props.keywords[3],this.props.keywords[4]];
+      // console.log(firstFive);
+      topKeywordShow = firstFive.map(
+        (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword.keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+
       );
     }
 
@@ -78,13 +81,14 @@ export default class WatsonAnalyzer extends React.Component {
         </Text>
         <Text>
           Sentiment Label: {this.sentimentLabel}
+          {'\n'}
+          Suggested Keywords:
         </Text>
-        <Text>
-          Suggested Keywords: {'\n'}
-          
-          {keywordShow}
-          {topKeywordShow}
-        </Text>
+        <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+
+        {keywordShow}
+        {topKeywordShow}
+        </View>
       </View>
     );
 }

@@ -4,10 +4,20 @@ import {SESSION_URL, USERS_URL} from '../api/api_index';
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+export const CLEAR_SESSION_ERRORS = 'CLEAR_SESSION_ERRORS';
 
 export const receiveCurrentUser = user => ({
   type: RECEIVE_CURRENT_USER,
   user
+});
+
+export const receiveSessionErrors = errors => ({
+  type: RECEIVE_SESSION_ERRORS,
+  errors
+});
+
+export const clearSessionErrors = () => ({
+  type: CLEAR_SESSION_ERRORS
 });
 
 export const login = (user) => dispatch => (
@@ -15,12 +25,14 @@ export const login = (user) => dispatch => (
     .then(response => {
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
+      dispatch(clearSessionErrors());
       onSignIn();
       console.log('login success');
     })
     .catch((error) => {
       console.log("Can\'t log in");
       console.log(error.response);
+      dispatch(receiveSessionErrors(error.response.data));
     })
   );
 
@@ -37,12 +49,14 @@ export const logout = () => dispatch => {
         email: null,
         user_id: null
       }));
+      dispatch(clearSessionErrors());
       onSignOut();
       console.log('logged out');
     })
     .catch((error) => {
       console.log("Can\'t log out");
       console.log(error.response);
+      dispatch(receiveSessionErrors(error.response.data));
     });
   };
 
@@ -51,12 +65,14 @@ export const signup = (user) => dispatch => (
     .then((response) => {
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
+      dispatch(clearSessionErrors());
       onSignIn();
       console.log('signup success');
     })
     .catch((error) => {
       console.log('signup axios error');
       console.log(error.response);
+      dispatch(receiveSessionErrors(error.response.data));
     })
   );
 

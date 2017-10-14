@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  Button,
+  TouchableOpacity,
   TextInput,
   View
 } from 'react-native';
@@ -10,16 +10,21 @@ import {
 export default class SuggestedKeywordItem extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     this.state ={
       show: true
     };
-    console.log(this.props.currentKeywords);
-    console.log(this.props.keyword);
   }
 
   componentDidMount(){
-    if (this.props.currentKeywords.includes(this.props.keyword)) {
+    let keyword = this.props.keyword;
+    if (keyword) {
+      keyword = keyword.toLowerCase();
+    }
+    console.log(keyword);
+    if (this.props.currentKeywords.includes(keyword)) {
       this.setState({show: false});
+      // console.log(this.props.keyword.toLowerCase());
     }
   }
 
@@ -35,18 +40,19 @@ addKeyword() {
 
 render () {
   let suggestedWord;
-  if (this.state.show) {
+  // console.log(this.props);
+  if (this.state.show && this.props.keyword) {
     suggestedWord = (
-        <Button
-        onPress={this.addKeyword.bind(this)}
-        title={this.props.keyword}
-        />
+      <TouchableOpacity style={{marginHorizontal: 4}}
+        onPress={this.addKeyword.bind(this)}>
+        <Text style={{fontSize: 14, color: 'white', textAlign: 'center', borderRadius: 7, borderWidth: 1, borderColor: 'blue'}}> {this.props.keyword} </Text>
+      </TouchableOpacity>
     );
   } else {
     suggestedWord = null;
   }
   return(
-    <View style={{paddingHorizontal: 3}}>
+    <View>
       {suggestedWord}
     </View>
   );

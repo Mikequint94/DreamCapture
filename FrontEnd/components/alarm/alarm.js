@@ -7,11 +7,11 @@ import {
 } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import PushNotificationsHandler from 'react-native-push-notification';
+import DatePicker from 'react-native-datepicker'
 
 PushNotification.configure({
   // (required) Called when a remote or local notification is opened or received
     onNotification: function(notification) {
-        console.log( 'NOTIFICATION:', notification );
     },
     // IOS ONLY (optional): default: all - Permissions to register.
     permissions: {
@@ -35,8 +35,7 @@ export default class AlarmScreen extends React.Component {
     this.state = {
       reminderSet: false,
       reminderTimer: '',
-      time: '',
-      date: '',
+      time: '06:00 am',
     };
     // this.time = new Date;
 
@@ -57,13 +56,35 @@ export default class AlarmScreen extends React.Component {
     // clearInterval(clockId);
   }
 
+
+  parseTime() {
+    timeArr = this.state.time.split(" ");
+    amPm = timeArr[1];
+    time = timeArr[0].split(":").map( (time) => {
+      return parseInt(time);
+    })
+    if (amPm == 'pm') {
+      time[0] += 12;
+    }
+    return time
+  }
+
   setAlarm() {
+    let time = this.parseTime();
+
+    let now = new Date();
+    let reminder = new Date(now.getFullYear(), now.getMonth(), now.getDate(), time[0], time[1])
+
+    if (reminder < now) {
+      reminder.setHours(reminder.getHours() + 24)
+    }
+
     PushNotification.cancelAllLocalNotifications()
     PushNotification.localNotificationSchedule({
       message: "Record your dream", // (required)
-      date: new Date(Date.now() + (10 * 1000)),
+      date: reminder,
       repeatType:'day',
-      repeatInterval: "day"
+      repeatInterval: 'day'
     });
 
     this.setState({reminderSet: true})
@@ -86,26 +107,44 @@ export default class AlarmScreen extends React.Component {
 
 
   render() {
-    let button = null
+    let button = null;
+    let text = null;
     if (this.state.reminderSet) {
       button  =  <TouchableOpacity style={styles.submitButton}
                     onPress={this.cancelAlarm} >
                     <Text style={styles.submitButtonText}
                       > Cancel Reminder </Text>
                   </TouchableOpacity>
+      text = <Text> We'll send you a reminder to record your dream around: </Text>
     } else {
       button  =  <TouchableOpacity style={styles.submitButton}
                     onPress={this.setAlarm} >
                     <Text style={styles.submitButtonText}> Set Reminder </Text>
                   </TouchableOpacity>
+      text = <Text> When do you usually wake up? </Text>
     }
 
     return (
       <View style={styles.container}>
-        <Text> When do you usually wake up? </Text>
-        <Text> {this.state.time.slice(0, 8)} </Text>
-        <Text> {this.state.date} </Text>
-        {button}
+        {text}
+        <DatePicker
+        date={this.state.time}
+        mode="time"
+        format="h:mm a"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        showIcon= {false}
+        customStyles={{
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(time) => {
+          this.setState({
+            time: time,
+          })
+          this.cancelAlarm()
+        }}
+      />
+      {button}
       </View>
     )
   }

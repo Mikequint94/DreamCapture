@@ -16,13 +16,15 @@ export default class DreamIndexScreen extends React.Component {
   }
 
   sectionDreams() {
-    const dreams = this.props.dreams;
+    const dreams = Object.values(this.props.dreams);
+    console.log(dreams)
     const reformattedDreams = dreams.map(d => {
       const dreamObj = Object.values(d)[0]
       let dream = {};
       const day = moment(dreamObj.created_at).format('DD');
       const month = moment(dreamObj.created_at).format('MMMM');
-
+      const year = moment(dreamObj.created_at).format('YYYY');
+      dream['year'] = year;
       dream['month'] = month;
       dream['day'] = day;
       dream['body'] = dreamObj.body;
@@ -38,14 +40,15 @@ export default class DreamIndexScreen extends React.Component {
       return reformattedDreams.filter(d => d.month === month);
     });
 
+    console.log(dreamsByMonth);
+
     const sectionListData = uniqMonths.map( (month, idx) => {
       let section = {}
       section['data'] = dreamsByMonth[idx];
-      section['title'] = month;
+      section['title'] = `${month} ${dreamsByMonth[idx][0].year}`;
       return section;
     });
 
-    console.log(sectionListData);
     return sectionListData;
   };
 
@@ -59,7 +62,9 @@ export default class DreamIndexScreen extends React.Component {
     const dreamList =
       <SectionList
         sections={this.sectionDreams()}
-        renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+        renderSectionHeader={({ section }) =>
+          <Text style={styles.sectionHeader}>{section.title}</Text>}
+        stickySectionHeadersEnabled={false}
         renderItem={({ item }) => this.renderSectionListItem(item)}
         ItemSeparatorComponent={this.renderSeparator}
         keyExtractor={( item ) => `${item.id}`}
@@ -72,27 +77,27 @@ export default class DreamIndexScreen extends React.Component {
       <View
         style={{
           height: 1,
-          width: "85%",
+          width: "100%",
           backgroundColor: "#CFD3DA",
-          marginLeft: "15%"
+          marginLeft: "0%"
         }}
       />
     );
   };
 
   renderSectionListItem(item) {
-    // const dream = Object.values(item)[0];
-    // const dayNum = moment(item.day).format('DD');
     const { navigate } = this.props.navigation;
     return (
       <ListItem style={styles.listItem}
         title={`${item.body}`}
+        titleNumberOfLines={2}
         avatar={<Avatar
                   width={30}
                   height={30}
                   title={item.day}
-                  titleStyle={{fontSize:20}}
-                  overlayContainerStyle={{backgroundColor:'#A1BEB4'}}
+                  titleStyle={{fontSize:20,
+                    fontWeight:'bold', color: '#3B264A'}}
+                  overlayContainerStyle={{backgroundColor:'white'}}
                 />}
         onPress={() => navigate('DreamShow', {dreamId: item.id})}
       />
@@ -102,7 +107,6 @@ export default class DreamIndexScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
         <SearchBar
           round
           placeholder='Search dreams'/>
@@ -136,7 +140,13 @@ const styles = StyleSheet.create({
   dreamSection: {
     flex: 3,
   },
-  listItem : {
-    // flexDirection: 'row'
+  sectionHeader: {
+    alignSelf: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#3B264A',
+  },
+  listItem: {
+    marginVertical: 5,
   }
 });

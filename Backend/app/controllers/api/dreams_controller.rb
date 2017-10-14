@@ -48,6 +48,15 @@ class Api::DreamsController < ApplicationController
     render 'api/dreams/index'
   end
 
+  def search
+    @dreams = Dream.where(user_id: params[:user_id]).joins(:keywords)
+                  .where("keyword ILIKE ?", "#{params[:query]}")
+
+    @dreams += Dream.where(user_id: params[:user_id])
+                     .where("body ILIKE ?", "%#{params[:query]}%")
+    render 'api/dreams/index'
+  end
+
   private
 
   def dream_params

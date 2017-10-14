@@ -54,10 +54,10 @@ export default class DreamIndexScreen extends React.Component {
 
   dreamList() {
     const dreams = this.props.dreams;
-    if (Object.keys(dreams).length === 0
-        && dreams.constructor === Object ) {
-      return ( <View></View> );
-    }
+    // if (Object.keys(dreams).length === 0
+    //     && dreams.constructor === Object ) {
+    //   return ( <View></View> );
+    // }
 
     const dreamList =
       <SectionList
@@ -66,19 +66,35 @@ export default class DreamIndexScreen extends React.Component {
           <Text style={styles.sectionHeader}>{section.title}</Text>}
         stickySectionHeadersEnabled={false}
         renderItem={({ item }) => this.renderSectionListItem(item)}
-        ItemSeparatorComponent={this.renderSeparator}
         keyExtractor={( item ) => `${item.id}`}
+        ListHeaderComponent={false}
+        ItemSeparatorComponent={this.renderItemSeparator}
+        SectionSeparatorComponent={this.renderSectionSeparator}
+        ListEmptyComponent={this.renderEmptyList}
       />
     return dreamList;
   }
 
-  renderSeparator() {
+  renderItemSeparator() {
     return (
       <View
         style={{
           height: 1,
           width: "100%",
-          backgroundColor: "#CFD3DA",
+          backgroundColor: 'rgba(62,50,84,.2)',
+          marginLeft: "0%"
+        }}
+      />
+    );
+  };
+
+  renderSectionSeparator() {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: 'rgba(62,50,84,.3)',
           marginLeft: "0%"
         }}
       />
@@ -97,27 +113,42 @@ export default class DreamIndexScreen extends React.Component {
                   title={item.day}
                   titleStyle={{fontSize:20,
                     fontWeight:'bold', color: '#3B264A'}}
-                  overlayContainerStyle={{backgroundColor:'white'}}
+                  overlayContainerStyle={{
+                    backgroundColor:'white'}}
                 />}
         onPress={() => navigate('DreamShow', {dreamId: item.id})}
       />
     )
   }
 
+  renderEmptyList() {
+    return(
+      <View style={styles.emptyList}>
+        <Text style={styles.emptyListText}>
+          Welcome! Get started by pressing the record icon to record
+          your first dream. {"\n"} {"\n"}
+          You can also set push notifications for a reminder to record a
+          dream when you wake up.
+        </Text>
+      </View>
+    )
+  }
+
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <SearchBar
           round
           placeholder='Search dreams'/>
         <View style={styles.recordSection}>
-          <TouchableHighlight>
+          <TouchableHighlight onPress={() => navigate('Record')}>
             <Icon name='microphone' size={70} color="white" />
           </TouchableHighlight>
         </View>
         <View style={styles.dreamSection}>
 
-          <List>
+          <List containerStyle={{marginTop: 1}}>
             {this.dreamList()}
           </List>
         </View>
@@ -129,7 +160,6 @@ export default class DreamIndexScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   recordSection: {
     flex: 1,
@@ -148,5 +178,12 @@ const styles = StyleSheet.create({
   },
   listItem: {
     marginVertical: 5,
+  },
+  emptyList: {
+    backgroundColor: '#E9E9EF',
+  },
+  emptyListText: {
+    color: '#3B264A',
+    fontSize: 20,
   }
 });

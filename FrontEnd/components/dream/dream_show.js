@@ -164,6 +164,7 @@ const styles = StyleSheet.create ({
     marginBottom: 5,
   },
   dreamBody: {
+    flex: 1,
     color: '#D4CCD9',
     margin: 5,
   },

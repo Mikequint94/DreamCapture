@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
+import SuggestedKeywordItem from '../keyword/suggested_keyword_item';
 
 
 String.prototype.convert_to_url = function() {
@@ -56,15 +57,20 @@ export default class WatsonAnalyzer extends React.Component {
 
   render() {
     let keywordShow;
+    let topKeywordShow;
+    // console.log(this.keywords);
     if (this.keywords) {
-      keywordShow = (
-        <View style={styles.suggestedKeys}>
-          <Text>{this.keywords[0]}</Text>
-          <Text>{this.keywords[1]}</Text>
-          <Text>{this.keywords[2]}</Text>
-          <Text>{this.keywords[3]}</Text>
-          <Text>{this.keywords[4]}</Text>
-        </View>
+      keywordShow = this.keywords.map(
+        (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+    );
+    }
+    // console.log(this.props.keywords);
+    if (this.props.keywords) {
+      let firstFive = [this.props.keywords[0],this.props.keywords[1],this.props.keywords[2],this.props.keywords[3],this.props.keywords[4]];
+      // console.log(firstFive);
+      topKeywordShow = firstFive.map(
+        (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword.keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+
       );
     }
 
@@ -75,14 +81,17 @@ export default class WatsonAnalyzer extends React.Component {
         </Text>
         <Text>
           Sentiment Label: {this.sentimentLabel}
-        </Text>
-        <Text>
+          {'\n'}
           Suggested Keywords:
-          {keywordShow}
         </Text>
+        <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+
+        {keywordShow}
+        {topKeywordShow}
+        </View>
       </View>
     );
-  }
+}
 }
 
 module.exports = WatsonAnalyzer;
@@ -93,7 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: 300,
-    height: 300,
+    height: 200,
     borderColor: 'gray',
     borderWidth: 1
   }

@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     resources :notes, only: %i[create update destroy]
   end
 
+   get 'api/users/:user_id/dreams/search/:query', defaults: { format: :json }, to: 'api/dreams#search'
+
 end

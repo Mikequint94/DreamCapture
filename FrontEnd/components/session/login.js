@@ -34,6 +34,26 @@ export default class LoginScreen extends React.Component {
     }
   }
 
+  renderErrors() {
+    if (this.props.errors.length === 0) {
+      return(
+        <Text>{"\n"}</Text>
+      )
+    }
+    return(
+      <Text style={styles.errors}>
+        {this.props.errors.map((error,idx) => {
+          if (idx === this.props.errors.length - 1) {
+            return `${error}`;
+          } else {
+            return `${error} ${"\n"}`;
+          }
+        }
+        )}
+      </Text>
+    )
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -41,6 +61,9 @@ export default class LoginScreen extends React.Component {
         <Text style={styles.header}>
           Welcome, please log in.
         </Text>
+
+        {this.renderErrors()}
+
         <View style={styles.inputsContainer}>
           <View style={styles.inputRow}>
             <Icon style={styles.icon}
@@ -70,6 +93,7 @@ export default class LoginScreen extends React.Component {
             </View>
           </View>
         </View>
+
         <View style={styles.submitContainer}>
           <TouchableOpacity style={styles.submitButton}
             onPress={
@@ -99,7 +123,7 @@ const styles = StyleSheet.create ({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#D4CCD9',
-    marginBottom: 20,
+    marginBottom: 2,
   },
   inputsContainer: {
     flexDirection: 'row',
@@ -119,7 +143,7 @@ const styles = StyleSheet.create ({
     height: 40,
     borderBottomWidth: 1,
     borderColor: '#D4CCD9',
-    marginVertical: 3,
+    marginVertical: 1,
   },
   input: {
     flex: 1,
@@ -129,7 +153,7 @@ const styles = StyleSheet.create ({
     backgroundColor: '#3E3254',
     borderWidth: 1,
     borderRadius: 1,
-    marginVertical: 3,
+    marginBottom: 5,
   },
   submitContainer: {
     flexDirection: 'row'
@@ -149,4 +173,8 @@ const styles = StyleSheet.create ({
     color: 'white',
     textAlign: 'center',
   },
+  errors: {
+    color: '#83BFAA',
+    fontSize: 16,
+  }
 });

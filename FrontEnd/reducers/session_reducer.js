@@ -1,5 +1,4 @@
 import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
-// import merge from 'lodash/merge';
 
 const _nullUser = {
   email: null,
@@ -8,13 +7,15 @@ const _nullUser = {
 
 const SessionReducer = (state = _nullUser, action) => {
   Object.freeze(state);
+  const newState = Object.assign({});
+
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
       const currentUser = action.user;
-      return {
+      return Object.assign({}, {
         email: currentUser.email,
         user_id: currentUser.id
-      };
+      });
     default:
       return state;
   }

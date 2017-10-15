@@ -15,6 +15,14 @@ export default class DreamIndexScreen extends React.Component {
     this.props.requestUserDreams(this.props.userId);
   }
 
+  searchDreams(text) {
+    if (text === "") {
+      this.props.requestUserDreams(this.props.userId);
+    } else {
+      this.props.requestSearchDreams(this.props.userId, text);
+    }
+  }
+
   sectionDreams() {
     const dreams = Object.values(this.props.dreams);
     console.log(dreams)
@@ -70,7 +78,7 @@ export default class DreamIndexScreen extends React.Component {
         ListHeaderComponent={false}
         ItemSeparatorComponent={this.renderItemSeparator}
         SectionSeparatorComponent={this.renderSectionSeparator}
-        ListEmptyComponent={this.renderEmptyList}
+        ListEmptyComponent={this.renderEmptyList(this.search)}
       />
     return dreamList;
   }
@@ -121,15 +129,25 @@ export default class DreamIndexScreen extends React.Component {
     )
   }
 
-  renderEmptyList() {
+  renderEmptyList(search) {
+    let noDreamsText = (
+      <Text style={styles.emptyListText}>
+        Welcome! Get started by pressing the record icon to record
+        your first dream. {"\n"} {"\n"}
+        You can also set push notifications for a reminder to record a
+        dream when you wake up.
+      </Text>
+    )
+    if (search && search.input._lastNativeText) {
+      noDreamsText = (
+        <Text style={styles.emptyListText}>
+          No matching dreams found
+        </Text>
+      )
+    }
     return(
       <View style={styles.emptyList}>
-        <Text style={styles.emptyListText}>
-          Welcome! Get started by pressing the record icon to record
-          your first dream. {"\n"} {"\n"}
-          You can also set push notifications for a reminder to record a
-          dream when you wake up.
-        </Text>
+        {noDreamsText}
       </View>
     )
   }
@@ -140,7 +158,9 @@ export default class DreamIndexScreen extends React.Component {
       <View style={styles.container}>
         <SearchBar
           round
-          placeholder='Search dreams'/>
+          placeholder='Search dreams'
+          ref={search => this.search = search}
+          onChangeText={text => this.searchDreams(text)}/>
         <View style={styles.recordSection}>
           <TouchableHighlight onPress={() => navigate('Record')}>
             <Icon name='microphone' size={70} color="white" />

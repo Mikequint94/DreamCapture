@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Button,
-  Image,
-  Alert,
-  TouchableHighlight
+import { StyleSheet, Text, TextInput, View,
+          Button, Image, Alert, TouchableHighlight
 } from 'react-native';
-
+import { FontAwesome } from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Voice from 'react-native-voice';
 
 export default class RecordScreen extends React.Component {
@@ -176,26 +170,27 @@ export default class RecordScreen extends React.Component {
       // let analysis = WatsonAnalyzer.analyze(string)
       // console.log(analysis);
       topText = (
-        <Text style={styles.welcome}>
-          Edit and Save
-        </Text>
+        <View style={styles.topContainer}>
+          <Text style={styles.recordText}>
+            Edit and Save
+          </Text>
+        </View>
       )
       middleTextPic = (
         <View style={styles.middleContainer}>
+          <View style={styles.textInputContainer}>
             <TextInput style={styles.input}
               onChangeText={(text) => this.setState({finalResults: text})}
               value={this.state.finalResults}
               multiline={true}
             />
+          </View>
         </View>
       )
       bottomButton = (
         <View style={styles.bottomContainer}>
           <TouchableHighlight onPress={this.rerecord.bind(this)}>
-            <Image
-              style={{height:80, width: 80, marginHorizontal: 30}}
-              source={require('./rerecord.png')}
-              />
+            <Icon name='repeat' size={100} color="white" />
           </TouchableHighlight>
           <Button style={{ height:80, width: 80, marginHorizontal: 30}} onPress={
               this.saveDream.bind(this)
@@ -207,24 +202,31 @@ export default class RecordScreen extends React.Component {
     if (this.state.started === "") {
       console.log(this.props);
       topText = (
-        <Text style={styles.welcome}>
-          Record Your Dream
-        </Text>
+        <View style={styles.topContainer}>
+          <Text style={styles.recordText}>
+            Record Your Dream
+          </Text>
+        </View>
+      )
+      middleTextPic = (
+        <View style={styles.middleContainer}>
+        </View>
       )
       bottomButton = (
+        <View style={styles.bottomContainer}>
           <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
-            <Image
-              style={styles.button}
-              source={require('./button.png')}
-            />
+            <Icon name='microphone' size={100} color="white" />
           </TouchableHighlight>
+        </View>
       )
 
     } else if (this.state.end === "") {
       topText = (
-        <Text style={styles.welcome}>
-          Recording...
-         </Text>
+        <View style={styles.topContainer}>
+          <Text style={styles.recordText}>
+            Recording...
+           </Text>
+        </View>
       )
       middleTextPic = (
         <View style={styles.middleContainer}>
@@ -232,15 +234,14 @@ export default class RecordScreen extends React.Component {
             style={styles.soundwave}
             source={require('./soundwav.gif')}
           />
-      </View>
+        </View>
       )
       bottomButton = (
-        <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
-          <Image
-            style={styles.button}
-            source={require('./stop.png')}
-          />
-        </TouchableHighlight>
+        <View style={styles.bottomContainer}>
+          <TouchableHighlight onPress={this._stopRecognizing.bind(this)}>
+            <Icon name='stop-circle-o' size={100} color="white" />
+          </TouchableHighlight>
+        </View>
       )
     }
     return (
@@ -254,6 +255,36 @@ export default class RecordScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#3E3254'
+  },
+  topContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    backgroundColor: 'white'
+  },
+  middleContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: 'pink'
+  },
+  bottomContainer: {
+    flex: 1,
+    // flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 20,
+    backgroundColor: 'blue'
+  },
+  recordText: {
+    fontSize: 36,
+    color: '#D4CCD9',
+    textAlign: 'center',
+    // marginTop: 50,
+  },
   button: {
     width: 150,
     height: 150,
@@ -262,36 +293,15 @@ const styles = StyleSheet.create({
     width: 300,
     height: 250,
   },
+  textInputContainer: {
+    alignItems: 'stretch',
+  },
   input: {
-    width: 300,
-    height: 300,
-    borderColor: 'gray',
-    borderWidth: 1
-  },
-  container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  bottomContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20
-  },
-  middleContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 200
-  },
-  welcome: {
-    flex: 3,
-    fontSize: 40,
-    color: 'purple',
-    textAlign: 'center',
-    marginTop: 35,
+    // width: 350,
+    borderColor: 'rgba(212, 204, 217, 0.25)',
+    borderWidth: 1,
+    color: '#D4CCD9'
   },
   action: {
     textAlign: 'center',

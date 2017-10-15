@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { isSignedIn, onSignOut } from '../../actions/session_actions';
-
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button
-} from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default class MainScreen extends React.Component {
   static navigationOptions = {

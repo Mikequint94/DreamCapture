@@ -70,7 +70,6 @@ export default class WatsonAnalyzer extends React.Component {
     // console.log(this.props.keywords);
     if (this.props.keywords) {
       let firstFive = [this.props.keywords[0].keyword,this.props.keywords[1].keyword,this.props.keywords[2].keyword,this.props.keywords[3].keyword,this.props.keywords[4].keyword];
-      // console.log(firstFive);
       topKeywordShow = firstFive.map(
         (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
 
@@ -79,12 +78,8 @@ export default class WatsonAnalyzer extends React.Component {
 
     return (
       <View>
-        <Text>
-          Sentiment Score: {this.sentimentScore}
-        </Text>
-        <Text>
-          Sentiment Label: {this.sentimentLabel}
-          {'\n'}
+
+        <Text style={styles.keywordsHeaderText}>
           Suggested Keywords:
         </Text>
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -108,5 +103,11 @@ const styles = StyleSheet.create({
     height: 200,
     borderColor: 'gray',
     borderWidth: 1
+  },
+  keywordsHeaderText: {
+    color: '#D4CCD9',
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 4,
   }
 });

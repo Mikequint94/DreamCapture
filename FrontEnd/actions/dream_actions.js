@@ -1,5 +1,3 @@
-// import * as DreamUtil from '../util/dream_util';
-
 import axios from 'axios';
 import {API_URL} from '../api/api_index';
 
@@ -27,6 +25,12 @@ export const receiveDream = dream => ({
   type: RECEIVE_DREAM,
   dream
 });
+
+export const requestSearchDreams = (userId, query) => dispatch => (
+  axios.get(`${API_URL}/api/users/${userId}/dreams/search/${query}`)
+  .then(dreams => dispatch(receiveAllDreams(dreams.data)))
+  .catch(err => dispatch(receiveErrors(err)))
+);
 
 export const requestDream = dreamId => dispatch => (
   axios.get(`${API_URL}/api/dreams/${dreamId}`)

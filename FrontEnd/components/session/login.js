@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
-import { isSignedIn } from '../../actions/session_actions';
+import { isSignedIn, onSignIn } from '../../actions/session_actions';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
@@ -25,21 +25,16 @@ export default class LoginScreen extends React.Component {
       ],
     });
     this.props.navigation.dispatch(resetAction);
-  };
+  }
 
   handleLogin() {
     this.props.login(this.state)
-    if (isSignedIn()) {
-      this.resetNav();
-    }
+      .then((res) => {
+        if (res === 'signedin') {this.resetNav();}
+      });
   }
 
   renderErrors() {
-    if (this.props.errors.length === 0) {
-      return(
-        <Text>{"\n"}</Text>
-      )
-    }
     return(
       <Text style={styles.errors}>
         {this.props.errors.map((error,idx) => {
@@ -52,6 +47,12 @@ export default class LoginScreen extends React.Component {
         )}
       </Text>
     )
+  }
+
+  handleLinkNav(){
+    const { navigate } = this.props.navigation;
+    navigate('SignUp');
+    this.props.clearErrors();
   }
 
   render() {
@@ -102,7 +103,7 @@ export default class LoginScreen extends React.Component {
             </TouchableOpacity>
         </View>
         <Button style={styles.link}
-          onPress={() => navigate('SignUp')}
+          onPress={() => this.handleLinkNav()}
           title='Sign Up'
           color='#D4CCD9'
           />
@@ -127,6 +128,7 @@ const styles = StyleSheet.create ({
   },
   inputsContainer: {
     flexDirection: 'row',
+    marginBottom: 3,
   },
   inputRow: {
     flex: .80,
@@ -176,5 +178,6 @@ const styles = StyleSheet.create ({
   errors: {
     color: '#83BFAA',
     fontSize: 16,
+    marginVertical: 4,
   }
 });

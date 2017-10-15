@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isSignedIn } from '../../actions/session_actions';
+import { isSignedIn, onSignOut } from '../../actions/session_actions';
 
 import {
   StyleSheet,
@@ -16,9 +16,7 @@ export default class MainScreen extends React.Component {
   handleLogout() {
     const { navigate } = this.props.navigation;
     this.props.logout();
-    if (!isSignedIn()) {
-      navigate('SignIn');
-    }
+    onSignOut().then(() => navigate('SignIn'));
   }
 
   render() {

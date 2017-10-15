@@ -4,8 +4,11 @@ import { isSignedIn, onSignIn } from '../../actions/session_actions';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  StyleSheet, Text, TextInput, View, TouchableOpacity, Button, AppState
+  StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback
 } from 'react-native';
+
+// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -82,7 +85,12 @@ export default class LoginScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={styles.container}
+        >
+      <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
+        <View style={styles.container}>
         <Text style={styles.header}>
           Welcome, please log in.
         </Text>
@@ -132,6 +140,8 @@ export default class LoginScreen extends React.Component {
           color='#D4CCD9'
           />
       </View>
+</TouchableWithoutFeedback>
+</KeyboardAvoidingView>
     )
   }
 }

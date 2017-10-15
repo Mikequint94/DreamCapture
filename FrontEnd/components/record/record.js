@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View,
-         Image, Alert, TouchableHighlight
+         Image, Alert, TouchableHighlight, Keyboard, TouchableWithoutFeedback
 } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Voice from 'react-native-voice';
 import { Button } from 'react-native-elements';
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
@@ -255,11 +258,17 @@ export default class RecordScreen extends React.Component {
       )
     }
     return (
-      <View style={styles.container}>
-        {topText}
-        {middleTextPic}
-        {bottomButton}
-      </View>
+      <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
+        <KeyboardAwareScrollView
+          style={{ backgroundColor: '#3E3254' }}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scroll={false}
+          contentContainerStyle={styles.container}>
+          {topText}
+          {middleTextPic}
+          {bottomButton}
+        </KeyboardAwareScrollView>
+      </TouchableWithoutFeedback>
     );
   }
 }

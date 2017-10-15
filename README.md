@@ -1,191 +1,114 @@
-# Dream Capture
-
-## Background and Overview
-
-Dreams are a unique phenomenon.  They let us connect to our subconscious and explore parts of our brains and inner creativity that we otherwise have no means to access.  Everybody dreams, and everybody can remember their dreams given the proper tools.  95% of dreams are forgotten within the first 5 minutes of waking up, and any distracting thoughts or stimulations will accelerate the forgetting process.  Dream Capture is the solution.
-
-Dream Capture is a mobile app to record dreams via speech-to-text. The app also doubles as an alarm, and will prompt users to record the dream after the alarm is turned off. Users can add notes and tags to their dreams. There will be a search functionality and the ability to browse by keywords and user-added tags.
+![alt text](https://res.cloudinary.com/make-anything/image/upload/c_scale,h_400/v1508102268/DreamCaptureLong_twzq3b.jpg "DreamCapture Logo")
 
 
-## Functionality and MVP
+Brief Overview
+==
 
-##### This app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation:
+Dreams are a unique phenomenon. They let us connect to our subconscious and explore parts of our brains and inner creativity that we otherwise have no means to access. Everybody dreams, and everybody can remember their dreams given the proper tools. 95% of dreams are forgotten within the first 5 minutes of waking up, and any distracting thoughts or stimulations will accelerate the forgetting process. Dream Capture is the solution.
 
-- [ ] Reliable alarm to gently wake up user at the correct time and days of the week
-  -  Will immediately launch app on snooze and prompt for audio recording
-- [ ] User Authentication (email and password)
-- [ ] Recording speech to text is accurate and quick.
-- [ ] Dreams are searchable
-- [ ] Adding notes to dreams
-- [ ] Adding keywords to dreams
-- [ ] Demo page showcasing relevant app features
-  - Customized to look more unique
-- [ ] Production README
-
-#### Bonus:
-
-- [ ] Analytics
-  - Collect demographic info on user during sign up
-
-- [ ] Charts and graphs to display keyword frequency and sentiment tracking
-- [ ] 3rd Party Authentication
-  - Auth0 or similar
-  - Oauth potentially upon user request
-- [ ] Reference Guide
-  - Explaining what your dreams may mean based on analyzed content
-- [ ] Intro to app tutorial to explain workflow
-- [ ] Graphic time display with a sun/moon travelling across the top of the screen
+Dream Capture is a mobile app to record and store dreams.  The app uses speech-to-text technology, and will prompt users to record the dream with a notification upon wakeup. Users can add notes and tag keywords to their dreams. Users can search by dream text or keyword to remember past dreams.  
+####   [DreamCapture Demo Page](http://www.dream-capture.com "DreamCapture Demo Page")
 
 
-## Technologies and Technical Challenges
-#### Backend:
-- Ruby on Rails
-- PostgreSQL
-- AWS S3 - https://aws.amazon.com/s3/
+This full stack mobile application was crafted to be functional yet simple.  DreamCapture uses Ruby on Rails for the backend and React Native with a Redux architectural framework for the frontend.  The app utilizes a PostgreSQL database, and benefits from advanced performance with the addition of various installed packages.
 
-#### Frontend:
-- React Native
-- Processing language keywords
-- Watson API
-https://www.ibm.com/watson/services/discovery/
+Design
+==
 
-#### Challenges:
-- Connecting React Native front end to Rails
-- Managing permissions (local storage, calendar, microphone, speech-to-text):
- - Getting access to local storage and calendar for our alarm feature, as well as the microphone and speech-to-text functionality built into iOS.
-- Integrating Watson API for Natural language processing:   
- - Using built in speech-to-text to record a user’s dream, then linking it with IBM’s watson for speech analysis.
-- Pleasing and relaxing UX/UI: aim is to gently guide user through workflow just as they wake up.
+MakeAnything was designed with user experience in mind.  The site is fun to navigate, and returns desired results.
 
-## Wireframes
+![alt text](https://res.cloudinary.com/make-anything/image/upload/c_scale,h_540/v1506715231/Screen_Shot_2017-09-29_at_12.59.51_PM_byuxgc.png "Splash Page")
 
-#### Signup and Login
+The splash homepage was a challenge in many senses.  Not only did I want the desired parallax scroll effect, but also I wanted the background image to be a slideshow.  Finally I wanted text on top of each image to give examples of project categories.  Creating the parallax scroll effect on the homepage was challenging in its own sense, but I figured out that wrapping all of my elements with appropriate CSS kept the site functional and stylish on all pages.    I used a simple timer to advance the background image, but timing was a challenge since I had to pair the text with the image perfectly.  
 
-![wireframe1](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_1_signup_login.png)
----
-#### Signup Form
+By utilizing class and timers I was able to craft the perfect solution.  
 
-![wireframe2](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_2_signup_form.png)
---
-#### Dream Index
+```javascript
+dummyInput(string, idx){
+    let dummyText = Array.from(string);
+    this.setState({text: ""});
+    this.clearInterval = setInterval(() => {
+      if (dummyText.length) {
+        this.setState({text: this.state.text + dummyText.shift()});
+      } else {
+        clearTimeout(this.clearInterval);
+        if (idx === 0) {
+          this.bgclass="section parallax bg3";
+          this.dummyInput("Woodwork   ", 1);
+        } else if (idx === 1) {
+          this.bgclass="section parallax bg1";
+          this.dummyInput("Artwork      ", 2);
+        } else {
+          this.bgclass="section parallax bg2";
+          this.dummyInput("Cooking      ", 0);
+        }
+      }
+    }, 300);
+}
+```
+Additionally, all the forms are styled to match.  Logged in visitors can create new projects, add steps for the project, edit projects, edit steps, and add comments to any existing project.  
+![alt text](https://res.cloudinary.com/make-anything/image/upload/c_scale,h_540/v1506718182/MakeAnythingFormFeatures_h3dsu6.jpg
+"Form Features")
 
-![wireframe3](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_3_main.png)
---
-#### Alarm
+Functionality
+==
 
-![wireframe4](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_4_alarm.png)
---
-#### Record Dream Start
+MakeAnything features search to filter projects by title.  I was able to combine this component with the page showing all projects by a single crafter.  Here is an example of a typical user going through the site and leaving a comment.
 
-![wireframe5](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_5_record_dream_start.png)
---
-#### In Recording Screen
+![alt text](https://res.cloudinary.com/make-anything/image/upload/v1506721204/giphy_uneqcu.gif
+  "Search")
 
-![wireframe6](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_6_in_recording.png)
---
-#### Post Recording Review
+Since this is a single page application, it was difficult to maintain similar visual feel across components.  I achieved consistency and non-repetitive code by using conditional statements to set visibility and content of subcomponents based on factors such as logged in user, project author, and the type of media present in the step or project.
+````javascript
+return(
+  <div className="projectshow">
+    <ul className="header">
+      <li className="steps-edit">
+        {editproject}
+      </li>
+      <li className={titleclass}>{project.title}</li>
+      <li className={authorclass}>by:
+        <Link to={`/member/${project.author.id}/${project.author.username}/projects`}>  {project.author.username}</Link>
+      </li>
+    </ul>
+    <ul className="pictextvid">
+      {image}
+      <h2>{project.description}</h2>
+      {video}
+    </ul>
+    <ul className="steps">
+      {steps}
+      <br/>
+      {addSteps}
+    </ul>
+    <div className="comment-form">
+      {comments}
+      <CommentIndexContainer />
+    </div>
+  </div>
+);
+} else {
+  return(
+    <div className="loadingtext">
+      <h3>Loading</h3>
+    </div>
+  );
+  ````
 
-![wireframe7](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_7_post_recording_review.png)
---
-#### Add Keywords
+Technologies
+==
 
-![wireframe8](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_8_add_keywords.png)
---
-#### Dream Show
+Future Directions
+==
 
-![wireframe9](https://github.com/Mikequint94/DreamCapture/blob/master/docs/Wireframe_9_dream_show.png)
+**Dream Analysis:**
+DreamCapture already analyzes the dream content for sentiment, and eventually the app will be able to analyze for emotion as well.  Their will be an analysis page to show users trends in the content of their dreams, charting out sentiment and keyword frequencies.
 
+**Reference Guide:**
+Using analyzed content, the app will be able to explain to users what they dreams may mean!  By using the app and thinking more about their dreams, users will be shown different interpretations and be provoked to think about what their dreams are trying to communicate.
 
-### Sample Schema
+**Port to Android:**
+Using analyzed content, the app will be able to explain to users what they dreams may mean!  By using the app and thinking more about their dreams, users will be shown different interpretations and be provoked to think about what their dreams are trying to communicate.
 
-https://github.com/Mikequint94/DreamCapture/blob/master/docs/Schema.md
-
-### Sample State
-
-https://github.com/Mikequint94/DreamCapture/blob/master/docs/SampleState.md
-
-## Group Members and Work Breakdown
-
-#### We have three members: Michael Quint, Peter Ludlum, Adrienne Lin
-
-__Michael’s__ primary responsibilities will be:
-- Implementing voice to text feature
-- Sending text to Watson NLP API for analysis
-- Alarm functionality setup.
-
-__Peter’s__ primary responsibilities will be:
-- Backend setup - User Auth frontend
-- AWS setup and usage
-- Setting up Demo Page
-- Writing Production Readme
-
-__Adrienne’s__ primary responsibilities will be:
-- Frontend - React Native
-- user login/signup screen
-- signup form
-- main index
-- alarm screen
-- record start screen in recording screen
-- recording review screen
-- add keywords screen
-- dream show screen
-- Submit app for review on Apple App Store
-
-
-## Plan for getting Users and Reviews
-- All members will share the published app with at least 20 friends and family members.
-- Soft launch with several close friends to get feedback before final publishing to the app store.
-- Peter will post in appropriate sub-reddit.
-- Michael will utilize all of social medias to advertise the app.
-- Adrienne will submit the app for review on the App Store.
-
-## Implementation Timeline
-#### __Phase 1:__ Learn Technologies (2 days - first weekend)
-All teammates will use the weekend to learn React Native.
-
-Team members will also individually research the following technologies:
-- Michael
-    - Research Watson and other speech-to-text.
-    - Start setting up API keys.
-
-- Peter 		
-    - Research AWS.
-    - Look at alarm functionality.
-
-- Adrienne
-    - Research OAuth providers and determine if app will use.
-
-All teammates will complete and submit proposal by Monday morning.
-#### __Phase 2:__ Foundation (2 days)
-- User authentication
-    - Set up using Rails
-    - Set up views with React Native - signup/login screen and signup form
-    - Session Show and Session Form pages
- 
-- Create Skeleton of the following pages and Navigation between them
-    - Index Page
-    - Option to record
-    - Shows all dreams
-    - Dream Record Page
-    - Dream Edit Page
-    - Dream Show Page
-    - Add note
-    - Add seeds for testing
-
-#### __Phase 3:__ MVP Features  (4 days)
-- Alarm
-- Speech to text
-- Add keywords - automatic and user-generated
-- Edit/add notes to dreams
-- Search
-
-#### __Phase 4:__ Demo/README.md/Styling  (1 day)
-- Make demo page with gifs
-- Make production README
-- Add final styling touchups
-
-##### __Phase 5:__ Get Feedback/App Store/Bonuses (ongoing for future)
-- Get feedback from friends and family
-- Submit app on Apple App Store
-- Port to Android
-- Add bonus features from user feedback
+ ![alt text](https://res.cloudinary.com/make-anything/image/upload/c_scale,h_116/v1508103105/DreamFaviconLarge_a45tgh.png
+ "DreamCapture Logo") **[Capture Your Dreams](https://www.dream-capture.com "DreamCapture")**

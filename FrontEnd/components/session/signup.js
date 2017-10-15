@@ -4,8 +4,11 @@ import { isSignedIn } from '../../actions/session_actions';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  StyleSheet, Text, TextInput, View, TouchableOpacity, Button
+  StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback
 } from 'react-native';
+
+// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 export default class SignupScreen extends React.Component {
   static navigationOptions = {
@@ -84,55 +87,63 @@ export default class SignupScreen extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Text style={styles.header}>
-          Create your account below.
-        </Text>
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={styles.container}
+        >
+      <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Text style={styles.header}>
+            Create your account below.
+          </Text>
 
-        {this.renderErrors()}
+          {this.renderErrors()}
 
-        <View style={styles.inputsContainer}>
-          <View style={styles.inputRow}>
-            <Icon style={styles.icon}
-              name='envelope-o' size={20} color='#D4CCD9' />
-            <View style={styles.inputBorder}>
-              <TextInput style={styles.input}
-                value={this.state.email}
-                autoCapitalize='none'
-                placeholder='Email'
-                placeholderTextColor='#D4CCD9'
-                onChangeText={ email => this.setState({email})} />
+          <View style={styles.inputsContainer}>
+            <View style={styles.inputRow}>
+              <Icon style={styles.icon}
+                name='envelope-o' size={20} color='#D4CCD9' />
+              <View style={styles.inputBorder}>
+                <TextInput style={styles.input}
+                  value={this.state.email}
+                  autoCapitalize='none'
+                  placeholder='Email'
+                  placeholderTextColor='#D4CCD9'
+                  onChangeText={ email => this.setState({email})} />
+              </View>
             </View>
           </View>
-        </View>
-        <View style={styles.inputsContainer}>
-          <View style={styles.inputRow}>
-            <Icon style={styles.icon}
-              name='key' size={20} color='#D4CCD9' />
-            <View style={styles.inputBorder}>
-              <TextInput style={styles.input}
-                value={this.state.password}
-                autoCapitalize='none'
-                placeholder='Password'
-                placeholderTextColor='#D4CCD9'
-                secureTextEntry={true}
-                onChangeText={ password => this.setState({password})}/>
+          <View style={styles.inputsContainer}>
+            <View style={styles.inputRow}>
+              <Icon style={styles.icon}
+                name='key' size={20} color='#D4CCD9' />
+              <View style={styles.inputBorder}>
+                <TextInput style={styles.input}
+                  value={this.state.password}
+                  autoCapitalize='none'
+                  placeholder='Password'
+                  placeholderTextColor='#D4CCD9'
+                  secureTextEntry={true}
+                  onChangeText={ password => this.setState({password})}/>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.submitContainer}>
-          <TouchableOpacity style={styles.submitButton}
-            onPress={() => this.handleSignup()}>
-              <Text style={styles.submitButtonText}> Sign Up </Text>
-            </TouchableOpacity>
+          <View style={styles.submitContainer}>
+            <TouchableOpacity style={styles.submitButton}
+              onPress={() => this.handleSignup()}>
+                <Text style={styles.submitButtonText}> Sign Up </Text>
+              </TouchableOpacity>
+          </View>
+          <Button style={styles.link}
+            onPress={() => this.handleLinkNav()}
+            title='Log In'
+            color='#D4CCD9'
+            />
         </View>
-        <Button style={styles.link}
-          onPress={() => this.handleLinkNav()}
-          title='Log In'
-          color='#D4CCD9'
-          />
-      </View>
+        </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+
     )
   }
 }

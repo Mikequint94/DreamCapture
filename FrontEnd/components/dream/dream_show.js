@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
   View
 } from 'react-native';
 
@@ -13,6 +12,8 @@ import WatsonAnalyzer from './watson';
 import KeywordShow from '../keyword/keyword_show';
 import NoteShowContainer from '../note/note_show_container';
 import moment from 'moment'
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class DreamShowScreen extends React.Component {
   static navigationOptions = {
@@ -113,7 +114,7 @@ export default class DreamShowScreen extends React.Component {
           onChangeText={(newKey) => this.setState({newKey})}
           placeholder={"enter keyword"}
           placeholderTextColor='rgba(212, 204, 217, 0.7)'
-          autoFocus={true}
+          autoFocus={false}
           autoCapitalize={'none'}
           value={this.state.newKey}
           multiline={false}
@@ -129,9 +130,12 @@ export default class DreamShowScreen extends React.Component {
       </View>
     )
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
-          <View style={styles.containerMargin}>
+      <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: '#3E3254' }}
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        contentContainerStyle={styles.container}>
+            <View style={styles.containerMargin}>
             {dreams}
             {addKeywords}
             <View style={styles.watsonContainer}>
@@ -144,8 +148,8 @@ export default class DreamShowScreen extends React.Component {
                 {noteShow}
             </View>
           </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
+    </TouchableWithoutFeedback>
     )
   }
 }

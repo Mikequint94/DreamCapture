@@ -1,6 +1,7 @@
 class Api::NotesController < ApplicationController
   def create
-    @note = Note.find(dream_id: params[:note][:dream_id])
+
+    @note = Note.find_by(dream_id: params[:note][:dream_id])
     if @note
 
       if @note.update_attributes(note_params)

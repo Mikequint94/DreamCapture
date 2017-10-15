@@ -158,6 +158,8 @@ const styles = StyleSheet.create ({
   },
   dreamBodyBox: {
     flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'stretch',
     borderWidth: 1,
     borderColor: 'rgba(212, 204, 217, 0.25)',
     marginBottom: 5,
@@ -188,7 +190,7 @@ const styles = StyleSheet.create ({
     padding: 5
   },
   watsonContainer: {
-    flex: 2,
+    flex: 1,
     overflow: 'hidden',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',

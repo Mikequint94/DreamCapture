@@ -15,17 +15,8 @@ export default class KeywordShow extends React.Component {
 
   }
 
-  componentDidMount() {
-    // let newDream = this.props.requestDream(this.props.currentDream.id);
-    // console.log(this.props);
-    // console.log(newDream);
-
-  }
-
   render() {
     let dreamKeywords = this.props.currentKeywords;
-    // console.log(dreamKeywords.reverse());
-    // console.log(dreamKeywords);
     let keywordItems = dreamKeywords.map(
       (keyword) => <KeywordItem key={keyword.id + 'keyword'} keyword={keyword.keyword}/>
     );
@@ -35,7 +26,7 @@ export default class KeywordShow extends React.Component {
         <Text style={styles.keywordsHeaderText}>
           Keywords:
         </Text>
-        <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+        <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
           {keywordItems}
         </View>
       </View>

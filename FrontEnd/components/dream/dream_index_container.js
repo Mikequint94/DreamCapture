@@ -1,6 +1,6 @@
 import DreamIndexScreen from './dream_index';
 
-import {requestUserDreams} from '../../actions/dream_actions';
+import {requestUserDreams, requestSearchDreams} from '../../actions/dream_actions';
 import {connect} from 'react-redux';
 
 
@@ -10,7 +10,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  requestUserDreams: (userId) => dispatch(requestUserDreams(userId))
+  requestUserDreams: (userId) => dispatch(requestUserDreams(userId)),
+  requestSearchDreams: (userId, query) => dispatch(requestSearchDreams(userId, query))
 });
 
 export default connect(

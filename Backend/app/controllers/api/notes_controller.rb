@@ -1,10 +1,24 @@
 class Api::NotesController < ApplicationController
   def create
-    @note = Note.new(note_params)
-    if @note.save
-      render "api/notes/index"
+
+    @note = Note.find_by(dream_id: params[:note][:dream_id])
+    if @note
+
+      if @note.update_attributes(note_params)
+        render "api/notes/index"
+      else
+        render json: @note.errors.full_messages, status: 422
+      end
+
     else
-      render json: @note.errors.full_messages, status: 422
+
+      @note = Note.new(note_params)
+      if @note.save
+        render "api/notes/index"
+      else
+        render json: @note.errors.full_messages, status: 422
+      end
+
     end
   end
 

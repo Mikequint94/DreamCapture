@@ -61,6 +61,26 @@ export default class SignupScreen extends React.Component {
     this.props.clearErrors();
   }
 
+  renderErrors() {
+    if (this.props.errors.length === 0) {
+      return(
+        <Text>{"\n"}</Text>
+      )
+    }
+    return(
+      <Text style={styles.errors}>
+        {this.props.errors.map((error,idx) => {
+          if (idx === this.props.errors.length - 1) {
+            return `${error}`;
+          } else {
+            return `${error} ${"\n"}`;
+          }
+        }
+        )}
+      </Text>
+    )
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (

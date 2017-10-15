@@ -3,11 +3,15 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
   View
 } from 'react-native';
 
 import WatsonAnalyzer from './watson';
 import KeywordShow from '../keyword/keyword_show';
+import NoteShowContainer from '../note/note_show_container';
 import moment from 'moment'
 
 export default class DreamShowScreen extends React.Component {
@@ -43,13 +47,26 @@ export default class DreamShowScreen extends React.Component {
     let currentDream = this.props.navigation.state.params.dreamId;
 
     let keywordShow;
+    let note = undefined;
+    let noteShow;
     let currentKeywords = [{id: "", keyword: ""}];
     if (this.props.dreams[currentDream]) {
+        note = this.props.dreams[currentDream].note;
         currentKeywords = this.props.dreams[currentDream].keywords;
         keywordShow = (
           <KeywordShow currentKeywords={currentKeywords}/>
         )
       }
+    if (note) {
+      console.log(note);
+      noteShow = (
+        <NoteShowContainer currentDream={currentDream} note={note.body}/>
+      );
+    } else {
+      noteShow = (
+        <NoteShowContainer currentDream={currentDream}/>
+      )
+    }
 
     let dreams;
     let watsonInfo;
@@ -112,19 +129,23 @@ export default class DreamShowScreen extends React.Component {
       </View>
     )
     return (
-      <View style={styles.container}>
-        <View style={styles.containerMargin}>
-          {dreams}
-          {addKeywords}
-          <View style={styles.watsonContainer}>
-            {watson}
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
+          <View style={styles.containerMargin}>
+            {dreams}
+            {addKeywords}
+            <View style={styles.watsonContainer}>
+              {watson}
+            </View>
+            <View style={styles.keywordShowContainer}>
+              {keywordShow}
+            </View>
+            <View style={styles.keywordShowContainer}>
+                {noteShow}
+            </View>
           </View>
-          <View style={styles.keywordShowContainer}>
-
-            {keywordShow}
-          </View>
-        </View>
-      </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -196,6 +217,6 @@ const styles = StyleSheet.create ({
     alignItems: 'flex-start',
   },
   keywordShowContainer: {
-    flex: 2,
+    flex: 1.4,
   }
 });

@@ -1,0 +1,152 @@
+/* owl-carousel.scss
+=========================================================*/
+@-webkit-keyframes fadeOut {}
+.owl-dots .owl-dot {
+  border: 1px solid #3f51b5;
+}
+.owl-dots .owl-dot:hover, .owl-dots .owl-dot.active {
+  background: #3f51b5;
+}
+
+.bg-primary .owl-dots .owl-dot {
+  border-color: #ffffff;
+}
+.bg-primary .owl-dots .owl-dot:hover, .bg-primary .owl-dots .owl-dot.active {
+  background: #ffffff;
+}
+
+/* style.scss
+=========================================================*/
+body {
+  background: #edf1f2;
+  color: #888888;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2d2d2d;
+}
+
+html body .primary {
+  color: #3f51b5;
+}
+
+.bg-primary {
+  background: #3f51b5;
+}
+.bg-primary, .bg-primary h1, .bg-primary h2, .bg-primary h3, .bg-primary h4, .bg-primary h5, .bg-primary h6 {
+  color: #ffffff;
+}
+.bg-primary .primary {
+  color: #2d2d2d;
+}
+
+.bg-secondary {
+  background: #2d2d2d;
+}
+.bg-secondary h1, .bg-secondary h2, .bg-secondary h3, .bg-secondary h4, .bg-secondary h5, .bg-secondary h6 {
+  color: #ffffff;
+}
+
+.bg-secondary2 {
+  background: #edf1f2;
+}
+
+.material-design-help19:before {
+  color: #d1d8da;
+}
+
+.btn {
+  color: #ffffff;
+  background: #2d2d2d;
+}
+.btn:hover, .btn:active {
+  background: #ffffff;
+  color: #333333;
+}
+
+.btn[class*='material-design-']:before {
+  color: #3f51b5;
+}
+
+.btn__skin2 {
+  color: #333333;
+  background: #ffffff;
+}
+.btn__skin2:hover, .btn__skin2:active {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.marked-list li:before {
+  color: #5c5c5c;
+}
+.marked-list li.active {
+  color: #ffffff;
+}
+.marked-list li.active:before {
+  color: #3f51b5;
+}
+
+.pricing-table {
+  background: #333333;
+}
+.pricing-table_header {
+  background: #3f51b5;
+}
+.pricing-table_header, .pricing-table_header h1, .pricing-table_header h2, .pricing-table_header h3, .pricing-table_header h4, .pricing-table_header h5, .pricing-table_header h6 {
+  color: #ffffff;
+}
+
+header {
+  background: #3E3254;
+}
+header, header h1, header h2, header h3, header h4, header h5, header h6 {
+  color: #ffffff;
+}
+
+main {
+  background: #ffffff;
+}
+
+.toTop {
+  color: #ffffff;
+  background: #2d2d2d;
+}
+.toTop:hover {
+  color: #ffffff;
+  background: #3f51b5;
+}
+
+.thumb {
+  border: 10px solid #ffffff;
+}
+.thumb_overlay {
+  color: #ffffff;
+  background: #2d2d2d;
+}
+
+.parallax, .parallax h1, .parallax h2, .parallax h3, .parallax h4, .parallax h5, .parallax h6 {
+  color: #ffffff;
+}
+.parallax .subscribe-form .error, .parallax .subscribe-form .success {
+  background: #ffffff;
+}
+.parallax .subscribe-form label {
+  border-color: #ffffff;
+}
+.parallax .subscribe-form input, .parallax .subscribe-form label:before {
+  color: #ffffff;
+}
+.parallax_cnt {
+  background: rgba(63, 81, 181, 0.8);
+}
+
+/* subscribe-form.scss
+=========================================================*/
+.subscribe-form label:before {
+  color: #2d2d2d;
+}
+
+.subscribe-form .error, .subscribe-form .success {
+  background: #2d2d2d;
+}

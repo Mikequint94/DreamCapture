@@ -1,0 +1,154 @@
+@charset "UTF-8";
+/*========================================================
+                     RD Style Switcher
+=========================================================*/
+.styleswitcher {
+  position: fixed;
+  top: 22%;
+  width: 295px;
+  padding: 25px 25px 30px;
+  background: #2B3643;
+  color: #A5BFD2;
+  text-align: left;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  -moz-transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  -o-transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  -webkit-transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  -moz-transform: translateX(-295px);
+  -ms-transform: translateX(-295px);
+  -o-transform: translateX(-295px);
+  -webkit-transform: translateX(-295px);
+  transform: translateX(-295px);
+  -webkit-box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.15);
+  z-index: 9998;
+}
+.styleswitcher.active {
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  -webkit-transform: translateX(0px);
+  transform: translateX(0px);
+}
+@media (max-width: 479px) {
+  .styleswitcher {
+    width: 235px;
+    -moz-transform: translateX(-235px);
+    -ms-transform: translateX(-235px);
+    -o-transform: translateX(-235px);
+    -webkit-transform: translateX(-235px);
+    transform: translateX(-235px);
+  }
+}
+
+.styleswitcher_title {
+  color: #FFF;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.styleswitcher_toggle {
+  background: none;
+  border: none;
+  display: inline-block;
+  padding: 0;
+  outline: none;
+  outline-offset: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  background: #2B3643;
+  color: #A5BFD2;
+  font: 400 32px/60px "FontAwesome";
+  -moz-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+  -webkit-box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.15);
+}
+.styleswitcher_toggle::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+.styleswitcher_toggle:hover {
+  color: #FFF;
+}
+.styleswitcher_toggle:before {
+  content: "";
+}
+.styleswitcher_toggle.active:before {
+  content: "";
+}
+
+.styleswitcher_cnt {
+  word-spacing: 6px;
+}
+
+.styleswitcher_scheme {
+  background: none;
+  border: none;
+  display: inline-block;
+  padding: 0;
+  outline: none;
+  outline-offset: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  -moz-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.styleswitcher_scheme::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+.styleswitcher_scheme:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.2)), color-stop(100%, rgba(255, 255, 255, 0)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.styleswitcher_scheme.active, .styleswitcher_scheme:hover {
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
+
+.styleswitcher_title + .styleswitcher_cnt {
+  margin-top: 25px;
+}

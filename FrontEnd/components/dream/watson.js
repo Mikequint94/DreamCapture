@@ -19,6 +19,7 @@ export default class WatsonAnalyzer extends React.Component {
   //
 
   componentDidMount() {
+
     this.urlString = this.props.string.convert_to_url();
     this.sentimentScore = 0;
     this.sentimentLabel = "";
@@ -59,29 +60,27 @@ export default class WatsonAnalyzer extends React.Component {
     let keywordShow;
     let topKeywordShow;
     // console.log(this.keywords);
-    if (this.keywords) {
-      keywordShow = this.keywords.map(
+    if (this.keywords && this.keywords.length > 0) {
+      let firstFiveKeys = [this.keywords[0],this.keywords[1],this.keywords[2],this.keywords[3],this.keywords[4]];
+      // console.log(firstFiveKeys);
+      keywordShow = firstFiveKeys.map(
         (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
     );
     }
     // console.log(this.props.keywords);
     if (this.props.keywords) {
-      let firstFive = [this.props.keywords[0],this.props.keywords[1],this.props.keywords[2],this.props.keywords[3],this.props.keywords[4]];
+      let firstFive = [this.props.keywords[0].keyword,this.props.keywords[1].keyword,this.props.keywords[2].keyword,this.props.keywords[3].keyword,this.props.keywords[4].keyword];
       // console.log(firstFive);
       topKeywordShow = firstFive.map(
-        (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword.keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+        (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
 
       );
     }
 
     return (
       <View>
-        <Text>
-          Sentiment Score: {this.sentimentScore}
-        </Text>
-        <Text>
-          Sentiment Label: {this.sentimentLabel}
-          {'\n'}
+
+        <Text style={styles.keywordsHeaderText}>
           Suggested Keywords:
         </Text>
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -105,5 +104,11 @@ const styles = StyleSheet.create({
     height: 200,
     borderColor: 'gray',
     borderWidth: 1
+  },
+  keywordsHeaderText: {
+    color: '#D4CCD9',
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 4,
   }
 });

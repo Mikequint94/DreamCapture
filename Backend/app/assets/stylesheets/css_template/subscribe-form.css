@@ -1,0 +1,89 @@
+/*==================     Subscribe Form     ======================*/
+.subscribe-form {
+  position: relative;
+  display: block;
+  word-spacing: 10px;
+  text-align: center;
+}
+.subscribe-form > * {
+  word-spacing: normal;
+}
+.subscribe-form label {
+  display: inline-block;
+  position: relative;
+  padding: 12.5px 10px 12.5px 55px;
+  max-width: 352px;
+  width: 100%;
+  background: transparent;
+  border: 2px solid #2d2d2d;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.subscribe-form label:before {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  margin-top: -15px;
+  content: '\e070';
+  font: 400 26px/30px 'Material Design';
+  color: #2d2d2d;
+}
+.subscribe-form input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  vertical-align: baseline;
+  box-shadow: none;
+  color: #2d2d2d;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  line-height: 26px;
+  height: 26px;
+}
+
+.subscribe-form .error, .subscribe-form .success {
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: -10px;
+  text-align: left;
+  padding: 4px 10px;
+  left: 5px;
+  right: 5px;
+  font-size: 10px;
+  line-height: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #2d2d2d;
+}
+.subscribe-form .error {
+  display: none;
+  color: #f00;
+  overflow: hidden;
+  -moz-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+.subscribe-form label.invalid .error {
+  display: block;
+}
+.subscribe-form .success {
+  display: none;
+  color: #0f0;
+}
+
+@media (max-width: 767px) {
+  .subscribe-form * + a[data-type='submit'] {
+    margin-top: 10px;
+  }
+}

@@ -37,7 +37,9 @@ export default class RecordScreen extends React.Component {
   }
 
   componentWillUnmount() {
-    Voice.destroy().then(Voice.removeAllListeners);
+    if (Voice.destroy()) {
+      Voice.destroy().then(Voice.removeAllListeners);
+    }
   }
 
   onSpeechStart(e) {

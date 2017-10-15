@@ -1,88 +1,55 @@
 /*
-	Hyperspace by HTML5 UP
+	Photon by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-/* Type */
+/* Header */
 
-	h1.major:after {
-		background: #b74e91;
-	}
-
-/* Wrapper */
-
-	.wrapper.fullscreen {
-		min-height: 0;
-		padding-bottom: 6em;
-		padding-top: 6em;
-	}
-
-		body.is-ie .wrapper.fullscreen {
-			height: auto;
-		}
-
-/* Spotlights */
-
-	.spotlights > section {
-		padding-left: 20em;
+	#header {
+		background-image: none;
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr="#4fa49a", endColorStr="#4361c2", GradientType=1);
 		position: relative;
 	}
 
-		.spotlights > section > .image {
+		#header:before {
+			background-image: url("images/overlay2.png"), url("images/overlay3.svg");
+			background-position: top left,							center center;
+			background-size: auto,								cover;
+			content: '';
 			height: 100%;
 			left: 0;
 			position: absolute;
 			top: 0;
-			width: 20em;
-		}
-
-		.spotlights > section > .content {
 			width: 100%;
 		}
 
-/* Features */
+		#header > * {
+			position: relative;
+			z-index: 1;
+		}
 
-	.features:after {
-		clear: both;
-		content: '';
-		display: block;
+/* Footer */
+
+	#footer {
+		background-image: none;
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr="#4361c2", endColorStr="#4fa49a", GradientType=1);
+		position: relative;
 	}
 
-	.features section {
-		float: left;
-	}
+		#footer:before {
+			background-image: url("images/overlay2.png"), url("images/overlay4.svg");
+			background-position: top left,							center center;
+			background-size: auto,								cover;
+			content: '';
+			height: 100%;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
 
-/* Split */
-
-	.split:after {
-		clear: both;
-		content: '';
-		display: block;
-	}
-
-	.split > * {
-		float: left;
-	}
-
-/* Sidebar */
-
-	#sidebar nav a:after {
-		background-color: #b74e91;
-	}
-
-/* Header */
-
-	#header:after {
-		clear: both;
-		content: '';
-		display: block;
-	}
-
-	#header > .title {
-		float: left;
-	}
-
-	#header > nav {
-		float: right;
-	}
+		#footer > * {
+			position: relative;
+			z-index: 1;
+		}

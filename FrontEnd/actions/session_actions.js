@@ -54,7 +54,7 @@ export const logout = () => dispatch => {
     .catch((error) => {
       console.log("Can\'t log out");
       console.log(error.response);
-      dispatch(receiveSessionErrors(error.response.data));
+      // dispatch(receiveSessionErrors(error.response.data));
     });
   };
 

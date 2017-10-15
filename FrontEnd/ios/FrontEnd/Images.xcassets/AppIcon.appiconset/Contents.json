@@ -67,10 +67,6 @@
       "scale" : "3x"
     },
     {
-<<<<<<< HEAD
-      "idiom" : "ios-marketing",
-      "size" : "1024x1024",
-=======
       "size" : "20x20",
       "idiom" : "ipad",
       "filename" : "icon-20@1x.png",
@@ -152,7 +148,6 @@
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
       "filename" : "icon-1024@1x.png",
->>>>>>> c5eaa0cf6d08bd53c74f7debffb6127b35a21ba8
       "scale" : "1x"
     }
   ],

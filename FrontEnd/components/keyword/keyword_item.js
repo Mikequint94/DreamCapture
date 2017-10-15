@@ -9,12 +9,15 @@ import {
 export default class KeywordItem extends React.Component {
 
 render () {
-
+  // console.log("rendered a keyword!");
+  // console.log(this.props.keyword);
+  // let keyworditem =
+  //
+  //   ;
   return(
-
-  <Text style={{marginHorizontal: 5, color: '#A1BEB4', fontSize: 12}}>
-    {this.props.keyword}
-  </Text>
+    <Text style={{marginHorizontal: 5, color: '#A1BEB4', fontSize: 12}}>
+      {this.props.keyword}
+    </Text>
   );
 }
 }

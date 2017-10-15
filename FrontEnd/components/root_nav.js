@@ -14,7 +14,7 @@ import MainContainer from "./main/main_container";
 import DreamIndexContainer from "./dream/dream_index_container";
 
 import RecordScreen from './record/record_container';
-import AlarmScreen from './alarm/alarm';
+import AlarmContainer from './alarm/alarm_container';
 import DreamShowScreen from './dream/dream_show_container';
 
 export const SignedOut = StackNavigator({
@@ -51,7 +51,7 @@ export const SignedIn = StackNavigator({
   Record: { screen: RecordScreen },
   Login: { screen: LoginContainer },
   Signup: { screen: SignupContainer },
-  Alarm: { screen: AlarmScreen },
+  Alarm: { screen: AlarmContainer },
   DreamShow: { path: 'dream/:dreamid', screen: DreamShowScreen },
   });
 

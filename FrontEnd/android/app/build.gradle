@@ -137,7 +137,11 @@ android {
 }
 
 dependencies {
+<<<<<<< HEAD
+    compile project(':react-native-push-notification')
+=======
     compile project(':react-native-vector-icons')
+>>>>>>> 9d12f776ba685e249ee9a35429b9625b42ab4fc5
     compile project(':react-native-calendar-events')
     compile project(':react-native-voice')
     compile fileTree(dir: "libs", include: ["*.jar"])

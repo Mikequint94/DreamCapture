@@ -20,6 +20,10 @@ export default class SignupScreen extends React.Component {
     this.state = { email: "", password: "" };
   }
 
+  componentWillMount() {
+    AppState.addEventListener('change', this.props.clearErrors);
+  }
+
   resetNav() {
     const resetAction = NavigationActions.reset({
       index: 0,

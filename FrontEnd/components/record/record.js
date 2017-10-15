@@ -199,7 +199,7 @@ export default class RecordScreen extends React.Component {
             onPress={this.rerecord.bind(this)}
             title='Re-record'
             fontWeight={'bold'}
-            fontSize={18}
+            fontSize={20}
             buttonStyle={styles.redoButton}/>
           <Button
             large
@@ -207,7 +207,7 @@ export default class RecordScreen extends React.Component {
             onPress={this.saveDream.bind(this)}
             title='Save'
             fontWeight={'bold'}
-            fontSize={24}
+            fontSize={26}
             buttonStyle={styles.saveButton}/>
         </View>
       )
@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(212, 204, 217, 0.25)',
     borderWidth: 1,
     color: '#D4CCD9',
-    fontSize: 14,
+    fontSize: 16,
   },
   action: {
     textAlign: 'center',
@@ -342,16 +342,16 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 1,
   },
+  redoButton: {
+    borderRadius: 8,
+    backgroundColor: '#99CAB9',
+    margin: 6,
+    padding: 6,
+  },
   saveButton: {
     borderRadius: 10,
     backgroundColor: '#83BFAA',
-    margin: 2,
-    padding: 2,
+    margin: 6,
+    padding: 8,
   },
-  redoButton: {
-    borderRadius: 10,
-    backgroundColor: '#83BFAA',
-    margin: 10,
-    padding: 2,
-  }
 });

@@ -163,6 +163,7 @@ const styles = StyleSheet.create ({
     marginBottom: 5,
   },
   dreamBody: {
+    flex: 1,
     color: '#D4CCD9',
     margin: 5,
   },
@@ -187,13 +188,12 @@ const styles = StyleSheet.create ({
     padding: 5
   },
   watsonContainer: {
-    flex: 2,
+    flex: 1,
     overflow: 'hidden',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
   keywordShowContainer: {
     flex: 2,
-    // color: '#D4CCD9',
   }
 });

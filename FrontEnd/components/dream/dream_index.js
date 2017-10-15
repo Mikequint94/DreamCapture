@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Button, TouchableHighlight,
-         Image, FlatList } from 'react-native';
+         Image, SectionList } from 'react-native';
 import { SearchBar, List, ListItem, Avatar } from 'react-native-elements'
+import moment from 'moment'
+
 export default class DreamIndexScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
@@ -13,26 +15,20 @@ export default class DreamIndexScreen extends React.Component {
     this.props.requestUserDreams(this.props.userId);
   }
 
-  parseDate(timestamp) {
-    const time = timestamp.split('-');
-    const year = time[0];
-    const month = time[1];
-    const day = time[2].slice(0,2);
-    return [year, month, day];
-  };
-
   sectionDreams() {
-    const dreams = this.props.dreams;
+    const dreams = Object.values(this.props.dreams);
+    console.log(dreams)
     const reformattedDreams = dreams.map(d => {
       const dreamObj = Object.values(d)[0]
       let dream = {};
-      const date = this.parseDate(dreamObj.created_at);
-      dream['year'] = date[0];
-      dream['month'] = date[1];
-      dream['day'] = date[2];
+      const day = moment(dreamObj.created_at).format('DD');
+      const month = moment(dreamObj.created_at).format('MMMM');
+      const year = moment(dreamObj.created_at).format('YYYY');
+      dream['year'] = year;
+      dream['month'] = month;
+      dream['day'] = day;
       dream['body'] = dreamObj.body;
       dream['id'] = dreamObj.id;
-      dream['user_id'] = dreamObj.user_id;
       return dream;
     });
 
@@ -46,88 +42,113 @@ export default class DreamIndexScreen extends React.Component {
 
     console.log(dreamsByMonth);
 
-    return dreamsByMonth;
+    const sectionListData = uniqMonths.map( (month, idx) => {
+      let section = {}
+      section['data'] = dreamsByMonth[idx];
+      section['title'] = `${month} ${dreamsByMonth[idx][0].year}`;
+      return section;
+    });
+
+    return sectionListData;
   };
 
   dreamList() {
     const dreams = this.props.dreams;
-    if (Object.keys(dreams).length === 0
-        && dreams.constructor === Object ) {
-      return ( <View></View> );
-    }
+    // if (Object.keys(dreams).length === 0
+    //     && dreams.constructor === Object ) {
+    //   return ( <View></View> );
+    // }
 
     const dreamList =
-      <FlatList
-        data={dreams}
-        keyExtractor={this.keyExtractor}
-        renderItem={({ item }) => (
-          this.renderFlatListItem(item)
-        )}
-        ItemSeparatorComponent={this.renderSeparator}
-        removeClippedSubviews={false}
+      <SectionList
+        sections={this.sectionDreams()}
+        renderSectionHeader={({ section }) =>
+          <Text style={styles.sectionHeader}>{section.title}</Text>}
+        stickySectionHeadersEnabled={false}
+        renderItem={({ item }) => this.renderSectionListItem(item)}
+        keyExtractor={( item ) => `${item.id}`}
+        ListHeaderComponent={false}
+        ItemSeparatorComponent={this.renderItemSeparator}
+        SectionSeparatorComponent={this.renderSectionSeparator}
+        ListEmptyComponent={this.renderEmptyList}
       />
     return dreamList;
   }
 
-  renderSeparator() {
+  renderItemSeparator() {
     return (
       <View
         style={{
           height: 1,
-          width: "85%",
-          backgroundColor: "#CFD3DA",
-          marginLeft: "15%"
+          width: "100%",
+          backgroundColor: 'rgba(62,50,84,.2)',
+          marginLeft: "0%"
         }}
       />
     );
   };
 
-  renderFlatListItem(item) {
-    const dream = Object.values(item)[0];
-    const timeStamp = dream.created_at;
-    const dayNum = this.parseDate(timeStamp)[2];
+  renderSectionSeparator() {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: 'rgba(62,50,84,.3)',
+          marginLeft: "0%"
+        }}
+      />
+    );
+  };
+
+  renderSectionListItem(item) {
     const { navigate } = this.props.navigation;
     return (
       <ListItem style={styles.listItem}
-        title={`${dream.body}`}
+        title={`${item.body}`}
+        titleNumberOfLines={2}
         avatar={<Avatar
                   width={30}
                   height={30}
-                  title={dayNum}
-                  titleStyle={{fontSize:20}}
-                  overlayContainerStyle={{backgroundColor:'#A1BEB4'}}
+                  title={item.day}
+                  titleStyle={{fontSize:20,
+                    fontWeight:'bold', color: '#3B264A'}}
+                  overlayContainerStyle={{
+                    backgroundColor:'white'}}
                 />}
-        onPress={() => navigate('DreamShow', {dreamId: dream.id})}
+        onPress={() => navigate('DreamShow', {dreamId: item.id})}
       />
     )
   }
 
-
-  keyExtractor(item){
-    const dream = Object.values(item)[0];
-    return dream.id;
-  }
-
-  renderSectionList() {
-
+  renderEmptyList() {
+    return(
+      <View style={styles.emptyList}>
+        <Text style={styles.emptyListText}>
+          Welcome! Get started by pressing the record icon to record
+          your first dream. {"\n"} {"\n"}
+          You can also set push notifications for a reminder to record a
+          dream when you wake up.
+        </Text>
+      </View>
+    )
   }
 
   render() {
-
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-
         <SearchBar
           round
           placeholder='Search dreams'/>
         <View style={styles.recordSection}>
-          <TouchableHighlight>
+          <TouchableHighlight onPress={() => navigate('Record')}>
             <Icon name='microphone' size={70} color="white" />
           </TouchableHighlight>
         </View>
         <View style={styles.dreamSection}>
 
-          <List>
+          <List containerStyle={{marginTop: 1}}>
             {this.dreamList()}
           </List>
         </View>
@@ -139,7 +160,6 @@ export default class DreamIndexScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   recordSection: {
     flex: 1,
@@ -150,7 +170,20 @@ const styles = StyleSheet.create({
   dreamSection: {
     flex: 3,
   },
-  listItem : {
-    // flexDirection: 'row'
+  sectionHeader: {
+    alignSelf: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#3B264A',
+  },
+  listItem: {
+    marginVertical: 5,
+  },
+  emptyList: {
+    backgroundColor: '#E9E9EF',
+  },
+  emptyListText: {
+    color: '#3B264A',
+    fontSize: 20,
   }
 });

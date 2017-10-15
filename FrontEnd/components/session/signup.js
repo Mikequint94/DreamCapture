@@ -24,14 +24,41 @@ export default class SignupScreen extends React.Component {
         NavigationActions.navigate({ routeName: 'Main' }),
       ],
     });
-    this.props.navigation.dispatch(resetAction);
-  };
+    isSignedIn()
+      .then(res => {
+          if (res) {
+            this.props.navigation.dispatch(resetAction);
+          }
+        })
+        .catch(err => {});
+  }
 
   handleSignup() {
     this.props.signup(this.state)
-    if (isSignedIn()) {
-      this.resetNav();
-    }
+      .then((res) => {
+        if (res === 'signedin') {this.resetNav();}
+      });
+  }
+
+  renderErrors() {
+    return(
+      <Text style={styles.errors}>
+        {this.props.errors.map((error,idx) => {
+          if (idx === this.props.errors.length - 1) {
+            return `${error}`;
+          } else {
+            return `${error} ${"\n"}`;
+          }
+        }
+        )}
+      </Text>
+    )
+  }
+
+  handleLinkNav(){
+    const { navigate } = this.props.navigation;
+    navigate('SignIn');
+    this.props.clearErrors();
   }
 
   renderErrors() {
@@ -96,13 +123,12 @@ export default class SignupScreen extends React.Component {
 
         <View style={styles.submitContainer}>
           <TouchableOpacity style={styles.submitButton}
-            onPress={
-              () => this.handleSignup()}>
+            onPress={() => this.handleSignup()}>
               <Text style={styles.submitButtonText}> Sign Up </Text>
             </TouchableOpacity>
         </View>
         <Button style={styles.link}
-          onPress={() => navigate('SignIn')}
+          onPress={() => this.handleLinkNav()}
           title='Log In'
           color='#D4CCD9'
           />
@@ -177,5 +203,6 @@ const styles = StyleSheet.create ({
   errors: {
     color: '#83BFAA',
     fontSize: 16,
+    marginVertical: 4,
   }
 });

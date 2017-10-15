@@ -23,21 +23,19 @@ export const clearSessionErrors = () => ({
 export const login = (user) => dispatch => (
   axios.post(SESSION_URL, { user })
     .then(response => {
-      console.log(response);
       dispatch(receiveCurrentUser(response.data));
       dispatch(clearSessionErrors());
-      onSignIn();
       console.log('login success');
+      onSignIn();
+      return 'signedin';
     })
     .catch((error) => {
       console.log("Can\'t log in");
-      console.log(error.response);
       dispatch(receiveSessionErrors(error.response.data));
     })
   );
 
 export const logout = () => dispatch => {
-  console.log("log out pushed");
   axios({
     method: 'DELETE',
     url: SESSION_URL,
@@ -50,8 +48,8 @@ export const logout = () => dispatch => {
         user_id: null
       }));
       dispatch(clearSessionErrors());
-      onSignOut();
       console.log('logged out');
+      return onSignOut();
     })
     .catch((error) => {
       console.log("Can\'t log out");
@@ -66,8 +64,9 @@ export const signup = (user) => dispatch => (
       console.log(response);
       dispatch(receiveCurrentUser(response.data));
       dispatch(clearSessionErrors());
-      onSignIn();
       console.log('signup success');
+      onSignIn();
+      return 'signedin';
     })
     .catch((error) => {
       console.log('signup axios error');
@@ -76,18 +75,33 @@ export const signup = (user) => dispatch => (
     })
   );
 
-  const USER_LOGGED_IN = "user_logged_in";
+  // AsyncStorage code adapted from
+  // https://github.com/spencercarli/react-navigation-auth-flow
 
-  const onSignIn = () => AsyncStorage.setItem(USER_LOGGED_IN, "true");
-  const onSignOut = () => AsyncStorage.removeItem(USER_LOGGED_IN);
+  const USER_LOGGED_IN = 'dreamcapture_user_logged_in';
+
+  export const onSignIn = () => {
+    console.log('user logged in set to true');
+    return AsyncStorage.setItem(USER_LOGGED_IN, 'true');
+  };
+
+  export const onSignOut = () => {
+    console.log('user logged in removed');
+    return AsyncStorage.removeItem(USER_LOGGED_IN);
+  };
 
   export const isSignedIn = () => {
-    const userLoggedIn = AsyncStorage.getItem(USER_LOGGED_IN);
-    if (userLoggedIn !== null) {
-      console.log('async user logged in');
-      return true;
-    } else {
-      console.log('async user logged out');
-      return false;
-    }
+    return new Promise((resolve, reject) => {
+     AsyncStorage.getItem(USER_LOGGED_IN)
+       .then(res => {
+         if (res !== null) {
+           console.log('async storage true');
+           resolve(true);
+         } else {
+           console.log('async storage false');
+           resolve(false);
+         }
+       })
+       .catch(err => reject(err));
+   });
   };

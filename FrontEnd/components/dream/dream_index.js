@@ -22,7 +22,6 @@ export default class DreamIndexScreen extends React.Component {
       this.props.requestSearchDreams(this.props.userId, text);
     }
   }
-
   sectionDreams() {
     const dreams = Object.values(this.props.dreams);
     console.log(dreams)
@@ -79,6 +78,7 @@ export default class DreamIndexScreen extends React.Component {
         ItemSeparatorComponent={this.renderItemSeparator}
         SectionSeparatorComponent={this.renderSectionSeparator}
         ListEmptyComponent={this.renderEmptyList(this.search)}
+
       />
     return dreamList;
   }

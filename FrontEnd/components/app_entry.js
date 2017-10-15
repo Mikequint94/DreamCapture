@@ -16,9 +16,9 @@ export default class AppEntry extends React.Component {
   }
 
   componentWillMount() {
-    if (isSignedIn()) {
-      this.setState({ signedIn: true, checkedSignIn: true });
-    }
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert("isSignedIn Error"));
   }
 
   render() {
@@ -28,6 +28,7 @@ export default class AppEntry extends React.Component {
       return null;
     }
 
+    console.log(signedIn)
     const RootNavigator = createRootNavigator(signedIn);
     return <RootNavigator />;
   }

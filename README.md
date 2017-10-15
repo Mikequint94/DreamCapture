@@ -108,7 +108,7 @@ DreamCapture already analyzes the dream content for sentiment, and eventually th
 Using analyzed content, the app will be able to explain to users what they dreams may mean!  By using the app and thinking more about their dreams, users will be shown different interpretations and be provoked to think about what their dreams are trying to communicate.
 
 **Port to Android:**
-Using analyzed content, the app will be able to explain to users what they dreams may mean!  By using the app and thinking more about their dreams, users will be shown different interpretations and be provoked to think about what their dreams are trying to communicate.
+Once our app is perfected on iOS, we will make the necessary changes to create the app for Android platforms.
 
  ![alt text](https://res.cloudinary.com/make-anything/image/upload/c_scale,h_116/v1508103105/DreamFaviconLarge_a45tgh.png
  "DreamCapture Logo") **[Capture Your Dreams](https://www.dream-capture.com "DreamCapture")**

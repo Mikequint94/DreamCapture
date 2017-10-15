@@ -11,10 +11,6 @@
     "moment": "^2.19.1",
     "react": "^16.0.0-beta.5",
     "react-native": "0.49.3",
-<<<<<<< HEAD
-    "react-native-push-notification": "^3.0.1",
-=======
->>>>>>> 373a89bed7ce24a3024c47895ededc6d5af56294
     "react-native-calendar-events": "^1.4.3",
     "react-native-datepicker": "^1.6.0",
     "react-native-elements": "^0.17.0",

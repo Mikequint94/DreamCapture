@@ -4,7 +4,7 @@ import { isSignedIn } from '../../actions/session_actions';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  StyleSheet, Text, TextInput, View, TouchableOpacity, Button
+  StyleSheet, Text, TextInput, View, TouchableOpacity, Button, AppState
 } from 'react-native';
 
 export default class SignupScreen extends React.Component {
@@ -15,6 +15,10 @@ export default class SignupScreen extends React.Component {
   constructor() {
     super();
     this.state = { email: "", password: "" };
+  }
+
+  componentWillMount() {
+    AppState.addEventListener('change', this.props.clearErrors);
   }
 
   resetNav() {

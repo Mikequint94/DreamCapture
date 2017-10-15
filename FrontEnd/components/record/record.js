@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View,
-          Button, Image, Alert, TouchableHighlight
+         Image, Alert, TouchableHighlight
 } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Voice from 'react-native-voice';
+import { Button } from 'react-native-elements';
 
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
@@ -189,13 +190,22 @@ export default class RecordScreen extends React.Component {
       )
       bottomButton = (
         <View style={styles.bottomContainer}>
-          <TouchableHighlight onPress={this.rerecord.bind(this)}>
-            <Icon name='repeat' size={100} color="white" />
-          </TouchableHighlight>
-          <Button style={{ height:80, width: 80, marginHorizontal: 30}} onPress={
-              this.saveDream.bind(this)
-                }
-            title="Save" />
+          <Button
+            large
+            icon={{name: 'redo'}}
+            onPress={this.rerecord.bind(this)}
+            title='Re-record'
+            fontWeight={'bold'}
+            fontSize={18}
+            buttonStyle={styles.redoButton}/>
+          <Button
+            large
+            icon={{name: 'check'}}
+            onPress={this.saveDream.bind(this)}
+            title='Save'
+            fontWeight={'bold'}
+            fontSize={24}
+            buttonStyle={styles.saveButton}/>
         </View>
       )
     }
@@ -264,30 +274,28 @@ const styles = StyleSheet.create({
   topContainer: {
     flex: 2,
     justifyContent: 'center',
-    backgroundColor: 'white'
+    // backgroundColor: 'white'
   },
   middleContainer: {
-    flex: 2,
-    justifyContent: 'center',
+    flex: 3,
+    justifyContent: 'flex-start',
     alignItems: 'stretch',
-    backgroundColor: 'pink'
+    marginBottom: 30,
+    // backgroundColor: 'pink'
   },
   bottomContainer: {
     flex: 1,
     // flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
-    backgroundColor: 'blue'
+    marginBottom: 30,
+    borderRadius: 10,
+    // backgroundColor: 'blue'
   },
   recordText: {
     fontSize: 36,
     color: '#D4CCD9',
     textAlign: 'center',
     // marginTop: 50,
-  },
-  button: {
-    width: 150,
-    height: 150,
   },
   soundwave: {
     width: 300,
@@ -298,10 +306,11 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    // width: 350,
+    width: 350,
     borderColor: 'rgba(212, 204, 217, 0.25)',
     borderWidth: 1,
-    color: '#D4CCD9'
+    color: '#D4CCD9',
+    fontSize: 14,
   },
   action: {
     textAlign: 'center',
@@ -324,4 +333,16 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 1,
   },
+  saveButton: {
+    borderRadius: 10,
+    backgroundColor: '#83BFAA',
+    margin: 2,
+    padding: 2,
+  },
+  redoButton: {
+    borderRadius: 10,
+    backgroundColor: '#83BFAA',
+    margin: 10,
+    padding: 2,
+  }
 });

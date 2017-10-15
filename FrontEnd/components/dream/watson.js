@@ -79,12 +79,8 @@ export default class WatsonAnalyzer extends React.Component {
 
     return (
       <View>
-        <Text>
-          Sentiment Score: {this.sentimentScore}
-        </Text>
-        <Text>
-          Sentiment Label: {this.sentimentLabel}
-          {'\n'}
+
+        <Text style={styles.keywordsHeaderText}>
           Suggested Keywords:
         </Text>
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
@@ -108,5 +104,11 @@ const styles = StyleSheet.create({
     height: 200,
     borderColor: 'gray',
     borderWidth: 1
+  },
+  keywordsHeaderText: {
+    color: '#D4CCD9',
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 4,
   }
 });

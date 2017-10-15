@@ -188,7 +188,7 @@ const styles = StyleSheet.create ({
     padding: 5
   },
   watsonContainer: {
-    flex: 2,
+    flex: 1,
     overflow: 'hidden',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',

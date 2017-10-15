@@ -10,7 +10,7 @@ import {
 export default class SuggestedKeywordItem extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    // console.log(this.props);
     this.state ={
       show: true
     };
@@ -21,7 +21,7 @@ export default class SuggestedKeywordItem extends React.Component {
     if (keyword) {
       keyword = keyword.toLowerCase();
     }
-    console.log(keyword);
+    // console.log(keyword);
     if (this.props.currentKeywords.includes(keyword)) {
       this.setState({show: false});
       // console.log(this.props.keyword.toLowerCase());
@@ -45,7 +45,7 @@ render () {
     suggestedWord = (
       <TouchableOpacity style={{marginHorizontal: 4}}
         onPress={this.addKeyword.bind(this)}>
-        <Text style={{fontSize: 14, color: 'white', textAlign: 'center', borderRadius: 7, borderWidth: 1, borderColor: 'blue'}}> {this.props.keyword} </Text>
+        <Text style={{fontSize: 12, color: 'white', textAlign: 'center', borderRadius: 7, borderWidth: 1, borderColor: 'blue'}}> {this.props.keyword} </Text>
       </TouchableOpacity>
     );
   } else {

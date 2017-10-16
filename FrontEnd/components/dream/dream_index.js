@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesome } from 'react-native-vector-icons';
+import { NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet, Text, View, Button, TouchableHighlight,
          Image, SectionList } from 'react-native';
@@ -9,11 +10,22 @@ import moment from 'moment'
 export default class DreamIndexScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
+    headerLeft: null,
   };
+
+  // componentWillMount() {
+  //   this.resetNav();
+  // }
 
   componentDidMount() {
     this.props.requestUserDreams(this.props.userId);
   }
+
+  resetNav() {
+    return NavigationActions.reset({
+      index: 0,
+  });
+}
 
   searchDreams(text) {
     if (text === "") {

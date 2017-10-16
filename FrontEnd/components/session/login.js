@@ -4,7 +4,8 @@ import { isSignedIn, onSignIn } from '../../actions/session_actions';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, AppState
+  StyleSheet, Text, TextInput, View, TouchableOpacity, Button,
+  Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, AppState
 } from 'react-native';
 
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -28,7 +29,7 @@ export default class LoginScreen extends React.Component {
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({ routeName: 'Main' }),
+        NavigationActions.navigate({ routeName: 'Home' }),
       ],
     });
     this.props.navigation.dispatch(resetAction);

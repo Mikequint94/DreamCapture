@@ -6,7 +6,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   View,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from 'react-native';
 
 import WatsonAnalyzer from './watson';
@@ -82,6 +83,7 @@ export default class DreamShowScreen extends React.Component {
 
       dreams = (
         <View style={styles.dreamsContainer}>
+
           <Text style={styles.date}>
             {date}
           </Text>
@@ -89,9 +91,11 @@ export default class DreamShowScreen extends React.Component {
             {time}
           </Text>
           <View style={styles.dreamBodyBox}>
+            <ScrollView>
             <Text style={styles.dreamBody}>
               {dream.body}
             </Text>
+          </ScrollView>
           </View>
         </View>
       )
@@ -140,13 +144,17 @@ export default class DreamShowScreen extends React.Component {
             {dreams}
             {addKeywords}
             <View style={styles.watsonContainer}>
+              <ScrollView>
               {watson}
+            </ScrollView>
             </View>
             <View style={styles.keywordShowContainer}>
               {keywordShow}
             </View>
             <View style={styles.keywordShowContainer}>
+              <ScrollView>
                 {noteShow}
+              </ScrollView>
             </View>
           </View>
       </KeyboardAwareScrollView>

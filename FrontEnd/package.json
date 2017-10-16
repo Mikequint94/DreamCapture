@@ -21,7 +21,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^4.10.1",
+    "redux-persist": "^4.10.1"
   },
   "devDependencies": {
     "babel-jest": "21.2.0",

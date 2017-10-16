@@ -4,11 +4,12 @@ import {requestDream, receiveDream} from '../../actions/dream_actions';
 import {requestKeyword, receiveKeyword, receiveAllKeywords, createKeyword, requestTopKeywords} from '../../actions/keyword_actions';
 import {connect} from 'react-redux';
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   dreams: state.entities.dreams,
   keywords: state.entities.keywords,
-  currentUser: state.session.user_id
+  currentUser: state.session.user_id,
+  dreamDate: props.navigation.state.params.dreamDate,
+  dreamTime: props.navigation.state.params.dreamTime
 });
 
 const mapDispatchToProps = dispatch => ({

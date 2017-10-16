@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
-  View,
-  Button,
-  Dimensions,
-  ScrollView
-} from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableWithoutFeedback,
+         Keyboard, View, Button, Dimensions, ScrollView
+       } from 'react-native';
 
 import WatsonAnalyzer from './watson';
 import KeywordShow from '../keyword/keyword_show';
 import NoteShowContainer from '../note/note_show_container';
-import moment from 'moment'
-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class DreamShowScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Dream Show',
-    headerLeft: <Button title='Home' onPress={() => navigation.navigate('Home')} />
+    title: `${navigation.state.params.dreamDate}`
   });
 
   constructor(props) {
@@ -35,6 +24,7 @@ export default class DreamShowScreen extends React.Component {
   componentDidMount(){
     this.props.requestDream(this.props.navigation.state.params.dreamId);
     this.props.requestTopKeywords(this.props.currentUser);
+    this.props.navigation.setParams({dreamDate: this.props.dreamDate})
     let myThis = this;
     setTimeout(function () {
       myThis.setState({loaded: true});
@@ -76,19 +66,13 @@ export default class DreamShowScreen extends React.Component {
     let dreams;
     let watsonInfo;
     let watson;
-    // console.log(currentKeywords);
 
     if (this.props.dreams[currentDream]) {
       const dream = this.props.dreams[currentDream];
-      const date = moment(dream.created_at).format('MMMM D, YYYY');
-      const time = moment(dream.created_at).format('h:mm a')
+      const time = this.props.dreamTime;
 
       dreams = (
         <View style={styles.dreamsContainer}>
-
-          <Text style={styles.date}>
-            {date}
-          </Text>
           <Text style={styles.time}>
             {time}
           </Text>
@@ -130,7 +114,6 @@ export default class DreamShowScreen extends React.Component {
             this.props.createKeyword({keyword: this.state.newKey, dream_id: currentDream})
             .then(() => this.props.requestDream(this.props.navigation.state.params.dreamId));
             this.setState({newKey: ""})
-
           }
           }}
           />
@@ -181,15 +164,10 @@ const styles = StyleSheet.create ({
     alignItems: 'flex-start',
     marginBottom: 5,
   },
-  date: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#B7A3C6',
-    marginBottom: 2,
-  },
   time: {
-    fontSize: 18,
-    color: '#D4CCD9',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#B7A3C6',
     marginBottom: 8,
   },
   dreamBodyBox: {
@@ -205,11 +183,12 @@ const styles = StyleSheet.create ({
     flex: 1,
     color: '#D4CCD9',
     margin: 5,
+    fontSize: 16,
   },
   addKeywordsContainer: {
     flex: 1,
     justifyContent: 'flex-start',
-    marginBottom: 5,
+    marginBottom: 10,
   },
   keywordsHeaderText: {
     color: '#D4CCD9',

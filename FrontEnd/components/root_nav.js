@@ -30,11 +30,8 @@ export const SignedOut = StackNavigator({
       headerLeft: null
     }
   },
-  Main: {
-    screen: MainContainer,
-    navigationOptions: {
-      headerLeft: null
-    }
+  Home: {
+    screen: DreamIndexContainer,
   },
 });
 

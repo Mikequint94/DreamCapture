@@ -15,7 +15,7 @@ render () {
   //
   //   ;
   return(
-    <Text style={{marginHorizontal: 5, color: '#A1BEB4', fontSize: 12}}>
+    <Text style={{marginHorizontal: 5, color: '#A1BEB4', fontSize: 16}}>
       {this.props.keyword}
     </Text>
   );

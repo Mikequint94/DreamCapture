@@ -54,7 +54,7 @@ const styles = StyleSheet.create ({
   noteHeaderText: {
     color: '#D4CCD9',
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: 4,
   },
   noteInput: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create ({
     borderWidth: 1,
     borderRadius: 4,
     color: '#D4CCD9',
-    fontSize: 14,
+    fontSize: 16,
     padding: 5
   },
 });

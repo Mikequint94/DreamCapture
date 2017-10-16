@@ -44,12 +44,19 @@ export const DreamStack = StackNavigator({
     path: 'dream/:dreamid',
     screen: DreamShowScreen,
     navigationOptions: {
-      title: 'Viewing Dream',
+      headerTitleStyle: { color: 'white', fontSize: 20, fontWeight: 'bold' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#3E3254' }
     }},
   Record: {
     screen: RecordScreen,
     navigationOptions: {
       title: 'Record A Dream',
+      headerTitleStyle: { color: '#3E3254' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#3E3254' }
     }},
 })
 

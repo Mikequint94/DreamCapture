@@ -12,7 +12,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
-      title: 'Record',
+    title: 'Record A Dream',
   };
 
   constructor(props) {
@@ -278,33 +278,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3E3254'
+    backgroundColor: '#3E3254',
   },
   topContainer: {
     flex: 2,
     justifyContent: 'center',
-    // backgroundColor: 'white'
   },
   middleContainer: {
     flex: 3,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     marginBottom: 30,
-    // backgroundColor: 'pink'
   },
   bottomContainer: {
     flex: 1,
-    // flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 30,
     borderRadius: 10,
-    // backgroundColor: 'blue'
   },
   recordText: {
     fontSize: 36,
     color: '#D4CCD9',
     textAlign: 'center',
-    // marginTop: 50,
   },
   soundwave: {
     width: 300,

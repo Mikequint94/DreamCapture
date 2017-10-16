@@ -10,7 +10,7 @@ import moment from 'moment'
 export default class DreamIndexScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
-    headerLeft: null,
+    header: null,
   };
 
   // componentWillMount() {
@@ -21,11 +21,25 @@ export default class DreamIndexScreen extends React.Component {
     this.props.requestUserDreams(this.props.userId);
   }
 
-  resetNav() {
-    return NavigationActions.reset({
-      index: 0,
-  });
-}
+//   resetNav() {
+//     return NavigationActions.reset({
+//       index: 0,
+//   });
+// }
+
+  searchBar() {
+    return (
+      <SearchBar
+        round
+        placeholder='Search dreams'
+        placeholderTextColor='#D4CCD9'
+        icon={{color: '#D4CCD9'}}
+        ref={search => this.search = search}
+        containerStyle = {styles.searchBar}
+        inputStyle = {styles.searchBarInput}
+        onChangeText={text => this.searchDreams(text)}/>
+    )
+  }
 
   searchDreams(text) {
     if (text === "") {
@@ -43,9 +57,14 @@ export default class DreamIndexScreen extends React.Component {
       const day = moment(dreamObj.created_at).format('DD');
       const month = moment(dreamObj.created_at).format('MMMM');
       const year = moment(dreamObj.created_at).format('YYYY');
+      const date = moment(dream.created_at).format('MMMM D, YYYY');
+      const time = moment(dream.created_at).format('h:mm a')
+
       dream['year'] = year;
       dream['month'] = month;
       dream['day'] = day;
+      dream['date'] = date;
+      dream['time'] = time;
       dream['body'] = dreamObj.body;
       dream['id'] = dreamObj.id;
       return dream;
@@ -136,7 +155,10 @@ export default class DreamIndexScreen extends React.Component {
                   overlayContainerStyle={{
                     backgroundColor:'white'}}
                 />}
-        onPress={() => navigate('DreamShow', {dreamId: item.id})}
+        onPress={() => navigate('DreamShow', {
+                                  dreamId: item.id,
+                                  dreamDate: item.date,
+                                  dreamTime: item.time } )}
       />
     )
   }
@@ -168,18 +190,18 @@ export default class DreamIndexScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <SearchBar
-          round
-          placeholder='Search dreams'
-          ref={search => this.search = search}
-          onChangeText={text => this.searchDreams(text)}/>
+        <View style={styles.topPadding}>
+        </View>
+
+        {this.searchBar()}
+
         <View style={styles.recordSection}>
           <TouchableHighlight onPress={() => navigate('Record')}>
             <Icon name='microphone' size={70} color="white" />
           </TouchableHighlight>
         </View>
-        <View style={styles.dreamSection}>
 
+        <View style={styles.dreamSection}>
           <List containerStyle={{marginTop: 1}}>
             {this.dreamList()}
           </List>
@@ -193,14 +215,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  topPadding: {
+    backgroundColor: '#3E3254',
+    height: 20,
+  },
+  searchBar: {
+    backgroundColor: '#3E3254',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+  },
+  searchBarInput: {
+    backgroundColor: '#362554',
+  },
   recordSection: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3B264A',
+    backgroundColor: '#3E3254',
   },
   dreamSection: {
-    flex: 3,
+    flex: 4,
   },
   sectionHeader: {
     alignSelf: 'center',

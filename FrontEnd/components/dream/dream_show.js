@@ -5,7 +5,8 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  View
+  View,
+  Button
 } from 'react-native';
 
 import WatsonAnalyzer from './watson';
@@ -16,9 +17,10 @@ import moment from 'moment'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class DreamShowScreen extends React.Component {
-  static navigationOptions = {
-      title: 'Dream Show',
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Dream Show',
+    headerLeft: <Button title='Home' onPress={() => navigation.navigate('Home')} />
+  });
 
   constructor(props) {
     super(props);

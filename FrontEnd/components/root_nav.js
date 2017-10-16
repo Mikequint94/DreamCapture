@@ -1,17 +1,15 @@
 // Navigation code adapted from
 // https://github.com/spencercarli/react-navigation-auth-flow
 
-import React from "react";
-import { Platform, StatusBar } from "react-native";
-import { StackNavigator,
-         TabNavigator } from "react-navigation";
-// import { FontAwesome } from "react-native-vector-icons";
+import React from 'react';
+import { Platform, StatusBar } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
+import SignupContainer from './session/signup_container';
+import LoginContainer from './session/login_container';
 
-import SignupContainer from "./session/signup_container";
-import LoginContainer from "./session/login_container";
-
-import MainContainer from "./main/main_container";
-import DreamIndexContainer from "./dream/dream_index_container";
+import MainContainer from './main/main_container';
+import DreamIndexContainer from './dream/dream_index_container';
 
 import RecordScreen from './record/record_container';
 import AlarmContainer from './alarm/alarm_container';
@@ -40,20 +38,49 @@ export const SignedOut = StackNavigator({
   },
 });
 
-export const SignedIn = StackNavigator({
-  Main: {
-    screen: MainContainer,
-    navigationOptions: {
-      headerLeft: null
-    }
-  },
+export const DreamStack = StackNavigator({
   Home: {screen: DreamIndexContainer },
-  Record: { screen: RecordScreen },
-  Login: { screen: LoginContainer },
-  Signup: { screen: SignupContainer },
-  Alarm: { screen: AlarmContainer },
-  DreamShow: { path: 'dream/:dreamid', screen: DreamShowScreen },
-  });
+  DreamShow: {
+    path: 'dream/:dreamid',
+    screen: DreamShowScreen,
+    navigationOptions: {
+      title: 'Viewing Dream',
+    }},
+  Record: {
+    screen: RecordScreen,
+    navigationOptions: {
+      title: 'Record A Dream',
+    }},
+})
+
+export const SignedIn = TabNavigator({
+  Home: {
+    screen: DreamStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="home" size={35} color={tintColor} />
+    },
+  },
+  Alarm: {
+    screen: AlarmContainer,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="alarm" size={35} color={tintColor} />
+    },
+  },
+}, {
+    tabBarOptions: {
+    showLabel: false,
+    activeTintColor: '#83BFAA',
+    inactiveTintColor: '#D4CCD9',
+    // activeBackgroundColor: '#3E3254',
+    // inactiveBackgroundColor: '#3E3254',
+    style: {
+      borderTopWidth: 1,
+      paddingTop: 6,
+      borderTopColor: '#D4CCD9',
+      backgroundColor: '#3E3254',
+    },
+  },
+});
 
 export const createRootNavigator = (signedIn = false) => {
   return StackNavigator(

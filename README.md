@@ -15,88 +15,92 @@ This full stack mobile application was crafted to be functional yet simple.  Dre
 Design
 ==
 
-MakeAnything was designed with user experience in mind.  The site is fun to navigate, and returns desired results.
+Since this app is meant to be used immediately after the user wakes up, easy navigation and a pleasant, restful color scheme were a priority.
 
-![alt text](https://res.cloudinary.com/make-anything/image/upload/c_scale,h_540/v1506715231/Screen_Shot_2017-09-29_at_12.59.51_PM_byuxgc.png "Splash Page")
+![Navigation gif]("Navigation gif")
 
-The splash homepage was a challenge in many senses.  Not only did I want the desired parallax scroll effect, but also I wanted the background image to be a slideshow.  Finally I wanted text on top of each image to give examples of project categories.  Creating the parallax scroll effect on the homepage was challenging in its own sense, but I figured out that wrapping all of my elements with appropriate CSS kept the site functional and stylish on all pages.    I used a simple timer to advance the background image, but timing was a challenge since I had to pair the text with the image perfectly.  
+A goal of our app was to make journaling your dreams possible without any typing at all. When the user wakes up, they can quickly access DreamCapture through the silent notification waiting for them on their phone.  Next they will be prompted to record reflections on their dream. We use the built in speech-to-text capabilities of Android and iOS devices to capture these records, analyze and store them.
 
-By utilizing class and timers I was able to craft the perfect solution.  
 
-```javascript
-dummyInput(string, idx){
-    let dummyText = Array.from(string);
-    this.setState({text: ""});
-    this.clearInterval = setInterval(() => {
-      if (dummyText.length) {
-        this.setState({text: this.state.text + dummyText.shift()});
-      } else {
-        clearTimeout(this.clearInterval);
-        if (idx === 0) {
-          this.bgclass="section parallax bg3";
-          this.dummyInput("Woodwork   ", 1);
-        } else if (idx === 1) {
-          this.bgclass="section parallax bg1";
-          this.dummyInput("Artwork      ", 2);
-        } else {
-          this.bgclass="section parallax bg2";
-          this.dummyInput("Cooking      ", 0);
-        }
-      }
-    }, 300);
-}
-```
-Additionally, all the forms are styled to match.  Logged in visitors can create new projects, add steps for the project, edit projects, edit steps, and add comments to any existing project.  
-![alt text](https://res.cloudinary.com/make-anything/image/upload/c_scale,h_540/v1506718182/MakeAnythingFormFeatures_h3dsu6.jpg
-"Form Features")
-
+![2nd Navigation gif]("2nd Navigation gif")
 Functionality
 ==
 
-MakeAnything features search to filter projects by title.  I was able to combine this component with the page showing all projects by a single crafter.  Here is an example of a typical user going through the site and leaving a comment.
+## Recording Dreams
 
-![alt text](https://res.cloudinary.com/make-anything/image/upload/v1506721204/giphy_uneqcu.gif
-  "Search")
+Typing is slow. By using the speech-to-text capabilities now available in nearly all Android and iOS devices, we speed up the journaling process. This means users will remember and record more complete reflections on their dreams from the previous night.
 
-Since this is a single page application, it was difficult to maintain similar visual feel across components.  I achieved consistency and non-repetitive code by using conditional statements to set visibility and content of subcomponents based on factors such as logged in user, project author, and the type of media present in the step or project.
-````javascript
-return(
-  <div className="projectshow">
-    <ul className="header">
-      <li className="steps-edit">
-        {editproject}
-      </li>
-      <li className={titleclass}>{project.title}</li>
-      <li className={authorclass}>by:
-        <Link to={`/member/${project.author.id}/${project.author.username}/projects`}>  {project.author.username}</Link>
-      </li>
-    </ul>
-    <ul className="pictextvid">
-      {image}
-      <h2>{project.description}</h2>
-      {video}
-    </ul>
-    <ul className="steps">
-      {steps}
-      <br/>
-      {addSteps}
-    </ul>
-    <div className="comment-form">
-      {comments}
-      <CommentIndexContainer />
-    </div>
-  </div>
-);
-} else {
-  return(
-    <div className="loadingtext">
-      <h3>Loading</h3>
-    </div>
-  );
+![speech-to-text](
+  "speech-to-text gif")
+
+We also make use of IBM's Watson for some basic natural language analysis. After a dream is recorded as text, we use an axios request to send it along to the Watson API. Upon a success response we store the sentiment label, score, and any relevant keywords found.
+
+```javascript
+.then((response) => {
+  this.sentimentLabel = response.data.sentiment.document.label;
+  this.sentimentScore = response.data.sentiment.document.score;
+  response.data.keywords.map(index => {
+    this.keywords.push(Object.values(index)[0]);
+  });
+  ```
+
+
+## Setting Reminders
+
+Originally we had intend to include some sort of alarm functionality in DreamCapture. The idea was a user could set their alarm for the morning and would be prompted to record their dream upon silencing the ringing alarm.
+
+We decided against this option in favor of silent notifications for a couple reasons. First of all, this would require users of our app to use our built-in alarm instead of one of their choice. Secondly, there doesn't appear to be a way for a third party app to access the built in alarm clock on iOS. Some alarm clocks on the app store have bypassed this restriction in [creative ways](https://oleb.net/blog/2014/02/alarm-clock-apps-ios/), but we decided against such options due to a variety of drawbacks.
+
+In place of an alarm clock, DreamCapture allows you to set a daily reminder to record your dream. This silent notification will be waiting on your phone when you wake in the morning, allowing you to quickly jump into the app and start recording.
+
+![push notification gif](
+  "push notification gif")
+
+
+```javascript
+let now = new Date();
+let reminder = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minutes)
+
+if (reminder < now) {
+  reminder.setHours(reminder.getHours() + 24)
+}
+```
+```javascript
+PushNotification.cancelAllLocalNotifications()
+PushNotification.localNotificationSchedule({
+  message: "Record your dream", // (required)
+  date: reminder,
+  repeatType:'day',
+  repeatInterval: 'day'
+});
+
+this.setState({reminderSet: true})
+this.props.receiveReminder({time: this.state.time,
+                            set: true})
   ````
 
 Technologies
 ==
+## Stack
+- Backend
+  - [Heroku](https://www.heroku.com/)
+  - [Ruby on Rails](http://rubyonrails.org/)
+  - [PostgreSQL](https://www.postgresql.org/)
+- Frontend
+  - [React Native](https://facebook.github.io/react-native/)
+  - [Redux.js](http://redux.js.org/)
+- Packages
+  - [axios](https://github.com/axios/axios)
+  - [react-navigation](https://reactnavigation.org/)
+  - [redux-persist](https://github.com/rt2zz/redux-persist)
+  - [react-native-push-notification](https://github.com/zo0r/react-native-push-notification)
+  - [react-native-elements](https://github.com/react-native-training/react-native-elements)
+  - [react-native-voice](https://www.npmjs.com/package/react-native-voice)
+  - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
+  - [react-native-datepicker](https://github.com/xgfe/react-native-datepicker)
+- Tools
+  - [Atom](https://atom.io/)
+  - [Xcode](https://developer.apple.com/xcode/)
 
 Future Directions
 ==

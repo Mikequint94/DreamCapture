@@ -5,7 +5,8 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
 import WatsonAnalyzer from './watson';
@@ -186,7 +187,8 @@ const styles = StyleSheet.create ({
     flexDirection: 'row',
     alignSelf: 'stretch',
     borderWidth: 1,
-    borderColor: 'rgba(212, 204, 217, 0.25)',
+    borderRadius: 5,
+    borderColor: 'rgba(212, 204, 217, 0.4)',
     marginBottom: 5,
   },
   dreamBody: {
@@ -207,7 +209,7 @@ const styles = StyleSheet.create ({
   },
   keywordsInput: {
     height: 50,
-    borderColor: 'rgba(212, 204, 217, 0.5)',
+    borderColor: 'rgba(212, 204, 217, 0.4)',
     borderWidth: 1,
     borderRadius: 4,
     color: '#D4CCD9',
@@ -222,5 +224,6 @@ const styles = StyleSheet.create ({
   },
   keywordShowContainer: {
     flex: 1.4,
+    width: (Dimensions.get('window').width - 23)
   }
 });

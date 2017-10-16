@@ -83,7 +83,6 @@ export default class WatsonAnalyzer extends React.Component {
           Suggested Keywords:
         </Text>
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-
         {keywordShow}
         {topKeywordShow}
         </View>

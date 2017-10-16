@@ -28,7 +28,7 @@ Functionality
 
 ## Recording Dreams
 
-Typing is slow. By using the speech-to-text capabilities now available in nearly all Android and iOS devices, we speed up the journaling process. This means users will remember and record more complete reflections on their dreams from the previous night.
+Typing is slow. By using the native speech-to-text capabilities available in nearly all Android and iOS devices, we speed up the journaling process. This means users will remember and record more complete reflections on their dreams from the previous night.
 
 ![speech-to-text](
   "speech-to-text gif")
@@ -47,11 +47,11 @@ We also make use of IBM's Watson for some basic natural language analysis. After
 
 ## Setting Reminders
 
-Originally we had intend to include some sort of alarm functionality in DreamCapture. The idea was a user could set their alarm for the morning and would be prompted to record their dream upon silencing the ringing alarm.
+Originally we had intended to include alarm functionality in DreamCapture. The idea was that a user could set their alarm for the morning and would be prompted to record their dream upon silencing the ringing alarm.
 
-We decided against this option in favor of silent notifications for a couple reasons. First of all, this would require users of our app to use our built-in alarm instead of one of their choice. Secondly, there doesn't appear to be a way for a third party app to access the built in alarm clock on iOS. Some alarm clocks on the app store have bypassed this restriction in [creative ways](https://oleb.net/blog/2014/02/alarm-clock-apps-ios/), but we decided against such options due to a variety of drawbacks.
+We decided against this option in favor of silent notifications for a couple reasons. First of all, this would require a user to forgo their current alarm system in order to use ours. Secondly, there doesn't appear to be a way for a third party app to access the built in alarm clock on iOS. Some alarm clocks on the app store have bypassed this restriction in [creative ways](https://oleb.net/blog/2014/02/alarm-clock-apps-ios/), but we decided against such options due to the various drawbacks.
 
-In place of an alarm clock, DreamCapture allows you to set a daily reminder to record your dream. This silent notification will be waiting on your phone when you wake in the morning, allowing you to quickly jump into the app and start recording.
+In place of an alarm clock, DreamCapture allows users to set a daily reminder to record your dream. This silent notification will be waiting on your phone when you wake in the morning, allowing you to quickly navigate into the app and start recording.
 
 ![push notification gif](
   "push notification gif")

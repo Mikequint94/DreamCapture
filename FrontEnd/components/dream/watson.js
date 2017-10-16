@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   keywordsHeaderText: {
     color: '#D4CCD9',
     fontWeight: 'bold',
-    fontSize: 14,
-    marginBottom: 4,
+    fontSize: 16,
+    marginVertical: 4,
   }
 });

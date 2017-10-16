@@ -60,10 +60,10 @@ const styles = StyleSheet.create ({
   suggestedKey: {
     marginVertical: 2,
     marginHorizontal: 4,
-    paddingRight: 1,
+    padding: 2,
     backgroundColor: '#D4CCD9',
     justifyContent: 'center',
-    borderRadius: 10,
+    borderRadius: 8,
     overflow: 'hidden',
   },
 });

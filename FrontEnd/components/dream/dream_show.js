@@ -193,7 +193,7 @@ const styles = StyleSheet.create ({
   keywordsHeaderText: {
     color: '#D4CCD9',
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: 4,
   },
   keywordsInput: {
@@ -202,16 +202,20 @@ const styles = StyleSheet.create ({
     borderWidth: 1,
     borderRadius: 4,
     color: '#D4CCD9',
-    fontSize: 14,
-    padding: 5
+    fontSize: 16,
+    marginBottom: 6,
   },
   watsonContainer: {
-    flex: 1,
+    flex: 1.4,
     overflow: 'hidden',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
   keywordShowContainer: {
+    flex: .8,
+    width: (Dimensions.get('window').width - 23)
+  },
+  notesShowContainer: {
     flex: 1.4,
     width: (Dimensions.get('window').width - 23)
   }

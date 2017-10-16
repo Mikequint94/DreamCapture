@@ -8,12 +8,10 @@ import {
   Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, AppState
 } from 'react-native';
 
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
-
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
       title: 'Log In',
+      header: null,
   };
 
   constructor() {

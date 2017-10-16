@@ -10,7 +10,6 @@ import {
 export default class SuggestedKeywordItem extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(this.props);
     this.state ={
       show: true
     };
@@ -21,10 +20,8 @@ export default class SuggestedKeywordItem extends React.Component {
     if (keyword) {
       keyword = keyword.toLowerCase();
     }
-    // console.log(keyword);
     if (this.props.currentKeywords.includes(keyword)) {
       this.setState({show: false});
-      // console.log(this.props.keyword.toLowerCase());
     }
   }
 
@@ -43,9 +40,9 @@ render () {
   // console.log(this.props);
   if (this.state.show && this.props.keyword) {
     suggestedWord = (
-      <TouchableOpacity style={{marginHorizontal: 4}}
+      <TouchableOpacity style={styles.suggestedKey}
         onPress={this.addKeyword.bind(this)}>
-        <Text style={{fontSize: 12, color: 'white', textAlign: 'center', borderRadius: 7, borderWidth: 1, borderColor: 'blue'}}> {this.props.keyword} </Text>
+        <Text style={{fontSize: 14, color: '#3E3254', textAlign: 'center'}}> {this.props.keyword} </Text>
       </TouchableOpacity>
     );
   } else {
@@ -58,3 +55,15 @@ render () {
   );
 }
 }
+
+const styles = StyleSheet.create ({
+  suggestedKey: {
+    marginVertical: 2,
+    marginHorizontal: 4,
+    paddingRight: 1,
+    backgroundColor: '#D4CCD9',
+    justifyContent: 'center',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+});

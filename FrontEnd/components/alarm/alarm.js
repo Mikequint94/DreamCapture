@@ -143,6 +143,7 @@ export default class AlarmScreen extends React.Component {
         }}
       />
       {button}
+      <View style={{height:63}}></View>
       </View>
     )
   }

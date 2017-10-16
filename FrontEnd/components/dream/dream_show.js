@@ -6,7 +6,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   View,
-  Button
+  Button,
+  Dimensions,
+  ScrollView
 } from 'react-native';
 
 import WatsonAnalyzer from './watson';
@@ -83,6 +85,7 @@ export default class DreamShowScreen extends React.Component {
 
       dreams = (
         <View style={styles.dreamsContainer}>
+
           <Text style={styles.date}>
             {date}
           </Text>
@@ -90,9 +93,11 @@ export default class DreamShowScreen extends React.Component {
             {time}
           </Text>
           <View style={styles.dreamBodyBox}>
+            <ScrollView>
             <Text style={styles.dreamBody}>
               {dream.body}
             </Text>
+          </ScrollView>
           </View>
         </View>
       )
@@ -141,13 +146,17 @@ export default class DreamShowScreen extends React.Component {
             {dreams}
             {addKeywords}
             <View style={styles.watsonContainer}>
+              <ScrollView>
               {watson}
+            </ScrollView>
             </View>
             <View style={styles.keywordShowContainer}>
               {keywordShow}
             </View>
             <View style={styles.keywordShowContainer}>
+              <ScrollView>
                 {noteShow}
+              </ScrollView>
             </View>
           </View>
       </KeyboardAwareScrollView>
@@ -188,7 +197,8 @@ const styles = StyleSheet.create ({
     flexDirection: 'row',
     alignSelf: 'stretch',
     borderWidth: 1,
-    borderColor: 'rgba(212, 204, 217, 0.25)',
+    borderRadius: 5,
+    borderColor: 'rgba(212, 204, 217, 0.4)',
     marginBottom: 5,
   },
   dreamBody: {
@@ -209,7 +219,7 @@ const styles = StyleSheet.create ({
   },
   keywordsInput: {
     height: 50,
-    borderColor: 'rgba(212, 204, 217, 0.5)',
+    borderColor: 'rgba(212, 204, 217, 0.4)',
     borderWidth: 1,
     borderRadius: 4,
     color: '#D4CCD9',
@@ -224,5 +234,6 @@ const styles = StyleSheet.create ({
   },
   keywordShowContainer: {
     flex: 1.4,
+    width: (Dimensions.get('window').width - 23)
   }
 });

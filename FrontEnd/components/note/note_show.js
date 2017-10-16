@@ -24,13 +24,13 @@ export default class NoteShow extends React.Component {
       body: this.state.note,
       dream_id: this.props.currentDream
     });
-    console.log("creatingNote");
-    console.log(this.state.note);
+    // console.log("creatingNote");
+    // console.log(this.state.note);
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
+    // console.log(this.props);
+    // console.log(this.state);
 
     return (
       <View>

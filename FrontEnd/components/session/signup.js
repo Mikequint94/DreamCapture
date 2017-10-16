@@ -47,6 +47,12 @@ export default class SignupScreen extends React.Component {
         if (res === 'signedin') {this.resetNav();}
       });
   }
+  handleDemoLogin() {
+    this.props.login({email: "dreamer@gmail.com", password: "password"})
+      .then((res) => {
+        if (res === 'signedin') {this.resetNav();}
+      });
+  }
 
   renderErrors() {
     return(
@@ -140,6 +146,13 @@ export default class SignupScreen extends React.Component {
                 <Text style={styles.submitButtonText}> Sign Up </Text>
               </TouchableOpacity>
           </View>
+          <View style={styles.submitContainer}>
+            <TouchableOpacity style={styles.demoLoginButton}
+              onPress={() => this.handleDemoLogin()}>
+                <Text style={styles.submitButtonText}> Demo Log In </Text>
+              </TouchableOpacity>
+
+          </View>
           <Button style={styles.link}
             onPress={() => this.handleLinkNav()}
             title='Log In'
@@ -204,6 +217,15 @@ const styles = StyleSheet.create ({
   submitButton: {
     flex: 0.8,
     marginTop: 40,
+    backgroundColor: '#83BFAA',
+    height: 40,
+    justifyContent: 'center',
+    borderRadius: 10,
+    marginBottom: 5,
+  },
+  demoLoginButton: {
+    flex: 0.8,
+    marginTop: 20,
     backgroundColor: '#83BFAA',
     height: 40,
     justifyContent: 'center',

@@ -71,20 +71,10 @@ export default class WatsonAnalyzer extends React.Component {
     for (let i=0; i< 5; i++) {
       if (this.props.keywords[i]) {
         topKeywordShow.push(
-          <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={i+"suggestedtopkey"} keyword={this.props.keywords[0].keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
+          <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={i+"suggestedtopkey"} keyword={this.props.keywords[i].keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
         );
       }
     }
-
-    // if (this.props.keywords[0]) {
-    //   let firstFive = [this.props.keywords[0].keyword,this.props.keywords[1].keyword,this.props.keywords[2].keyword,this.props.keywords[3].keyword,this.props.keywords[4].keyword];
-    //   topKeywordShow = firstFive.map(
-    //     (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
-    //
-    //   );
-    // }
-    // console.log(topKeywordShow);
-    // console.log(topKeywordShow2);
 
     return (
       <View>
@@ -93,7 +83,6 @@ export default class WatsonAnalyzer extends React.Component {
           Suggested Keywords:
         </Text>
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
-
         {keywordShow}
         {topKeywordShow}
         </View>

@@ -100,7 +100,7 @@ export default class DreamIndexScreen extends React.Component {
 
   onRefresh() {
     this.setState({refreshing: true});
-    this.props.requestUserDreams(this.props.userID).then(() => {
+    this.props.requestUserDreams(this.props.userId).then(() => {
       this.setState({refreshing: false});
     });
   }

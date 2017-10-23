@@ -15,26 +15,6 @@ import RecordScreen from './record/record_container';
 import AlarmContainer from './alarm/alarm_container';
 import DreamShowScreen from './dream/dream_show_container';
 
-export const SignedOut = StackNavigator({
-  SignUp: {
-    screen: SignupContainer,
-    navigationOptions: {
-      title: "Sign Up Root Nav",
-      headerLeft: null
-    }
-  },
-  SignIn: {
-    screen: LoginContainer,
-    navigationOptions: {
-      title: "Log In Root Nav",
-      headerLeft: null
-    }
-  },
-  Home: {
-    screen: DreamIndexContainer,
-  },
-});
-
 export const DreamStack = StackNavigator({
   Home: {screen: DreamIndexContainer },
   DreamShow: {
@@ -85,6 +65,30 @@ export const SignedIn = TabNavigator({
     },
   },
 });
+
+export const SignedOut = StackNavigator({
+  SignUp: {
+    screen: SignupContainer,
+    navigationOptions: {
+      title: "Sign Up Root Nav",
+      headerLeft: null
+    }
+  },
+  SignIn: {
+    screen: LoginContainer,
+    navigationOptions: {
+      title: "Log In Root Nav",
+      headerLeft: null
+    }
+  },
+  Home: {
+    screen: SignedIn,
+  },
+}
+// {
+//   headerMode: 'none',
+// }
+);
 
 export const createRootNavigator = (signedIn = false) => {
   return StackNavigator(

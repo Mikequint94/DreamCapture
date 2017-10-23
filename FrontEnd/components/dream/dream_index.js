@@ -8,6 +8,13 @@ import { SearchBar, List, ListItem, Avatar } from 'react-native-elements'
 import moment from 'moment'
 
 export default class DreamIndexScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      refreshing: false,
+    };
+  }
+
   static navigationOptions = {
     title: 'Home',
     header: null,
@@ -57,8 +64,8 @@ export default class DreamIndexScreen extends React.Component {
       const day = moment(dreamObj.created_at).format('DD');
       const month = moment(dreamObj.created_at).format('MMMM');
       const year = moment(dreamObj.created_at).format('YYYY');
-      const date = moment(dream.created_at).format('MMMM D, YYYY');
-      const time = moment(dream.created_at).format('h:mm a')
+      const date = moment(dreamObj.created_at).format('MMMM D, YYYY');
+      const time = moment(dreamObj.created_at).format('h:mm a')
 
       dream['year'] = year;
       dream['month'] = month;
@@ -90,6 +97,14 @@ export default class DreamIndexScreen extends React.Component {
     return sectionListData;
   };
 
+
+  onRefresh() {
+    this.setState({refreshing: true});
+    this.props.requestUserDreams(this.props.userId).then(() => {
+      this.setState({refreshing: false});
+    });
+  }
+
   dreamList() {
     const dreams = this.props.dreams;
     // if (Object.keys(dreams).length === 0
@@ -109,7 +124,8 @@ export default class DreamIndexScreen extends React.Component {
         ItemSeparatorComponent={this.renderItemSeparator}
         SectionSeparatorComponent={this.renderSectionSeparator}
         ListEmptyComponent={this.renderEmptyList(this.search)}
-
+        refreshing={this.state.refreshing}
+        onRefresh={this.onRefresh.bind(this)}
       />
     return dreamList;
   }

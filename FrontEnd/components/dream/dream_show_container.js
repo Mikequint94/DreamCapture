@@ -9,7 +9,8 @@ const mapStateToProps = (state, props) => ({
   keywords: state.entities.keywords,
   currentUser: state.session.user_id,
   dreamDate: props.navigation.state.params.dreamDate,
-  dreamTime: props.navigation.state.params.dreamTime
+  dreamTime: props.navigation.state.params.dreamTime,
+  dreamTimeStamp: props.navigation.state.params.dreamTimestamp
 });
 
 const mapDispatchToProps = dispatch => ({

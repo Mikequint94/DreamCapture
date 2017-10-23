@@ -84,7 +84,10 @@ export default class RecordScreen extends React.Component {
     this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser})
     .then(
     (response) => {
-      navigate('DreamShow', {dreamId: response.dream.id})
+
+      navigate('DreamShow', {dreamId: response.dream.id,
+                             dreamDate: ' ',
+                             dreamTime: ' '})
     .catch(error => console.log(error))
     }
   )

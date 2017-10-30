@@ -16,7 +16,6 @@ String.prototype.convert_to_url = function() {
 };
 
 export default class WatsonAnalyzer extends React.Component {
-  //
 
   componentDidMount() {
 
@@ -24,7 +23,6 @@ export default class WatsonAnalyzer extends React.Component {
     this.sentimentScore = 0;
     this.sentimentLabel = "";
     this.keywords = [];
-    // console.log(this.props);
     let config = {'Authorization': 'Basic ZTI2YTUzMGQtM2YzNy00ODk1LWEzM2MtNDExZGM2NWMwMGE4OkZXdFI3MjFObUpyUg=='};
     axios.get(`https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2017-02-27&text=${this.urlString}`, {
       headers: config
@@ -36,33 +34,13 @@ export default class WatsonAnalyzer extends React.Component {
       response.data.keywords.map(index => {
         this.keywords.push(Object.values(index)[0]);
       });
-      // console.log(this.sentimentLabel, this.sentimentScore, this.keywords);
     });
-    // .catch((error) => {
-    //   const { navigate } = this.props.navigation;
-    //   Alert.alert(
-    //     'Your dream was not long enough for analysis',
-    //     'Would you like to continue anyway?',
-    //     [
-    //       {text: 'Yes', onPress: () => {
-    //         console.log("continue anyway");
-    //       }},
-    //       {text: 'Re-Record', onPress: () => {
-    //         navigate('Record');
-    //       }, style: 'cancel'},
-    //     ],
-    //     { cancelable: false }
-    //   );
-    // });
   }
 
   render() {
     let keywordShow;
-    // let topKeywordShow;
-    // console.log(this.keywords);
     if (this.keywords && this.keywords.length > 0) {
       let firstFiveKeys = [this.keywords[0],this.keywords[1],this.keywords[2],this.keywords[3],this.keywords[4]];
-      // console.log(firstFiveKeys);
       keywordShow = firstFiveKeys.map(
         (keyword, index) => <SuggestedKeywordItem currentKeywords={this.props.currentKeywords} key={index + "suggestedkey"} keyword = {keyword} requestDream={this.props.requestDream} currentDream={this.props.currentDream} createKeyword={this.props.createKeyword}/>
     );
@@ -82,7 +60,7 @@ export default class WatsonAnalyzer extends React.Component {
         <Text style={styles.keywordsHeaderText}>
           Suggested Keywords:
         </Text>
-        <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+        <View style={{flex: .8, flexDirection: 'row', flexWrap: 'wrap'}}>
         {keywordShow}
         {topKeywordShow}
         </View>

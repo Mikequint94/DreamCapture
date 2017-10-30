@@ -8,7 +8,6 @@ Tagging.destroy_all
 test_user = User.new(email: "dreamer@gmail.com", password: "password")
 test_user.save!
 
-
 def dream_maker
   dream_text = Faker::TwinPeaks.quote + " " +
                Faker::HitchhikersGuideToTheGalaxy.quote + " " +

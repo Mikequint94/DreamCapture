@@ -28,7 +28,7 @@ export default class AppEntry extends React.Component {
       return null;
     }
 
-    console.log(signedIn)
+    console.log(signedIn);
     const RootNavigator = createRootNavigator(signedIn);
     return <RootNavigator />;
   }

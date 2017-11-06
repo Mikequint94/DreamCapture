@@ -4,9 +4,9 @@
 Brief Overview
 ==
 
-Dreams are a unique phenomenon. They let us connect to our subconscious and explore parts of our brains and inner creativity that we otherwise have no means to access. Everybody dreams, and everybody can remember their dreams given the proper tools. 95% of dreams are forgotten within the first 5 minutes of waking up, and any distracting thoughts or stimulations will accelerate the forgetting process. Dream Capture is the solution.
+Dreams are a unique phenomenon. They let us connect to our subconscious and explore parts of our brains and inner creativity that we otherwise have no means to access. Everybody dreams, and everybody can remember their dreams given the proper tools. 95% of dreams are forgotten within the first 5 minutes of waking up, and any distracting thoughts or stimulations will accelerate the forgetting process. DreamCapture is the solution.
 
-Dream Capture is a mobile app to record and store dreams.  The app uses speech-to-text technology, and will prompt users to record the dream with a notification upon wakeup. Users can add notes and tag keywords to their dreams. Users can search by dream text or keyword to remember past dreams.  
+DreamCapture is a mobile app to record and store dreams.  The app uses speech-to-text technology, and will prompt users to record the dream with a notification upon wakeup. Users can add notes and tag keywords to their dreams. Users can search by dream text or keyword to remember past dreams.  
 ####   [DreamCapture Demo Page](http://www.dream-capture.com "DreamCapture Demo Page")
 
 

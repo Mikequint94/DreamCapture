@@ -42,10 +42,6 @@ export default class AlarmScreen extends React.Component {
     this.cancelAlarm = this.cancelAlarm.bind(this);
   }
 
-  componentDidMount() {
-    PushNotificationsHandler.requestPermissions()
-  }
-
 
   parseTime() {
     timeArr = this.state.time.split(" ");
@@ -60,6 +56,7 @@ export default class AlarmScreen extends React.Component {
   }
 
   setAlarm() {
+    PushNotificationsHandler.requestPermissions()
     let time = this.parseTime();
 
     let now = new Date();
@@ -99,24 +96,18 @@ export default class AlarmScreen extends React.Component {
                     <Text style={styles.submitButtonText}
                       > Cancel Reminder </Text>
                   </TouchableOpacity>
-      text = <Text style={styles.text}>
-              We'll send you a reminder to record your dream around:
-             </Text>
+      text = <Text> We'll send you a reminder to record your dream around: </Text>
     } else {
       button  =  <TouchableOpacity style={styles.submitButton}
                     onPress={this.setAlarm} >
                     <Text style={styles.submitButtonText}> Set Reminder </Text>
                   </TouchableOpacity>
-      text = <Text style={styles.text}>
-              When do you usually wake up?
-             </Text>
+      text = <Text> When do you usually wake up? </Text>
     }
 
     return (
       <View style={styles.container}>
-        <View style={styles.textContainer}>
-          {text}
-        </View>
+        {text}
         <DatePicker
         date={this.state.time}
         mode="time"
@@ -125,15 +116,7 @@ export default class AlarmScreen extends React.Component {
         cancelBtnText="Cancel"
         showIcon= {false}
         customStyles={{
-          dateInput: {
-            borderRadius: 5,
-            borderColor: '#D4CCD9',
-          },
-          dateText: {
-            color: '#D4CCD9',
-            fontSize: 24,
-            fontWeight: '600',
-          },
+          // ... You can check the source to find the other keys.
         }}
         onDateChange={(time) => {
           this.setState({
@@ -143,7 +126,6 @@ export default class AlarmScreen extends React.Component {
         }}
       />
       {button}
-      <View style={{height:63}}></View>
       </View>
     )
   }
@@ -154,30 +136,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3E3254',
+    backgroundColor: '#F5FCFF',
   },
   submitButton: {
-    margin: 25,
-    backgroundColor: '#83BFAA',
+    margin: 10,
+    backgroundColor: '#2830a5',
     height: 40,
-    borderRadius: 10,
     justifyContent: 'center',
-    padding: 6,
   },
   submitButtonText: {
-    fontSize: 22,
-    fontWeight: '500',
+    fontSize: 20,
     color: 'white',
-    textAlign: 'center',
-  },
-  textContainer: {
-    marginHorizontal: 30,
-    marginBottom: 25,
-  },
-  text: {
-    fontSize: 22,
-    fontWeight: '600',
-    color: '#D4CCD9',
     textAlign: 'center',
   }
 });

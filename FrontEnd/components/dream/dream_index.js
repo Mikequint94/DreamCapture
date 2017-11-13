@@ -158,25 +158,31 @@ export default class DreamIndexScreen extends React.Component {
 
   renderSectionListItem(item) {
     const { navigate } = this.props.navigation;
+    if (item.body) {
+      return (
+        <ListItem style={styles.listItem}
+          title={item.body}
+          titleNumberOfLines={2}
+          avatar={<Avatar
+                    width={30}
+                    height={30}
+                    title={item.day}
+                    titleStyle={{fontSize:20,
+                      fontWeight:'bold', color: '#3B264A'}}
+                    overlayContainerStyle={{
+                      backgroundColor:'white'}}
+                  />}
+          onPress={() => navigate('DreamShow', {
+                                    dreamId: item.id,
+                                    dreamDate: item.date,
+                                    dreamTime: item.time } )}
+        />
+      )
+  } else {
     return (
-      <ListItem style={styles.listItem}
-        title={`${item.body}`}
-        titleNumberOfLines={2}
-        avatar={<Avatar
-                  width={30}
-                  height={30}
-                  title={item.day}
-                  titleStyle={{fontSize:20,
-                    fontWeight:'bold', color: '#3B264A'}}
-                  overlayContainerStyle={{
-                    backgroundColor:'white'}}
-                />}
-        onPress={() => navigate('DreamShow', {
-                                  dreamId: item.id,
-                                  dreamDate: item.date,
-                                  dreamTime: item.time } )}
-      />
+      <Text/>
     )
+  }
   }
 
   renderEmptyList(search) {
@@ -263,6 +269,7 @@ const styles = StyleSheet.create({
   },
   emptyList: {
     backgroundColor: '#E9E9EF',
+    padding: 10
   },
   emptyListText: {
     color: '#3B264A',

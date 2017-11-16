@@ -4,22 +4,21 @@
 Brief Overview
 ==
 
-Dreams are a unique phenomenon. They let us connect to our subconscious and explore parts of our brains and inner creativity that we otherwise have no means to access. Everybody dreams, and everybody can remember their dreams given the proper tools. 95% of dreams are forgotten within the first 5 minutes of waking up, and any distracting thoughts or stimulations will accelerate the forgetting process. DreamCapture is the solution.
+Dreams are a unique phenomenon. They let us connect with the subconscious and explore parts of our brains and inner creativity that we otherwise don't access. Everyone dreams, and everyone can remember their dreams given the proper tools. 95% of dreams are forgotten within the first 5 minutes of waking up, and any distracting thoughts or stimulations accelerate this process. DreamCapture is the solution.
 
-DreamCapture is a mobile app to record and store dreams.  The app uses speech-to-text technology, and will prompt users to record the dream with a notification upon wakeup. Users can add notes and tag keywords to their dreams. Users can search by dream text or keyword to remember past dreams.  
+DreamCapture is a mobile app to record and store dreams.  The app uses speech-to-text technology and prompts users to record their dream upon wakeup. Users can add notes and keyword tags to their dreams. The search feature lets users search past dreams by dream text or keyword.  
 ####   [DreamCapture Demo Page](http://www.dream-capture.com "DreamCapture Demo Page")
 
-
-This full stack mobile application was crafted to be functional yet simple.  DreamCapture uses Ruby on Rails for the backend and React Native with a Redux architectural framework for the frontend.  The app utilizes a PostgreSQL database, and benefits from advanced performance with the addition of various installed packages.
+This full stack mobile application was crafted to be functional yet simple.  DreamCapture uses Ruby on Rails for the backend and React Native with a Redux architectural framework for the frontend.  The app utilizes a PostgreSQL database and benefits from advanced performance with the addition of various installed packages.
 
 Design
 ==
 
-Since this app is meant to be used immediately after the user wakes up, easy navigation and a pleasant, restful color scheme were a priority.
+Since the app is designed for use immediately after waking, easy navigation and a pleasant, restful color scheme were a priority.
 
 ![Navigation gif]("Navigation gif")
 
-A goal of our app was to make journaling your dreams possible without any typing at all. When the user wakes up, they can quickly access DreamCapture through the silent notification waiting for them on their phone.  Next they will be prompted to record reflections on their dream. We use the built in speech-to-text capabilities of Android and iOS devices to capture these records, analyze and store them.
+A key goal of the app was to make journaling dreams possible without any typing. When the user wakes up, they can easily access DreamCapture through the silent notification on their phone.  On open, the app prompts the user to reflect on their dream. We use the built in speech-to-text capabilities of Android and iOS devices to capture the recordings, analyze, and store them.
 
 
 ![2nd Navigation gif]("2nd Navigation gif")
@@ -28,12 +27,12 @@ Functionality
 
 ## Recording Dreams
 
-Typing is slow. By using the native speech-to-text capabilities available in nearly all Android and iOS devices, we speed up the journaling process. This means users will remember and record more complete reflections on their dreams from the previous night.
+Typing is slow. By using the native speech-to-text capabilities available in Android and iOS devices, DreamCapture speeds up the journaling process. This enables users to remember and record more robust reflections of their dreams.
 
 ![speech-to-text](
   "speech-to-text gif")
 
-We also make use of IBM's Watson for some basic natural language analysis. After a dream is recorded as text, we use an axios request to send it along to the Watson API. Upon a success response we store the sentiment label, score, and any relevant keywords found.
+We also make use of IBM's Watson for some basic natural language analysis. After a dream is recorded as text, an axios request sends it to the Watson API. Upon a success response, DreamCapture stores the sentiment label, score, and any relevant keywords suggested by Watson.
 
 ```javascript
 .then((response) => {
@@ -44,10 +43,9 @@ We also make use of IBM's Watson for some basic natural language analysis. After
   });
   ```
 
-
 ## Setting Reminders
 
-Originally we had intended to include alarm functionality in DreamCapture. The idea was that a user could set their alarm for the morning and would be prompted to record their dream upon silencing the ringing alarm.
+The original idea called for an alarm functionality. The intention for was the app to also be used as an alarm. Upon silencing the alarm, the user would then be prompted to record their dream.
 
 We decided against this option in favor of silent notifications for a couple reasons. First of all, this would require a user to forgo their current alarm system in order to use ours. Secondly, there doesn't appear to be a way for a third party app to access the built in alarm clock on iOS. Some alarm clocks on the app store have bypassed this restriction in [creative ways](https://oleb.net/blog/2014/02/alarm-clock-apps-ios/), but we decided against such options due to the various drawbacks.
 
@@ -102,14 +100,14 @@ Technologies
   - [Atom](https://atom.io/)
   - [Xcode](https://developer.apple.com/xcode/)
 
-Future Directions
+Future Direction
 ==
 
 **Dream Analysis:**
-DreamCapture already analyzes the dream content for sentiment, and eventually the app will be able to analyze for emotion as well.  Their will be an analysis page to show users trends in the content of their dreams, charting out sentiment and keyword frequencies.
+DreamCapture already analyzes the dream content for sentiment. Eventually the app will look at emotion as well.  There will be an overview page to show users trends in their dreams, charting out sentiment and keyword frequencies.
 
 **Reference Guide:**
-Using analyzed content, the app will be able to explain to users what they dreams may mean!  By using the app and thinking more about their dreams, users will be shown different interpretations and be provoked to think about what their dreams are trying to communicate.
+Through analysis of recorded content, the app will suggest possible dream interpretations to users. Users will be shown different meanings and be able to reflect on what their dreams could be trying to communicate.
 
 **Port to Android:**
 Once our app is perfected on iOS, we will make the necessary changes to create the app for Android platforms.

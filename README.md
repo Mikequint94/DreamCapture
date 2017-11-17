@@ -16,12 +16,11 @@ Design
 
 Since the app is designed for use immediately after waking, easy navigation and a pleasant, restful color scheme were a priority.
 
-![Navigation gif]("Navigation gif")
+![Navigation gif](http://res.cloudinary.com/dzqrzline/image/upload/v1510890476/page-1_img09_inlsxy.gif)
 
 A key goal of the app was to make journaling dreams possible without any typing. When the user wakes up, they can easily access DreamCapture through the silent notification on their phone.  On open, the app prompts the user to reflect on their dream. We use the built in speech-to-text capabilities of Android and iOS devices to capture the recordings, analyze, and store them.
 
 
-![2nd Navigation gif]("2nd Navigation gif")
 Functionality
 ==
 
@@ -30,7 +29,7 @@ Functionality
 Typing is slow. By using the native speech-to-text capabilities available in Android and iOS devices, DreamCapture speeds up the journaling process. This enables users to remember and record more robust reflections of their dreams.
 
 ![speech-to-text](
-  "speech-to-text gif")
+  https://res.cloudinary.com/dzqrzline/image/upload/v1510890385/page-1_img08_itk0yh.gif)
 
 We also make use of IBM's Watson for some basic natural language analysis. After a dream is recorded as text, an axios request sends it to the Watson API. Upon a success response, DreamCapture stores the sentiment label, score, and any relevant keywords suggested by Watson.
 
@@ -52,7 +51,7 @@ We decided against this option in favor of silent notifications for a couple rea
 In place of an alarm clock, DreamCapture allows users to set a daily reminder to record your dream. This silent notification will be waiting on your phone when you wake in the morning, allowing you to quickly navigate into the app and start recording.
 
 ![push notification gif](
-  "push notification gif")
+  https://res.cloudinary.com/dzqrzline/image/upload/v1510890166/page-1_img06_t8azvq.gif)
 
 
 ```javascript

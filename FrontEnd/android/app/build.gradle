@@ -137,13 +137,10 @@ android {
 }
 
 dependencies {
-<<<<<<< HEAD
-    compile project(':react-native-push-notification')
-=======
-    compile project(':react-native-vector-icons')
->>>>>>> 9d12f776ba685e249ee9a35429b9625b42ab4fc5
-    compile project(':react-native-calendar-events')
     compile project(':react-native-voice')
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-push-notification')
+
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules

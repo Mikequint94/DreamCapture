@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (state, props) => ({
   dreams: state.entities.currentDream,
+  
   keywords: state.entities.keywords,
   currentUser: state.session.user_id
 });

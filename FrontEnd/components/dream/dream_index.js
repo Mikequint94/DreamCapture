@@ -25,9 +25,9 @@ export default class DreamIndexScreen extends React.Component {
   // }
 
   componentWillReceiveProps(nextProps) {
-    // if {nextProps !== this.props} {
-    //   this.props = nextProps;
-    // }
+    if (nextProps !== this.props) {
+      this.props = nextProps;
+    }
   }
 
   componentDidMount() {

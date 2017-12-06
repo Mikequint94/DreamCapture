@@ -14,12 +14,22 @@ import DreamIndexContainer from './dream/dream_index_container';
 import RecordScreen from './record/record_container';
 import AlarmContainer from './alarm/alarm_container';
 import DreamShowScreen from './dream/dream_show_container';
+import NewDreamShowScreen from './dream/new_dream_show_container';
 
 export const DreamStack = StackNavigator({
   Home: {screen: DreamIndexContainer },
   DreamShow: {
     path: 'dream/:dreamid',
     screen: DreamShowScreen,
+    navigationOptions: {
+      headerTitleStyle: { color: 'white', fontSize: 20, fontWeight: 'bold' },
+      headerBackTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+      headerStyle: { backgroundColor: '#3E3254' }
+    }},
+  NewDreamShow: {
+    path: 'dream/:dreamid',
+    screen: NewDreamShowScreen,
     navigationOptions: {
       headerTitleStyle: { color: 'white', fontSize: 20, fontWeight: 'bold' },
       headerBackTitleStyle: { color: 'white' },

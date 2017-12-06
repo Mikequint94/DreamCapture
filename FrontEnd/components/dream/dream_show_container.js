@@ -5,7 +5,7 @@ import {requestKeyword, receiveKeyword, receiveAllKeywords, createKeyword, reque
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state, props) => ({
-  dreams: state.entities.dreams,
+  dreams: state.entities.currentDream,
   keywords: state.entities.keywords,
   currentUser: state.session.user_id,
   dreamDate: props.navigation.state.params.dreamDate,

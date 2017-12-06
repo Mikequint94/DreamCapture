@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Voice from 'react-native-voice';
 import { Button } from 'react-native-elements';
 
+import { NavigationActions } from 'react-navigation';
+
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
@@ -78,6 +80,15 @@ export default class RecordScreen extends React.Component {
       partialResults: e.value,
     });
   }
+  resetNavigation(targetRoute) {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: targetRoute }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
 
   saveDream() {
     const { navigate } = this.props.navigation;
@@ -85,10 +96,12 @@ export default class RecordScreen extends React.Component {
     .then(
     (response) => {
 
-      navigate('DreamShow', {dreamId: response.dream.id,
+
+      // this.resetNavigation('NewDreamShow');
+
+      navigate('NewDreamShow', {dreamId: response.dream.id,
                              dreamDate: ' ',
                              dreamTime: ' '})
-    .catch(error => console.log(error))
     }
   )
   }

@@ -8,14 +8,10 @@ import KeywordShow from '../keyword/keyword_show';
 import NoteShowContainer from '../note/note_show_container';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-export default class DreamShowScreen extends React.Component {
+import { NavigationActions } from 'react-navigation';
 
-  static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.dreamDate}`
-    // if (navigation.state.params.dreamDate) {
-    //   headerLeft: null
-    // }
-  });
+
+export default class NewDreamShowScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -23,6 +19,22 @@ export default class DreamShowScreen extends React.Component {
       newKey: "",
       loaded: false
     };
+  }
+
+  static navigationOptions = ({ navigation }) => ({
+    title: `New Dream`,
+    headerLeft: null,
+    headerRight: <Button
+      onPress={() => navigation.navigate("Home")}
+      title='Save'
+      color='#D4CCD9'
+      />
+  });
+
+
+
+  static goHome() {
+    console.log("HOME");
   }
 
   componentDidMount(){

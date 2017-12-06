@@ -20,10 +20,12 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.createNote({
-      body: this.state.note,
-      dream_id: this.props.currentDream
-    });
+    if (this.state.note) {
+      this.props.createNote({
+        body: this.state.note,
+        dream_id: this.props.currentDream
+      });
+    }
     // console.log("creatingNote");
     // console.log(this.state.note);
   }

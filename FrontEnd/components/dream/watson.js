@@ -23,7 +23,7 @@ export default class WatsonAnalyzer extends React.Component {
     this.sentimentScore = 0;
     this.sentimentLabel = "";
     this.keywords = [];
-    let config = {'Authorization': 'Basic MzBmYzk4MzMtNzFhMC00MzhhLTk3OTAtMzNlMGQ5ZjUwMDdhOmdBWmc4VW5NdGhxZw=='};
+    let config = {'Authorization': 'Basic ZmI5NjVjNzgtYzM3Mi00M2Q2LTkwODYtMmZhMzY0MTQxOTdhOjhVcFVaUWM3UnZjQw=='};
     axios.get(`https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2017-02-27&text=${this.urlString}`, {
       headers: config
     }

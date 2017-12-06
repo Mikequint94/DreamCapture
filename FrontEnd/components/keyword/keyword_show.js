@@ -18,7 +18,7 @@ export default class KeywordShow extends React.Component {
   render() {
     let dreamKeywords = this.props.currentKeywords;
     let keywordItems = dreamKeywords.map(
-      (keyword) => <KeywordItem key={keyword.id + 'keyword'} keyword={keyword.keyword}/>
+      (keyword) => <KeywordItem Key={keyword.id + 'keyword'} keyword={keyword.keyword}/>
     );
 
     return (

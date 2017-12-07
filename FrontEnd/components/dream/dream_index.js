@@ -31,6 +31,9 @@ export default class DreamIndexScreen extends React.Component {
   }
 
   componentDidMount() {
+    console.log("!!!!!!!!!!!");
+    console.log(this.props.userId);
+    console.log("!!!!!!!!!!!");
     this.props.requestUserDreams(this.props.userId);
   }
 
@@ -167,7 +170,7 @@ export default class DreamIndexScreen extends React.Component {
     if (item.body) {
       return (
         <ListItem style={styles.listItem}
-          Key={item.id + Date.now()}
+          key={item.id + Date.now()}
           title={item.body}
           titleNumberOfLines={2}
           avatar={<Avatar

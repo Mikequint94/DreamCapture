@@ -14,21 +14,34 @@ export default class NoteShow extends React.Component {
     this.state = {note: ""};
   }
 
+  componentWillMount() {
+    if (this.props.note) {
+      console.log("note", this.props.note);
+      this.setState({note: this.props.note});
+    }
+  }
+
   componentWillReceiveProps(newProps) {
     console.log(newProps);
     this.setState({note: newProps.note});
-  }
-
-  componentWillUnmount() {
     if (this.state.note) {
       this.props.createNote({
         body: this.state.note,
         dream_id: this.props.currentDream
       });
     }
+  }
+  //
+  // componentWillUnmount() {
+  //   if (this.state.note) {
+  //     this.props.createNote({
+  //       body: this.state.note,
+  //       dream_id: this.props.currentDream
+  //     });
+  //   }
     // console.log("creatingNote");
     // console.log(this.state.note);
-  }
+  // }
 
   render() {
     // console.log(this.props);
@@ -45,7 +58,7 @@ export default class NoteShow extends React.Component {
           placeholderTextColor='rgba(212, 204, 217, 0.7)'
           autoCapitalize={'none'}
           value={this.state.note}
-          multiline={true}
+          multiline={false}
           />
       </View>
     );
@@ -61,7 +74,7 @@ const styles = StyleSheet.create ({
   },
   noteInput: {
     borderColor: 'rgba(212, 204, 217, 0.5)',
-    height: 80,
+    height: 26,
     borderWidth: 1,
     borderRadius: 4,
     color: '#D4CCD9',

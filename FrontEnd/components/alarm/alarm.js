@@ -96,18 +96,20 @@ export default class AlarmScreen extends React.Component {
                     <Text style={styles.submitButtonText}
                       > Cancel Reminder </Text>
                   </TouchableOpacity>
-      text = <Text> We'll send you a reminder to record your dream around: </Text>
+      text = <Text style={styles.text}> We will send you a reminder to record your dream around: </Text>
     } else {
       button  =  <TouchableOpacity style={styles.submitButton}
                     onPress={this.setAlarm} >
                     <Text style={styles.submitButtonText}> Set Reminder </Text>
                   </TouchableOpacity>
-      text = <Text> When do you usually wake up? </Text>
+      text = <Text style={styles.text}> When do you usually wake up? </Text>
     }
 
     return (
       <View style={styles.container}>
-        {text}
+        <View style={styles.textContainer}>
+          {text}
+        </View>
         <DatePicker
         date={this.state.time}
         mode="time"
@@ -116,7 +118,15 @@ export default class AlarmScreen extends React.Component {
         cancelBtnText="Cancel"
         showIcon= {false}
         customStyles={{
-          // ... You can check the source to find the other keys.
+          dateInput: {
+            borderRadius: 5,
+            borderColor: '#D4CCD9',
+          },
+          dateText: {
+            color: '#D4CCD9',
+            fontSize: 24,
+            fontWeight: '600',
+          },
         }}
         onDateChange={(time) => {
           this.setState({
@@ -126,6 +136,7 @@ export default class AlarmScreen extends React.Component {
         }}
       />
       {button}
+      <View style={{height:63}}></View>
       </View>
     )
   }
@@ -136,17 +147,30 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#3E3254',
   },
   submitButton: {
-    margin: 10,
-    backgroundColor: '#2830a5',
+    margin: 25,
+    backgroundColor: '#83BFAA',
     height: 40,
+    borderRadius: 10,
     justifyContent: 'center',
+    padding: 6,
   },
   submitButtonText: {
-    fontSize: 20,
+    fontSize: 22,
+    fontWeight: '500',
     color: 'white',
+    textAlign: 'center',
+  },
+  textContainer: {
+    marginHorizontal: 30,
+    marginBottom: 25,
+  },
+  text: {
+    fontSize: 22,
+    fontWeight: '600',
+    color: '#D4CCD9',
     textAlign: 'center',
   }
 });

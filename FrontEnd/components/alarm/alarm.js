@@ -136,17 +136,30 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#3E3254',
   },
   submitButton: {
-    margin: 10,
-    backgroundColor: '#2830a5',
+    margin: 25,
+    backgroundColor: '#83BFAA',
     height: 40,
+    borderRadius: 10,
     justifyContent: 'center',
+    padding: 6,
   },
   submitButtonText: {
-    fontSize: 20,
+    fontSize: 22,
+    fontWeight: '500',
     color: 'white',
+    textAlign: 'center',
+  },
+  textContainer: {
+    marginHorizontal: 30,
+    marginBottom: 25,
+  },
+  text: {
+    fontSize: 22,
+    fontWeight: '600',
+    color: '#D4CCD9',
     textAlign: 'center',
   }
 });

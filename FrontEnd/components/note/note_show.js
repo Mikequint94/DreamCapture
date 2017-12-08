@@ -15,21 +15,26 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillMount() {
+    // console.log(props);
     if (this.props.note) {
       console.log("note", this.props.note);
       this.setState({note: this.props.note});
     }
   }
-
   componentWillReceiveProps(newProps) {
-    console.log(newProps);
     this.setState({note: newProps.note});
-    if (this.state.note) {
+  }
+
+  saveNote(note) {
+    // console.log(note);
+    this.setState({note});
+    setTimeout(() => {
+      console.log(this.state.note);
       this.props.createNote({
         body: this.state.note,
         dream_id: this.props.currentDream
       });
-    }
+    }, 100);
   }
   //
   // componentWillUnmount() {
@@ -53,7 +58,7 @@ export default class NoteShow extends React.Component {
           Note:
         </Text>
         <TextInput style={styles.noteInput}
-          onChangeText={(note) => this.setState({note})}
+          onChangeText={(note) => this.saveNote(note)}
           placeholder={"enter note..."}
           placeholderTextColor='rgba(212, 204, 217, 0.7)'
           autoCapitalize={'none'}

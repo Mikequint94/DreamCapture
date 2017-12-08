@@ -94,10 +94,10 @@ export const SignedOut = StackNavigator({
   Home: {
     screen: SignedIn,
   },
-}
-// {
-//   headerMode: 'none',
-// }
+},
+  {
+    headerMode: 'none',
+  }
 );
 
 export const createRootNavigator = (signedIn = false) => {

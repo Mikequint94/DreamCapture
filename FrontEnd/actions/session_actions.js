@@ -25,12 +25,10 @@ export const login = (user) => dispatch => (
     .then(response => {
       dispatch(receiveCurrentUser(response.data));
       dispatch(clearSessionErrors());
-      console.log('login success');
       onSignIn();
       return 'signedin';
     })
     .catch((error) => {
-      console.log("Can\'t log in");
       dispatch(receiveSessionErrors(error.response.data));
     })
   );
@@ -42,35 +40,26 @@ export const logout = () => dispatch => {
     params: {}
   })
     .then(response => {
-      console.log(response);
       dispatch(receiveCurrentUser({
         email: null,
         user_id: null
       }));
       dispatch(clearSessionErrors());
-      console.log('logged out');
       return onSignOut();
     })
     .catch((error) => {
-      console.log("Can\'t log out");
-      console.log(error.response);
-      // dispatch(receiveSessionErrors(error.response.data));
     });
   };
 
 export const signup = (user) => dispatch => (
   axios.post(USERS_URL, { user })
     .then((response) => {
-      console.log(response);
       dispatch(receiveCurrentUser(response.data));
       dispatch(clearSessionErrors());
-      console.log('signup success');
       onSignIn();
       return 'signedin';
     })
     .catch((error) => {
-      console.log('signup axios error');
-      console.log(error.response);
       dispatch(receiveSessionErrors(error.response.data));
     })
   );
@@ -81,12 +70,10 @@ export const signup = (user) => dispatch => (
   const USER_LOGGED_IN = 'dreamcapture_user_logged_in';
 
   export const onSignIn = () => {
-    console.log('user logged in set to true');
     return AsyncStorage.setItem(USER_LOGGED_IN, 'true');
   };
 
   export const onSignOut = () => {
-    console.log('user logged in removed');
     return AsyncStorage.removeItem(USER_LOGGED_IN);
   };
 
@@ -95,10 +82,8 @@ export const signup = (user) => dispatch => (
      AsyncStorage.getItem(USER_LOGGED_IN)
        .then(res => {
          if (res !== null) {
-           console.log('async storage true');
            resolve(true);
          } else {
-           console.log('async storage false');
            resolve(false);
          }
        })

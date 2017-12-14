@@ -45,7 +45,7 @@ export const DreamStack = StackNavigator({
       headerTintColor: 'white',
       headerStyle: { backgroundColor: '#3E3254' }
     }},
-})
+});
 
 export const SignedIn = TabNavigator({
   Home: {
@@ -65,8 +65,6 @@ export const SignedIn = TabNavigator({
     showLabel: false,
     activeTintColor: '#83BFAA',
     inactiveTintColor: '#D4CCD9',
-    // activeBackgroundColor: '#3E3254',
-    // inactiveBackgroundColor: '#3E3254',
     style: {
       borderTopWidth: 1,
       paddingTop: 6,

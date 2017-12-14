@@ -45,12 +45,12 @@ export default class SignupScreen extends React.Component {
         if (res === 'signedin') {this.resetNav();}
       });
   }
-  handleDemoLogin() {
-    this.props.login({email: "dreamer@gmail.com", password: "password"})
-      .then((res) => {
-        if (res === 'signedin') {this.resetNav();}
-      });
-  }
+  // handleDemoLogin() {
+  //   this.props.login({email: "dreamer@gmail.com", password: "password"})
+  //     .then((res) => {
+  //       if (res === 'signedin') {this.resetNav();}
+  //     });
+  // }
 
   renderErrors() {
     return(
@@ -143,13 +143,6 @@ export default class SignupScreen extends React.Component {
               onPress={() => this.handleSignup()}>
                 <Text style={styles.submitButtonText}> Sign Up </Text>
               </TouchableOpacity>
-          </View>
-          <View style={styles.submitContainer}>
-            <TouchableOpacity style={styles.demoLoginButton}
-              onPress={() => this.handleDemoLogin()}>
-                <Text style={styles.submitButtonText}> Demo Log In </Text>
-              </TouchableOpacity>
-
           </View>
           <Button style={styles.link}
             onPress={() => this.handleLinkNav()}

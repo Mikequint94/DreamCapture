@@ -16,7 +16,6 @@ export default class NoteShow extends React.Component {
 
   componentWillMount() {
     if (this.props.note) {
-      console.log("note", this.props.note);
       this.setState({note: this.props.note});
     }
   }
@@ -27,7 +26,6 @@ export default class NoteShow extends React.Component {
   saveNote(note) {
     this.setState({note});
     setTimeout(() => {
-      console.log(this.state.note);
       this.props.createNote({
         body: this.state.note,
         dream_id: this.props.currentDream

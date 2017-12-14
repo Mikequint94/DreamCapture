@@ -31,12 +31,6 @@ export default class NewDreamShowScreen extends React.Component {
       />
   });
 
-
-
-  static goHome() {
-    console.log("HOME");
-  }
-
   componentDidMount(){
     this.props.requestDream(this.props.navigation.state.params.dreamId);
     this.props.requestTopKeywords(this.props.currentUser);
@@ -66,7 +60,6 @@ export default class NewDreamShowScreen extends React.Component {
         )
       }
     if (note) {
-      console.log(note);
       noteShow = (
         <NoteShowContainer currentDream={currentDream} note={note.body}/>
       );

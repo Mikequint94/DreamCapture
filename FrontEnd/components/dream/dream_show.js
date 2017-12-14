@@ -51,7 +51,6 @@ export default class DreamShowScreen extends React.Component {
         )
       }
     if (note) {
-      console.log(note);
       noteShow = (
         <NoteShowContainer currentDream={currentDream} note={note.body}/>
       );

@@ -69,7 +69,6 @@ export default class RecordScreen extends React.Component {
   }
 
   onSpeechResults(e) {
-    console.log(e.value);
     this.setState({
       results: e.value,
     });
@@ -126,7 +125,6 @@ export default class RecordScreen extends React.Component {
   }
 
   async _startRecognizing(e) {
-    console.log("recording started");
     this.setState({
       recognized: '',
       pitch: '',
@@ -139,7 +137,6 @@ export default class RecordScreen extends React.Component {
     try {
       await Voice.start('en-US');
     } catch (e) {
-      console.error(e);
     }
   }
 
@@ -147,7 +144,6 @@ export default class RecordScreen extends React.Component {
     try {
       await Voice.stop();
     } catch (e) {
-      console.error(e);
     }
   }
 
@@ -155,7 +151,6 @@ export default class RecordScreen extends React.Component {
     try {
       await Voice.cancel();
     } catch (e) {
-      console.error(e);
     }
   }
 
@@ -163,7 +158,6 @@ export default class RecordScreen extends React.Component {
     try {
       await Voice.destroy();
     } catch (e) {
-      console.error(e);
     }
     this.setState({
       recognized: '',
@@ -223,7 +217,6 @@ export default class RecordScreen extends React.Component {
       )
     }
     if (this.state.started === "") {
-      console.log(this.props);
       topText = (
         <View style={styles.topContainer}>
           <Text style={styles.recordText}>

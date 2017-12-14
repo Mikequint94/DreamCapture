@@ -51,9 +51,6 @@ export default class NewDreamShowScreen extends React.Component {
   }
 
   render() {
-    // if (this.state.newKey === "") {
-    // this.props.requestDream(this.props.navigation.state.params.dreamId);
-    // }
 
     let currentDream = this.props.navigation.state.params.dreamId;
 

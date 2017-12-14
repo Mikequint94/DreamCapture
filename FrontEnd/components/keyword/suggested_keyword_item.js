@@ -26,18 +26,15 @@ export default class SuggestedKeywordItem extends React.Component {
   }
 
 addKeyword() {
-  // console.log(this.props);
   this.props.createKeyword({keyword: this.props.keyword, dream_id: this.props.currentDream})
   .then(() => {
     this.setState({show: false});
-    // console.log(this.props);
     this.props.requestDream(this.props.currentDream);
   });
 }
 
 render () {
   let suggestedWord;
-  // console.log(this.props);
   if (this.state.show && this.props.keyword) {
     suggestedWord = (
       <TouchableOpacity style={styles.suggestedKey}

@@ -12,9 +12,6 @@ export default class DreamShowScreen extends React.Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.state.params.dreamDate}`
-    // if (navigation.state.params.dreamDate) {
-    //   headerLeft: null
-    // }
   });
 
   constructor(props) {
@@ -39,9 +36,6 @@ export default class DreamShowScreen extends React.Component {
   }
 
   render() {
-    // if (this.state.newKey === "") {
-    // this.props.requestDream(this.props.navigation.state.params.dreamId);
-    // }
 
     let currentDream = this.props.navigation.state.params.dreamId;
 

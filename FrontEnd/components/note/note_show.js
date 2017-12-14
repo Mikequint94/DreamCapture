@@ -15,7 +15,6 @@ export default class NoteShow extends React.Component {
   }
 
   componentWillMount() {
-    // console.log(props);
     if (this.props.note) {
       console.log("note", this.props.note);
       this.setState({note: this.props.note});
@@ -26,7 +25,6 @@ export default class NoteShow extends React.Component {
   }
 
   saveNote(note) {
-    // console.log(note);
     this.setState({note});
     setTimeout(() => {
       console.log(this.state.note);
@@ -36,22 +34,8 @@ export default class NoteShow extends React.Component {
       });
     }, 100);
   }
-  //
-  // componentWillUnmount() {
-  //   if (this.state.note) {
-  //     this.props.createNote({
-  //       body: this.state.note,
-  //       dream_id: this.props.currentDream
-  //     });
-  //   }
-    // console.log("creatingNote");
-    // console.log(this.state.note);
-  // }
 
   render() {
-    // console.log(this.props);
-    // console.log(this.state);
-
     return (
       <View>
         <Text style={styles.noteHeaderText}>

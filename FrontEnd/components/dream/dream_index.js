@@ -27,9 +27,6 @@ export default class DreamIndexScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log("!!!!!!!!!!!");
-    console.log(this.props.userId);
-    console.log("!!!!!!!!!!!");
     this.props.requestUserDreams(this.props.userId);
   }
 
@@ -56,7 +53,6 @@ export default class DreamIndexScreen extends React.Component {
   }
   sectionDreams() {
     const dreams = Object.values(this.props.dreams);
-    console.log(dreams)
     const reformattedDreams = dreams.map(d => {
       const dreamObj = Object.values(d)[0]
       let dream = {};
@@ -83,8 +79,6 @@ export default class DreamIndexScreen extends React.Component {
     const dreamsByMonth = uniqMonths.map(month => {
       return reformattedDreams.filter(d => d.month === month);
     });
-
-    console.log(dreamsByMonth);
 
     const sectionListData = uniqMonths.map( (month, idx) => {
       let section = {}

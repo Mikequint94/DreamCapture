@@ -20,10 +20,6 @@ export default class DreamIndexScreen extends React.Component {
     header: null,
   };
 
-  // componentWillMount() {
-  //   this.resetNav();
-  // }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps !== this.props) {
       this.props = nextProps;
@@ -36,12 +32,6 @@ export default class DreamIndexScreen extends React.Component {
     console.log("!!!!!!!!!!!");
     this.props.requestUserDreams(this.props.userId);
   }
-
-//   resetNav() {
-//     return NavigationActions.reset({
-//       index: 0,
-//   });
-// }
 
   searchBar() {
     return (
@@ -116,10 +106,6 @@ export default class DreamIndexScreen extends React.Component {
 
   dreamList() {
     const dreams = this.props.dreams;
-    // if (Object.keys(dreams).length === 0
-    //     && dreams.constructor === Object ) {
-    //   return ( <View></View> );
-    // }
 
     const dreamList =
       <SectionList

@@ -12,7 +12,6 @@ export default class KeywordShow extends React.Component {
 
   constructor(props) {
     super(props);
-
   }
 
   render() {

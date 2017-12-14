@@ -96,9 +96,6 @@ export default class RecordScreen extends React.Component {
     .then(
     (response) => {
 
-
-      // this.resetNavigation('NewDreamShow');
-
       navigate('NewDreamShow', {dreamId: response.dream.id,
                              dreamDate: ' ',
                              dreamTime: ' '})

@@ -46,12 +46,6 @@ class Api::NotesController < ApplicationController
     end
   end
 
-  # def index
-  #   dream = Dream.find(params[:dream_id])
-  #   @note = dream.note
-  #   render 'api/notes/index'
-  # end
-
   private
 
   def note_params

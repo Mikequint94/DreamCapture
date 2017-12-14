@@ -20,12 +20,6 @@ export const receiveNote = note => ({
   note
 });
 
-// export const requestNote = noteId => dispatch => (
-//   axios.get(`${API_URL}/api/notes/${noteId}`)
-//     .then(note => dispatch(receiveNote(note.data)))
-//     .catch(err => dispatch(receiveErrors(err)))
-// );
-
 export const createNote = note => dispatch => (
   axios.post(`${API_URL}/api/notes`, { note })
     .catch(err => dispatch(receiveErrors(err)))

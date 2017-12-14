@@ -1,5 +1,3 @@
-// import * as KeywordUtil from '../util/keyword_util';
-
 import axios from 'axios';
 import {API_URL} from '../api/api_index';
 

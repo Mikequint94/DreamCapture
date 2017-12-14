@@ -22,11 +22,6 @@ end
 
 dreams = []
 
-# 30.times do
-#   dreams.push(Dream.new(body: dream_maker,
-#                         user_id: test_user.id))
-# end
-
 dreams << Dream.new(body: "It was a day I was hanging out with one of my childhood best friends. The best thing about it was that he looked exactly like he did as a kid. It was as if my brain copied and pasted a photo of him from my 3rd grade class photo and put them in my dream. The Events and Adventures we had were kind of strange, I'm not going to go into it, but it was very fun.",
                     user_id: test_user.id)
 dreams << Dream.new(body: "Gotham city was under attack by 500 foot multicolored pigs whereing straw hats and overalls. The were eating everyone, so I had to team up with Indiana Jones and the The Scooby Doo gang. For some reason, Scooby was sick though. We built this intricate trap inside a giant mini-golf windmill, and almost had them. Sadly, they escaped and ate everyone.",
@@ -69,9 +64,6 @@ dreams <<  Dream.new(body: "Last night there was this crazy storm I could not be
                     user_id: test_user.id)
 
 
-
-
-
 keywords = [Keyword.new(keyword: "scary"),
             Keyword.new(keyword: "amazing"),
             Keyword.new(keyword: "wow"),
@@ -86,7 +78,6 @@ keywords = [Keyword.new(keyword: "scary"),
             Keyword.new(keyword: "thrilling"),
             Keyword.new(keyword: "space"),
             Keyword.new(keyword: "clouds"),
-
           ]
 
 keywords.each do |keyword|
@@ -110,13 +101,13 @@ notes = ["Wow... I have no idea where this came from haha",
 
 i = 0
 
-date = 15
-month = 10
+date = 14
+month = 12
 
 
 while i < dreams.length
   dreams[i].save!
-  dreams[i].update_attributes(created_at: "2017-#{month}-#{date} 00:12:26")
+  dreams[i].update_attributes(created_at: "2017-#{month}-#{date} 00:06:32")
   if i < notes.length
     Note.create(body: notes[i], dream_id: dreams[i].id)
   end

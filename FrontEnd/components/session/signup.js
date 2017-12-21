@@ -4,7 +4,7 @@ import { isSignedIn } from '../../actions/session_actions';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  StyleSheet, Text, TextInput, View, TouchableOpacity, Button, Keyboard,
+  StyleSheet, Platform, Text, TextInput, View, TouchableOpacity, Button, Keyboard,
   KeyboardAvoidingView, TouchableWithoutFeedback, AppState
 } from 'react-native';
 
@@ -95,8 +95,9 @@ export default class SignupScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const offset = Platform.OS === 'ios' ? 0 : -200;
     return (
-      <KeyboardAvoidingView
+      <KeyboardAvoidingView keyboardVerticalOffset={offset}
         behavior="padding"
         style={styles.container}
         >
@@ -113,7 +114,7 @@ export default class SignupScreen extends React.Component {
               <Icon style={styles.icon}
                 name='envelope-o' size={20} color='#D4CCD9' />
               <View style={styles.inputBorder}>
-                <TextInput style={styles.input}
+                <TextInput underlineColorAndroid="transparent" style={styles.input}
                   value={this.state.email}
                   autoCapitalize='none'
                   placeholder='Email'
@@ -127,7 +128,7 @@ export default class SignupScreen extends React.Component {
               <Icon style={styles.icon}
                 name='key' size={20} color='#D4CCD9' />
               <View style={styles.inputBorder}>
-                <TextInput style={styles.input}
+                <TextInput underlineColorAndroid="transparent" style={styles.input}
                   value={this.state.password}
                   autoCapitalize='none'
                   placeholder='Password'
@@ -187,7 +188,7 @@ const styles = StyleSheet.create ({
   },
   inputBorder: {
     flex: 0.9,
-    height: 40,
+    height: Platform.OS === 'ios' ? 40 : 45,
     borderBottomWidth: 1,
     borderColor: '#D4CCD9',
     marginVertical: 1,
@@ -200,7 +201,7 @@ const styles = StyleSheet.create ({
     backgroundColor: '#3E3254',
     borderWidth: 1,
     borderRadius: 1,
-    marginBottom: 5,
+    marginBottom: Platform.OS === 'ios' ? 5 : 0,
   },
   submitContainer: {
     flexDirection: 'row'

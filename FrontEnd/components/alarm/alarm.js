@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {receiveReminder} from '../../actions/reminder_actions';
 import {
   StyleSheet,
+  Platform,
   Text,
   View,
   TouchableOpacity,

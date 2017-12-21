@@ -82,8 +82,13 @@ export default class AlarmScreen extends React.Component {
     PushNotification.cancelAllLocalNotifications()
     PushNotification.localNotificationSchedule({
       message: "Record your dream", // (required)
-      date: new Date(Date.now() + (2 * 1000)),
-      color: "#3E3254",
+      date: reminder,
+      ...Platform.select({
+        android: {
+          color: "#3E3254",
+          smallIcon: "ic_notification",
+        },
+      }),
       repeatType:'day',
       repeatInterval: 'day'
     });

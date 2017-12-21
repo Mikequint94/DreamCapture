@@ -12,19 +12,30 @@ import PushNotificationsHandler from 'react-native-push-notification';
 import DatePicker from 'react-native-datepicker'
 
 PushNotification.configure({
-  // (required) Called when a remote or local notification is opened or received
-    onNotification: function(notification) {
+  ...Platform.select({
+    ios: {
+      // (required) Called when a remote or local notification is opened or received
+        onNotification: function(notification) {
+        },
+        // IOS ONLY (optional): default: all - Permissions to register.
+        permissions: {
+           alert: true,
+           badge: true,
+           sound: false
+         },
+         // Should the initial notification be popped automatically
+        // default: true
+        popInitialNotification: true,
+        requestPermissions: false,
     },
-    // IOS ONLY (optional): default: all - Permissions to register.
-    permissions: {
-       alert: true,
-       badge: true,
-       sound: false
-     },
-     // Should the initial notification be popped automatically
-    // default: true
-    popInitialNotification: true,
-    requestPermissions: false,
+    android: {
+      onNotification: function(notification) {
+             console.log( 'NOTIFICATION:', notification );
+      },
+      popInitialNotification: true,
+    },
+  }),
+
   });
 
 export default class AlarmScreen extends React.Component {
@@ -62,7 +73,8 @@ export default class AlarmScreen extends React.Component {
 
     let now = new Date();
     let reminder = new Date(now.getFullYear(), now.getMonth(), now.getDate(), time[0], time[1])
-
+    console.log(reminder);
+    console.log(now);
     if (reminder < now) {
       reminder.setHours(reminder.getHours() + 24)
     }
@@ -70,7 +82,11 @@ export default class AlarmScreen extends React.Component {
     PushNotification.cancelAllLocalNotifications()
     PushNotification.localNotificationSchedule({
       message: "Record your dream", // (required)
-      date: reminder,
+      date: new Date(Date.now() + (2 * 1000)),
+      // color: "purple",
+      // ticker: "My Notification Ticker", // (optional)
+      largeIcon: "",
+      smallIcon: "ic_notification",
       repeatType:'day',
       repeatInterval: 'day'
     });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FontAwesome } from 'react-native-vector-icons';
 import { NavigationActions } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, Text, View, Button, TouchableHighlight,
+import { StyleSheet, Platform, Text, View, Button, TouchableHighlight,
          Image, SectionList } from 'react-native';
 import { SearchBar, List, ListItem, Avatar } from 'react-native-elements'
 import moment from 'moment'
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   topPadding: {
     backgroundColor: '#3E3254',
-    height: 20,
+    height: Platform.OS === 'ios' ? 20: 10,
   },
   searchBar: {
     backgroundColor: '#3E3254',
@@ -240,7 +240,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#362554',
   },
   recordSection: {
-    flex: 1,
+    ...Platform.select({
+      android: {
+        height: 90
+      },
+      ios: {
+        flex: 1
+      },
+    }),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#3E3254',

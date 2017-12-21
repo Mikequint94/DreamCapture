@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View,
+import { StyleSheet, Platform, Text, TextInput, View,
          Image, Alert, TouchableHighlight, Keyboard, TouchableWithoutFeedback
 } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
@@ -55,11 +55,13 @@ export default class RecordScreen extends React.Component {
   }
 
   onSpeechEnd(e) {
-    let finalresults = `${this.state.results}`;
-    this.setState({
-      end: '√',
-      finalResults: finalresults
-    });
+    if (Platform.OS === 'ios') {
+      let finalresults = `${this.state.results}`;
+        this.setState({
+          end: '√',
+          finalResults: finalresults
+        });
+      }
   }
 
   onSpeechError(e) {
@@ -69,9 +71,16 @@ export default class RecordScreen extends React.Component {
   }
 
   onSpeechResults(e) {
-    this.setState({
-      results: e.value,
-    });
+    if (Platform.OS === 'android') {
+      this.setState({
+        end: '√',
+        results: e.value[0],
+      });
+    } else {
+      this.setState({
+        results: e.value,
+      });
+    }
   }
 
   onSpeechPartialResults(e) {
@@ -91,15 +100,27 @@ export default class RecordScreen extends React.Component {
 
   saveDream() {
     const { navigate } = this.props.navigation;
-    this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser})
-    .then(
-    (response) => {
+    if (Platform.OS === 'android') {
+      this.props.createDream({body: this.state.results, user_id: this.props.currentUser})
+      .then(
+        (response) => {
 
-      navigate('NewDreamShow', {dreamId: response.dream.id,
-                             dreamDate: ' ',
-                             dreamTime: ' '})
+          navigate('NewDreamShow', {dreamId: response.dream.id,
+            dreamDate: ' ',
+            dreamTime: ' '})
+          }
+        )
+    } else {
+      this.props.createDream({body: this.state.finalResults, user_id: this.props.currentUser})
+      .then(
+        (response) => {
+
+          navigate('NewDreamShow', {dreamId: response.dream.id,
+            dreamDate: ' ',
+            dreamTime: ' '})
+          }
+        )
     }
-  )
   }
   rerecord() {
     Alert.alert(
@@ -145,6 +166,7 @@ export default class RecordScreen extends React.Component {
       await Voice.stop();
     } catch (e) {
     }
+    console.log(e, this.state);
   }
 
   async _cancelRecognizing(e) {
@@ -173,17 +195,22 @@ export default class RecordScreen extends React.Component {
   render() {
     let middleTextPic;
     let bottomButton;
-    let string = this.state.finalResults;
     let analysis = "loading"
     let topText;
-    if (this.state.end === "√") {
-      topText = (
-        <View style={styles.topContainer}>
-          <Text style={styles.recordText}>
-            Edit and Save
-          </Text>
+    if (this.state.end === "√" && Platform.OS === 'android') {
+      middleTextPic = (
+        <View style={styles.middleContainer}>
+          <View style={styles.textInputContainer}>
+            <TextInput style={styles.input}
+              onChangeText={(text) => this.setState({results: text})}
+              value={this.state.results}
+              multiline={true}
+            />
+          </View>
         </View>
       )
+    }
+    if (this.state.end === "√" && Platform.OS === 'ios') {
       middleTextPic = (
         <View style={styles.middleContainer}>
           <View style={styles.textInputContainer}>
@@ -193,6 +220,15 @@ export default class RecordScreen extends React.Component {
               multiline={true}
             />
           </View>
+        </View>
+      )
+    }
+    if (this.state.end === "√") {
+      topText = (
+        <View style={styles.topContainer}>
+          <Text style={styles.recordText}>
+            Edit and Save
+          </Text>
         </View>
       )
       bottomButton = (
@@ -294,7 +330,14 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   bottomContainer: {
-    flex: 1,
+    ...Platform.select({
+      android: {
+        height: 100,
+        },
+      ios: {
+        flex: 1,
+      },
+    }),
     justifyContent: 'center',
     marginBottom: 30,
     borderRadius: 10,

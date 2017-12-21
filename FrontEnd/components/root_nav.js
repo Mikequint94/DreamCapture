@@ -62,11 +62,17 @@ export const SignedIn = TabNavigator({
   Alarm: {
     screen: AlarmContainer,
     navigationOptions: {
+
       tabBarIcon: ({ tintColor }) => <Icon name="alarm" size={35} color={tintColor} />
     },
   },
 }, {
     tabBarPosition: 'bottom',
+    ...Platform.select({
+      android: {
+        lazy: true,
+      },
+    }),
     tabBarOptions: {
     showLabel: false,
     ...Platform.select({

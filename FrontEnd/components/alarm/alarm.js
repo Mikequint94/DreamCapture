@@ -49,7 +49,7 @@ export default class AlarmScreen extends React.Component {
       reminderSet: this.props.reminder.set || false,
       time: this.props.reminder.time || '06:00 am',
     };
-
+    console.log(this.props.reminder);
     this.setAlarm = this.setAlarm.bind(this);
     this.cancelAlarm = this.cancelAlarm.bind(this);
   }

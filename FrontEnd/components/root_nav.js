@@ -40,10 +40,15 @@ export const DreamStack = StackNavigator({
     screen: RecordScreen,
     navigationOptions: {
       title: 'Record A Dream',
+      ...Platform.select({
+        android: {
+          header: null
+        },
+      }),
       headerTitleStyle: { color: '#3E3254' },
       headerBackTitleStyle: { color: 'white' },
       headerTintColor: 'white',
-      headerStyle: { backgroundColor: '#3E3254' }
+      headerStyle: { backgroundColor: '#3E3254' },
     }},
 });
 
@@ -61,6 +66,7 @@ export const SignedIn = TabNavigator({
     },
   },
 }, {
+    tabBarPosition: 'bottom',
     tabBarOptions: {
     showLabel: false,
     ...Platform.select({

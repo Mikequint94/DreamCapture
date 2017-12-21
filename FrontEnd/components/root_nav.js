@@ -63,6 +63,18 @@ export const SignedIn = TabNavigator({
 }, {
     tabBarOptions: {
     showLabel: false,
+    ...Platform.select({
+      android: {
+        showIcon: true,
+        indicatorStyle: {
+          backgroundColor: '#D4CCD9',
+        },
+        iconStyle: {
+            width: 45,
+            height: 35
+        },
+      },
+    }),
     activeTintColor: '#83BFAA',
     inactiveTintColor: '#D4CCD9',
     style: {

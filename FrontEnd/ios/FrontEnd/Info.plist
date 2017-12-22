@@ -40,9 +40,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Required for Voice to Text</string>
+	<string>Use of microphone is required to hear and record your dream.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Required for Voice to Text</string>
+	<string>Required for voice to text functionality.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

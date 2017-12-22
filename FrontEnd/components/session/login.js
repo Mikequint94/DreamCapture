@@ -83,9 +83,8 @@ export default class LoginScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const offset = Platform.OS === 'ios' ? 0 : -200;
     return (
-      <KeyboardAvoidingView  keyboardVerticalOffset={offset}
+      <KeyboardAvoidingView
         behavior="padding"
         style={styles.container}
         >

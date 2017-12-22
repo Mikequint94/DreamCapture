@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, TouchableWithoutFeedback,
+import { StyleSheet, Platform, Text, TextInput, TouchableWithoutFeedback,
          Keyboard, View, Button, Dimensions, ScrollView
        } from 'react-native';
 
@@ -24,11 +24,22 @@ export default class NewDreamShowScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: `New Dream`,
     headerLeft: null,
-    headerRight: <Button
-      onPress={() => navigation.navigate("Home")}
-      title='Save'
-      color='#D4CCD9'
-      />
+    ...Platform.select({
+      ios: {
+        headerRight: <Button
+        onPress={() => navigation.navigate("Home")}
+        title='Save'
+        color='#D4CCD9'
+        />
+      },
+      android: {
+        headerRight: <Button
+        onPress={() => navigation.navigate("Home")}
+        title='  Save  '
+        color='transparent'
+        />
+      },
+    }),
   });
 
   componentDidMount(){

@@ -28,6 +28,7 @@ export default class RecordScreen extends React.Component {
       partialResults: [],
       finalResults: ""
     };
+
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
@@ -35,6 +36,7 @@ export default class RecordScreen extends React.Component {
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
     Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
   }
+
 
   componentWillUnmount() {
     if (Voice.destroy()) {

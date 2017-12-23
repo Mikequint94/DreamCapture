@@ -115,8 +115,7 @@ export default class DreamShowScreen extends React.Component {
           />
       </View>
     )
-    if (Platform.OS === 'ios') {
-      return (
+    return (
       <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
         <KeyboardAwareScrollView
         style={{ backgroundColor: '#3E3254' }}
@@ -142,32 +141,6 @@ export default class DreamShowScreen extends React.Component {
         </KeyboardAwareScrollView>
     </TouchableWithoutFeedback>
     )
-  } else {
-    return (
-    <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
-      <KeyboardAvoidingView
-        style={styles.container}>
-          <View style={styles.containerMargin}>
-          {dreams}
-          {addKeywords}
-          <View style={styles.watsonContainer}>
-            <ScrollView>
-            {watson}
-          </ScrollView>
-          </View>
-          <View style={styles.keywordShowContainer}>
-            {keywordShow}
-          </View>
-          <View style={styles.keywordShowContainer}>
-            <ScrollView>
-              {noteShow}
-            </ScrollView>
-          </View>
-        </View>
-      </KeyboardAvoidingView>
-  </TouchableWithoutFeedback>
-  )
-  }
 }}
 
 const styles = StyleSheet.create ({

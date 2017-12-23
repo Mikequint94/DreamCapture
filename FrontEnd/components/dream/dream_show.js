@@ -119,6 +119,8 @@ export default class DreamShowScreen extends React.Component {
     return (
       <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
       <KeyboardAwareScrollView
+      enableOnAndroid='true'
+      extraHeight={200}
         style={{ backgroundColor: '#3E3254' }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.container}>

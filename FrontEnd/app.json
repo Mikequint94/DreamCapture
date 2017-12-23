@@ -1,4 +1,7 @@
 {
   "name": "FrontEnd",
-  "displayName": "DreamCapture"
+  "displayName": "DreamCapture",
+  "androidStatusBar": {
+  "backgroundColor": "#000000"
+  },
 }

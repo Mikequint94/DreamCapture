@@ -11,7 +11,6 @@ import { NavigationActions } from 'react-navigation';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
     title: 'Record A Dream',
@@ -36,7 +35,6 @@ export default class RecordScreen extends React.Component {
     Voice.onSpeechResults = this.onSpeechResults.bind(this);
     Voice.onSpeechPartialResults = this.onSpeechPartialResults.bind(this);
   }
-
 
   componentWillUnmount() {
     if (Voice.destroy()) {

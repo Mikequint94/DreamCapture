@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, TouchableWithoutFeedback,
-         Keyboard, View, Button, Dimensions, ScrollView
+import { StyleSheet, Text, Platform, TextInput, TouchableWithoutFeedback,
+         Keyboard, View, Button, KeyboardAvoidingView, Dimensions, ScrollView
        } from 'react-native';
 
 import WatsonAnalyzer from './watson';
@@ -63,7 +63,6 @@ export default class DreamShowScreen extends React.Component {
     let dreams;
     let watsonInfo;
     let watson;
-
     if (this.props.dreams[currentDream]) {
       const dream = this.props.dreams[currentDream];
       const time = this.props.dreamTime;
@@ -118,9 +117,7 @@ export default class DreamShowScreen extends React.Component {
     )
     return (
       <TouchableWithoutFeedback onPressIn={Keyboard.dismiss}>
-      <KeyboardAwareScrollView
-      enableOnAndroid='true'
-      extraHeight={200}
+        <KeyboardAwareScrollView
         style={{ backgroundColor: '#3E3254' }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={styles.container}>
@@ -141,11 +138,10 @@ export default class DreamShowScreen extends React.Component {
               </ScrollView>
             </View>
           </View>
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
     </TouchableWithoutFeedback>
     )
-  }
-}
+}}
 
 const styles = StyleSheet.create ({
   container: {

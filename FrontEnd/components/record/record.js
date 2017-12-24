@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform, Text, TextInput, View,
-         Image, Alert, TouchableHighlight, Keyboard, TouchableWithoutFeedback
+         Image, Alert, TouchableHighlight, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback
 } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,7 +10,6 @@ import { Button } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
 
 export default class RecordScreen extends React.Component {
   static navigationOptions = {
@@ -28,6 +27,7 @@ export default class RecordScreen extends React.Component {
       partialResults: [],
       finalResults: ""
     };
+
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
     Voice.onSpeechEnd = this.onSpeechEnd.bind(this);
@@ -199,7 +199,10 @@ export default class RecordScreen extends React.Component {
     let topText;
     if (this.state.end === "√" && Platform.OS === 'android') {
       middleTextPic = (
-        <View style={styles.middleContainer}>
+        <KeyboardAvoidingView
+          behavior="padding"
+          style={styles.middleContainer}
+          >
           <View style={styles.textInputContainer}>
             <TextInput style={styles.input}
               onChangeText={(text) => this.setState({results: text})}
@@ -207,7 +210,7 @@ export default class RecordScreen extends React.Component {
               multiline={true}
             />
           </View>
-        </View>
+        </KeyboardAvoidingView>
       )
     }
     if (this.state.end === "√" && Platform.OS === 'ios') {
@@ -320,7 +323,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3E3254',
   },
   topContainer: {
-    flex: 2,
+    flex: 1.6,
     justifyContent: 'center',
   },
   middleContainer: {
